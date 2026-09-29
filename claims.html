@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="AssureX — AI-powered warranty claim intelligence and decision support." name="description"/>
+<meta content="#060912" name="theme-color"/>
+<title>AssureX — Claims</title>
+<link href="asset/fav.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<style>
+  .claim-db-status{margin-top:14px;padding:10px 12px;border:1px solid rgba(255,255,255,.10);border-radius:10px;background:rgba(255,255,255,.025);font-size:10px;color:var(--muted,#7f8ba3);display:none}
+  .claim-db-status.show{display:block}.claim-db-status.success{color:#35e6a4;border-color:rgba(53,230,164,.22)}.claim-db-status.error{color:#ff9aa7;border-color:rgba(255,107,122,.25)}
+  .claim-history-head h2{margin:0;font-size:16px}.claim-history-head p{margin:4px 0 0;color:var(--muted,#7f8ba3);font-size:10px}
+  .claim-row strong{display:block;color:var(--text,#f4f7ff);font-size:10px}.claim-row span{display:block;color:var(--muted,#7f8ba3);font-size:9px;margin-top:3px}.claim-status.pending{color:#ffbd5a}.claim-status.under_review{color:#5b8cff}.claim-status.approved{color:#35e6a4}.claim-status.rejected{color:#ff6b7a}
+  @media(max-width:760px){}
+
+  .hidden{display:none!important}.evidence-upload-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.evidence-upload-grid label{display:flex;flex-direction:column;gap:8px;padding:14px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.02);font-size:10px}.evidence-upload-grid input[type=file]{font-size:10px}.evidence-upload-grid small{color:var(--muted,#7f8ba3);line-height:1.4}.evidence-upload-grid small.success{color:#35e6a4}.evidence-upload-grid small.warning{color:#ffbd5a}.evidence-upload-grid small.error{color:#ff9aa7}.evidence-analysis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.evidence-analysis>div{padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.02)}.evidence-analysis span,.review-section span{display:block;color:var(--muted,#7f8ba3);font-size:8px;text-transform:uppercase;letter-spacing:.08em}.evidence-analysis strong{display:block;margin-top:5px;font-size:10px;line-height:1.5}.review-details{display:grid;gap:12px;margin-top:18px}.review-section{padding:14px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.02)}.review-section h3{margin:0 0 12px;font-size:11px}.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.review-grid strong{display:block;margin-top:4px;font-size:10px;line-height:1.5;word-break:break-word}.wide-review{grid-column:1/-1}@media(max-width:760px){.evidence-upload-grid,.evidence-analysis,.review-grid{grid-template-columns:1fr}}
+</style>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/fixes.css">
+  <script src="js/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/animate.js" defer></script>
+<link rel="stylesheet" href="css/role-ui.css">
+<link rel="stylesheet" href="css/ai-intelligence.css">
+<link rel="stylesheet" href="css/experience-features.css">
+  <link rel="stylesheet" href="css/assurex-chatbot.css">
+<link rel="stylesheet" href="css/assurex-premium-all-pages.css">
+<link rel="stylesheet" href="css/assurex-viewport-controls.css">
+</head>
+<body><div class="background-grid"></div><div class="ambient ambient-one"></div><div class="ambient ambient-two"></div><div class="ambient ambient-three"></div><div class="app" id="appView">
+<!-- SIDEBAR -->
+<aside class="sidebar glass" id="sidebar">
+<div class="sidebar-header">
+<a class="dashboard-brand" href="#">
+<img alt="AssureX" src="asset/assurex-logo-dark.png"/>
+</a>
+<button aria-label="Close menu" class="icon-button mobile-only" id="closeSidebar">
+                    ×
+                </button>
+</div>
+<div class="sidebar-section-label">
+                WORKSPACE
+            </div>
+<nav class="sidebar-nav">
+<button class="nav-item active" data-page="dashboard">
+<span>⌂</span>
+                    Dashboard
+                </button>
+<button class="nav-item" data-page="products">
+<span>▣</span>
+                    Products
+                </button>
+<button class="nav-item" data-page="warranties">
+<span>◇</span>
+                    Warranties
+                </button>
+<button class="nav-item" data-page="documents">
+<span>▤</span>
+                    Documents
+                </button>
+<button class="nav-item" data-page="claims">
+<span>◉</span>
+                    Claims
+                </button>
+<button class="nav-item" data-page="validation">
+<span>✓</span>
+                    Validation
+                </button>
+<button class="nav-item" data-page="evaluation">
+<span>AI</span>
+                    AI Evaluation
+                </button>
+<button class="nav-item" data-page="decision">
+<span>◆</span>
+                    Decision &amp; Review
+                </button>
+<div class="sidebar-section-label">
+                    MANAGEMENT
+                </div>
+<button class="nav-item" data-page="analytics">
+<span>▥</span>
+                    Analytics
+                </button>
+<button class="nav-item" data-page="readiness">
+<span>◎</span>
+                    Readiness
+                </button>
+<button class="nav-item" data-page="profile">
+<span>◯</span>
+                    Profile
+                </button>
+</nav>
+<div class="sidebar-bottom">
+<div class="sidebar-user">
+<div class="avatar" id="userAvatar">
+                        U
+                    </div>
+<div>
+<strong id="profileName">User</strong>
+<small id="profileRole">Reviewer</small>
+</div>
+</div>
+<button class="logout-button" id="logout">
+                    <span aria-hidden="true">↪</span> Sign out
+                </button>
+</div>
+</aside>
+<!-- MAIN APPLICATION -->
+<div class="app-main">
+<!-- TOPBAR -->
+<header class="topbar glass">
+<button class="icon-button mobile-only" id="sidebarToggle">
+                    ☰
+                </button>
+<div class="global-search">
+<span>⌕</span>
+<input id="globalSearch" placeholder="Search claims, products, documents..." type="search"/>
+
+</div>
+<div class="topbar-actions">
+<button class="icon-button" id="themeButton" title="Themes">
+                        ◐
+                    </button>
+
+
+<button class="icon-button notification-button" id="notifyButton" title="Notifications">
+                        ♢
+                        <i></i>
+</button>
+</div>
+</header>
+<!-- THEME MENU -->
+<div class="theme-menu glass hidden" id="themeMenu">
+<div class="theme-menu-header">
+<strong>Appearance</strong>
+<button class="icon-button" id="closeTheme">
+                        ×
+                    </button>
+</div>
+<small id="currentTheme">
+                    Electric Blue &amp; Teal
+                </small>
+<button class="theme-choice" data-theme="light">
+    Light Mode
+</button>
+<button class="theme-choice" data-theme="dark">
+    Dark Mode
+</button>
+</div>
+<!-- =====================================================
+           PAGES
+      ====================================================== -->
+<main class="dashboard-content">
+<!-- DASHBOARD -->
+<!-- PRODUCTS -->
+<!-- WARRANTIES -->
+<!-- DOCUMENTS -->
+<!-- CLAIMS -->
+<section class="page" data-page="claims">
+<div class="page-heading">
+<div>
+<div class="eyebrow">CLAIM WIZARD</div>
+<h1>Submit a Claim</h1>
+<p>Enter structured information for analysis.</p>
+</div>
+</div>
+<div class="wizard glass">
+<div class="wizard-steps">
+<button class="step active" data-step="1"><span>01</span> Product &amp; Fault</button>
+<button class="step" data-step="2"><span>02</span> Evidence</button>
+<button class="step" data-step="3"><span>03</span> Review</button>
+</div>
+<div class="wizard-content">
+<div class="claim-step-label"><span id="claimStepLabel">Step 1 of 3</span></div>
+<div class="wizard-step active" data-wstep="1">
+<h2>Product &amp; reported fault</h2>
+<p class="helper-text">Select one of your registered products. Product, purchase and warranty details are fetched automatically from Firestore.</p>
+<div class="form-grid">
+<label class="wide">Registered Product<select id="claimProduct" name="productId" required><option value="">Select a registered product</option></select></label>
+<input type="hidden" id="claimProductId" name="selectedProductId"/>
+<label>Damage Category<select id="faultType" name="faultType" required><option value="">Select damage category</option><option value="Component Failure">Component Failure</option><option value="Screen Crack">Screen Crack</option><option value="Water Damage">Water Damage</option><option value="Wear and Tear">Wear and Tear</option><option value="Accidents">Accidents</option><option value="Misuse">Misuse</option><option value="Defective Components">Defective Components</option></select></label>
+<label class="wide">Fault Description<textarea id="faultDescription" name="faultDescription" rows="4" required placeholder="Describe the fault or damage..."></textarea></label>
+<label>Fault Occurrence Date<input id="faultDate" name="faultDate" type="date" required></label>
+<label>Previously Repaired?<select id="previouslyRepaired" name="previouslyRepaired" required><option value="">Select an option</option><option value="no">No</option><option value="yes">Yes</option></select></label>
+<label id="repairCountWrap" class="hidden">Repair Count<input id="repairCount" name="repairCount" type="number" min="1" step="1" placeholder="Number of previous repairs"/></label>
+<label class="wide">Repair Notes<textarea id="repairNotes" name="repairNotes" rows="3" placeholder="Add any previous repair details, if applicable..."></textarea></label>
+</div></div>
+<div class="wizard-step" data-wstep="2">
+<h2>Supporting evidence</h2>
+<p class="helper-text">Upload the purchase invoice, warranty document, repair history, product photos, fault/damage evidence, serial-number evidence and diagnostic reports. PDF and image documents are OCR-processed in the browser. Product photos are checked for image quality and, when a trained damage model is configured, classified for damage.</p>
+<div class="evidence-upload-grid">
+<label>Purchase Invoice<input id="invoiceFile" type="file" accept="image/*,.pdf" required/><small id="invoiceStatus">Not uploaded</small></label>
+<label>Warranty Document<input id="warrantyFile" type="file" accept="image/*,.pdf" required/><small id="warrantyStatus">Not uploaded</small></label>
+<label>Repair History<input id="repairFile" type="file" accept="image/*,.pdf"/><small id="repairStatus">Optional unless repaired</small></label>
+<label>Product Photos<input id="productPhotos" type="file" accept="image/*" multiple required/><small id="photoStatus">Not uploaded</small></label>
+<label>Fault Evidence<input id="faultEvidence" type="file" accept="image/jpeg,image/png,video/mp4,video/webm,video/quicktime"/><small id="faultEvidenceStatus">Optional</small></label>
+<label>Serial Evidence<input id="serialEvidence" type="file" accept="image/jpeg,image/png"/><small id="serialEvidenceStatus">Optional</small></label>
+<label>Diagnostic Report<input id="diagnosticReport" type="file" accept="application/pdf,image/jpeg,image/png"/><small id="diagnosticReportStatus">Optional</small></label>
+</div>
+<div class="evidence-analysis" id="evidenceAnalysis"><div><span>OCR</span><strong id="ocrSummary">Waiting for documents</strong></div><div><span>Photo damage check</span><strong id="damageSummary">Waiting for product photos</strong></div></div>
+</div>
+<div class="wizard-step" data-wstep="3">
+<h2>Review &amp; submission</h2>
+<div class="review-details" id="reviewDetails"></div>
+<p class="helper-text">Review the product, purchase, fault, repair and evidence information before submitting the claim.</p>
+</div>
+</div>
+<div class="wizard-actions">
+<button class="btn btn-glass" disabled="" id="prevStep">
+                                ← Previous
+                            </button>
+<button class="btn btn-gradient" id="nextStep">
+                                Continue →
+                            </button>
+</div>
+</div>
+
+<div id="claimDbStatus" class="claim-db-status" role="status" aria-live="polite"></div>
+
+</div>
+
+</section>
+<!-- VALIDATION -->
+<!-- EVALUATION -->
+<!-- DECISION -->
+<!-- ANALYTICS -->
+<!-- READINESS -->
+<!-- PROFILE -->
+</main>
+</div>
+</div><div class="modal-overlay hidden" id="commandPalette">
+<div class="command-palette glass">
+<div class="command-header">
+<input id="commandInput" placeholder="Search commands..."/>
+<button class="icon-button" id="closeCommand">
+                    ×
+                </button>
+</div>
+<div id="commandResults"></div>
+</div>
+</div><div class="toast" id="toast">
+        Ready
+    </div><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script><script>if(window.pdfjsLib&&window.pdfjsLib.GlobalWorkerOptions)window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";</script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-auth.js"></script>
+<script src="js/role-guard.js"></script>
+<script src="js/firebase-firestore.js"></script><script src="js/storage-service.js"></script>
+<script src="js/app.js"></script>
+<script src="js/assurex-api.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  // Set this to the URL of your trained Teachable Machine image model, e.g.
+  // https://teachablemachine.withgoogle.com/models/XXXXXXX/
+  // Canonical AssureX Teachable Machine model. The backend uses the exported local artifacts for server-side inference.
+  const steps=[...document.querySelectorAll(".wizard-step")];
+  const indicators=[...document.querySelectorAll(".wizard-steps .step")];
+  const stepLabel=document.getElementById("claimStepLabel");
+  const prevButton=document.getElementById("prevStep");
+  const nextButton=document.getElementById("nextStep");
+  const statusBox=document.getElementById("claimDbStatus");
+  const productSelect=document.getElementById("claimProduct");
+  const claimsList=document.getElementById("claimsList");
+  const claimCount=document.getElementById("claimCount");
+  const repairCountWrap=document.getElementById("repairCountWrap");
+  const repairFile=document.getElementById("repairFile");
+  let currentStep=1, products=[], currentProduct=null, currentUserProfile=null, evidenceResults={invoice:null,warranty:null,repair:null,photos:[]}, submitting=false;
+
+  function showStatus(message,type){statusBox.textContent=message||"";statusBox.className="claim-db-status show"+(type?" "+type:"");}
+  function clearStatus(){statusBox.textContent="";statusBox.className="claim-db-status";}
+  function val(name){const e=document.querySelector('[name="'+name+'"]');return e?String(e.value||"").trim():"";}
+  function setVal(name,v){const e=document.querySelector('[name="'+name+'"]');if(e)e.value=v==null?"":v;}
+  function esc(v){return String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");}
+  function dateValue(v){if(!v)return"";if(typeof v==="string")return v.slice(0,10);if(v.toDate)return v.toDate().toISOString().slice(0,10);if(v.seconds!=null)return new Date(Number(v.seconds)*1000).toISOString().slice(0,10);return"";}
+  function dateText(v){const d=dateValue(v);return d?new Date(d+"T00:00:00").toLocaleDateString():"—";}
+  function showStep(step){currentStep=step;steps.forEach(p=>p.classList.toggle("active",Number(p.dataset.wstep)===step));indicators.forEach(i=>{const n=Number(i.dataset.step);i.classList.toggle("active",n===step);i.classList.toggle("complete",n<step)});stepLabel.textContent="Step "+step+" of 3";prevButton.disabled=step===1||submitting;nextButton.textContent=step===3?"Submit Claim":"Continue →";nextButton.disabled=submitting;if(step===3)updateReview();}
+
+  function validateStep(step){
+    const panel=steps[step-1]; if(!panel)return true;
+    if(step===1&&!currentProduct){showStatus("Select a registered product before continuing.","error");return false;}
+    if(step===1&&!val("faultDescription")){showStatus("Describe the reported fault.","error");return false;}
+    if(step===1&&val("previouslyRepaired")==="yes"&&(!Number.isInteger(Number(val("repairCount")))||Number(val("repairCount"))<1)){showStatus("Enter the repair count.","error");return false;}
+    if(step===2){if(!document.getElementById("invoiceFile").files.length||!document.getElementById("warrantyFile").files.length||!document.getElementById("productPhotos").files.length){showStatus("Select the purchase invoice, warranty document and at least one product photo.","error");return false;}if(val("previouslyRepaired")==="yes"&&!repairFile.files.length){showStatus("Because the product was previously repaired, upload the repair history document.","error");return false;}if(!evidenceResults.invoice||!evidenceResults.warranty||!evidenceResults.photos.length){showStatus("Please wait for evidence processing to finish.","error");return false;}}
+    return true;
+  }
+
+  function syncRepairVisibility(){const yes=val("previouslyRepaired")==="yes";repairCountWrap.classList.toggle("hidden",!yes);document.getElementById("repairCount").required=yes;if(!yes)document.getElementById("repairCount").value="";}
+  document.getElementById("previouslyRepaired").addEventListener("change",syncRepairVisibility);
+
+  async function loadUser(user){
+    if(!user||!window.fbDb)return;
+    try{
+      const snap=await window.fbDb.collection("users").doc(user.uid).get();
+      currentUserProfile=snap.exists?snap.data():{};
+      const claimUserId=document.getElementById("claimUserId");
+      if(claimUserId)claimUserId.textContent=user.uid;
+      setVal("customerName",currentUserProfile.displayName||user.displayName||"");
+      setVal("customerEmail",currentUserProfile.email||user.email||"");
+      setVal("customerPhone",currentUserProfile.phone||currentUserProfile.phoneNumber||user.phoneNumber||"");
+    }catch(e){showStatus("Could not load the signed-in customer profile.","error");console.error(e);}
+  }
+
+  async function loadProducts(user){
+    if(!user||!window.fbDb)return;
+    try{
+      const snap=await window.fbDb.collection("products").where("user_id","==",user.uid).get();
+      products=snap.docs.map(d=>({id:d.id,...d.data()}));
+      productSelect.innerHTML='<option value="">Select a registered product</option>'+products.map(p=>'<option value="'+esc(p.id)+'">'+esc((p.name||p.product_name||"Unnamed Product")+" — "+(p.serial_number||"No serial"))+'</option>').join("");
+    }catch(e){showStatus("Could not load your registered products.","error");console.error(e);}
+  }
+
+  function fillProduct(id){
+    currentProduct=products.find(p=>p.id===id)||null;
+    document.getElementById("claimProductId").value=id||"";
+    if(!currentProduct){["product","serialNumber","category","purchaseDate","price","retailer","warrantyMonths","extendedWarrantyMonths","warrantyProvider","serviceCenter"].forEach(n=>setVal(n,""));return;}
+    setVal("product",currentProduct.name||currentProduct.product_name||"");
+    setVal("serialNumber",currentProduct.serial_number||"");
+    setVal("category",currentProduct.category||"");
+    setVal("purchaseDate",dateValue(currentProduct.purchase_date));
+    setVal("price",currentProduct.price!=null?String(currentProduct.price):"");
+    setVal("retailer",currentProduct.retailer||"");
+    setVal("warrantyMonths",currentProduct.warranty_months!=null?String(currentProduct.warranty_months):"");
+    setVal("extendedWarrantyMonths",currentProduct.extended_warranty_months!=null?String(currentProduct.extended_warranty_months):"0");
+    setVal("warrantyProvider",currentProduct.warranty_provider||"");
+    setVal("serviceCenter",currentProduct.service_center||"");
+  }
+  productSelect.addEventListener("change",()=>{fillProduct(productSelect.value);clearStatus();});
+
+  function setEvidenceStatus(id,text,type){const e=document.getElementById(id);e.textContent=text;e.className=type||"";}
+  async function ocrFile(file,label,statusId){
+    if(!file)return null;
+    setEvidenceStatus(statusId,"OCR processing — "+(file.name||label)+" ("+Math.round((Number(file.size||0))/1024)+" KB)…");
+    try{
+      if(!window.Tesseract)throw new Error("OCR library not loaded");
+      const sources=[];
+      if(file.type==="application/pdf"||/\.pdf$/i.test(file.name||"")){
+        if(!window.pdfjsLib)throw new Error("PDF OCR library is still loading. Please try Continue again.");
+        if(window.pdfjsLib.GlobalWorkerOptions)window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        // Read a fresh byte copy of the browser File. PDF.js must receive non-empty bytes.
+        const expectedSize=Number(file.size||0);
+        if(!expectedSize)throw new Error("The selected PDF is 0 bytes in the browser. The file input received an empty file.");
+        // Use several browser read paths. Some browser/file-input combinations can report a
+        // non-zero File.size while a direct PDF.js read receives an empty buffer.
+        let buffer=null;
+        try{buffer=await file.arrayBuffer();}catch(readError){console.warn("[AssureX] File.arrayBuffer failed",readError);}
+        if(!buffer||buffer.byteLength===0){
+          buffer=await new Promise((resolve,reject)=>{
+            const reader=new FileReader();
+            reader.onload=()=>resolve(reader.result);
+            reader.onerror=()=>reject(reader.error||new Error("FileReader could not read the PDF"));
+            reader.readAsArrayBuffer(file);
+          });
+        }
+        if(!buffer||buffer.byteLength===0){
+          const objectUrl=URL.createObjectURL(file);
+          try{buffer=await fetch(objectUrl,{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("Browser could not read the selected PDF");return r.arrayBuffer();});}
+          finally{URL.revokeObjectURL(objectUrl);}
+        }
+        if(!buffer||buffer.byteLength===0)throw new Error("The browser returned 0 bytes for the selected PDF. Please re-select the original PDF file.");
+        const bytes=new Uint8Array(buffer);
+        const header=new TextDecoder().decode(bytes.slice(0,5));
+        if(header!=="%PDF-")throw new Error("The selected file is not a valid PDF byte stream (received "+bytes.byteLength+" bytes).");
+        setEvidenceStatus(statusId,"PDF loaded — "+bytes.byteLength.toLocaleString()+" bytes. Starting OCR…");
+        const pdf=await window.pdfjsLib.getDocument({data:bytes}).promise;
+        const pageCount=Math.min(pdf.numPages,5);
+        for(let n=1;n<=pageCount;n++){
+          const page=await pdf.getPage(n),viewport=page.getViewport({scale:2});
+          const canvas=document.createElement("canvas");canvas.width=viewport.width;canvas.height=viewport.height;
+          await page.render({canvasContext:canvas.getContext("2d"),viewport}).promise;sources.push(canvas);
+        }
+      }else if(file.type.startsWith("image/")){
+        const img=document.createElement("img");img.src=URL.createObjectURL(file);
+        await new Promise((res,rej)=>{img.onload=res;img.onerror=rej});
+        const max=2200,scale=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight));
+        const canvas=document.createElement("canvas");canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));
+        canvas.getContext("2d").drawImage(img,0,0,canvas.width,canvas.height);URL.revokeObjectURL(img.src);sources.push(canvas);
+      }else throw new Error("Unsupported document type. Upload PDF, JPG, PNG or another image file.");
+      let combined="",confidenceTotal=0,count=0;
+      for(let i=0;i<sources.length;i++){
+        setEvidenceStatus(statusId,"OCR page "+(i+1)+" of "+sources.length+"…");
+        const result=await Tesseract.recognize(sources[i],"eng",{logger:m=>{if(m.status==="recognizing text")setEvidenceStatus(statusId,"OCR page "+(i+1)+" of "+sources.length+" — "+Math.round((m.progress||0)*100)+"%")}});
+        const text=(result.data.text||"").trim();if(text)combined+=(combined?"\n\n":"")+text;confidenceTotal+=Number(result.data.confidence||0);count++;
+      }
+      if(!combined)throw new Error("OCR completed but no readable text was detected in the uploaded document.");
+      setEvidenceStatus(statusId,"OCR complete — "+combined.length+" characters extracted","success");
+      return {label,text:combined,confidence:count?confidenceTotal/count:0,name:file.name,type:file.type,pages:count};
+    }catch(e){console.error("[AssureX] OCR failed",e);setEvidenceStatus(statusId,"OCR unavailable: "+e.message,"error");return {label,text:"",confidence:0,error:e.message,name:file.name,type:file.type};}
+  }
+
+  // Original evidence files stay in the browser only. We save extracted OCR/analysis text to Firestore.
+  function evidenceText(result){
+    if(!result)return {text:"",confidence:0,error:"Not supplied"};
+    return {text:String(result.text||""),confidence:Number(result.confidence||0),error:result.error||"",name:result.name||"",type:result.type||"",pages:Number(result.pages||0)};
+  }
+
+  function photoAnalysisText(items){
+    return (items||[]).map(x=>{
+      const error=x.error?"; Error: "+x.error:"";
+      return "Photo: "+(x.name||"unnamed")+"; Result: "+(x.status||"No result")+"; Dimensions: "+(x.width||"?")+"x"+(x.height||"?")+"; Brightness: "+(x.brightness!=null?x.brightness:"?")+"; Contrast: "+(x.contrast!=null?x.contrast:"?")+error;
+    }).join("\n");
+  }
+
+  async function analyzePhotos(files){
+    const arr=[...files];
+    if(!arr.length){evidenceResults.photos=[];setEvidenceStatus("photoStatus","No product photos selected","warning");updateEvidenceSummary();return;}
+    setEvidenceStatus("photoStatus",arr.length+" photo"+(arr.length===1?"":"s")+" selected — checking image quality…");
+    const out=[];
+    for(const file of arr){
+      try{
+        const url=URL.createObjectURL(file),img=document.createElement("img");img.src=url;
+        await new Promise((res,rej)=>{img.onload=res;img.onerror=rej});
+        const w=img.naturalWidth,h=img.naturalHeight,canvas=document.createElement("canvas");canvas.width=Math.min(w,900);canvas.height=Math.max(1,Math.round(h*(canvas.width/w)));
+        const ctx=canvas.getContext("2d",{willReadFrequently:true});ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;let sum=0,sq=0,dark=0;
+        for(let i=0;i<data.length;i+=4){const lum=.299*data[i]+.587*data[i+1]+.114*data[i+2];sum+=lum;sq+=lum*lum;if(lum<35)dark++;}
+        const pixels=data.length/4,mean=sum/pixels,std=Math.sqrt(Math.max(0,sq/pixels-mean*mean));
+        let quality=w>=800&&h>=600?"Good image quality":"Low resolution — use a clearer photo";
+        if(mean<45)quality="Very dark image — retake with better lighting";else if(mean>245)quality="Overexposed image — retake with less glare";
+        const analysis={name:file.name,status:quality,width:w,height:h,brightness:Math.round(mean),contrast:Math.round(std),darkPixelRatio:Math.round(dark/pixels*100)};
+        URL.revokeObjectURL(url);out.push(analysis);
+      }catch(e){out.push({name:file.name,status:"Could not inspect image",error:e.message});}
+    }
+    evidenceResults.photos=out;
+    setEvidenceStatus("photoStatus",out.map(x=>x.name+": "+x.status).join(" | "),out.some(x=>x.error)?"error":"success");
+    updateEvidenceSummary();
+  }
+
+  async function processEvidence(){
+    const user=window.fbAuth&&window.fbAuth.currentUser;if(!user)return;
+    evidenceResults={invoice:null,warranty:null,repair:null,photos:[]};
+    const invoice=document.getElementById("invoiceFile").files[0], warranty=document.getElementById("warrantyFile").files[0], repair=repairFile.files[0], photos=document.getElementById("productPhotos").files;
+    const [i,w,r]=await Promise.all([ocrFile(invoice,"purchase_invoice","invoiceStatus"),ocrFile(warranty,"warranty_document","warrantyStatus"),repair?ocrFile(repair,"repair_history","repairStatus"):Promise.resolve(null)]);
+    evidenceResults.invoice=i;evidenceResults.warranty=w;evidenceResults.repair=r;
+    await analyzePhotos(photos);
+    updateEvidenceSummary();
+    showStatus("Evidence processing finished. Review the OCR results and photo checks before continuing.","success");
+  }
+
+  ["invoiceFile","warrantyFile","repairFile","productPhotos"].forEach(id=>document.getElementById(id).addEventListener("change",async()=>{
+    const input=document.getElementById(id), files=input.files;
+    if(id==="productPhotos"){
+      await analyzePhotos(files);
+      return;
+    }
+    const statusId=id.replace("File","Status");
+    const file=files&&files[0];
+    if(!file){setEvidenceStatus(statusId,"Not uploaded","warning");return;}
+    if(!file.size){setEvidenceStatus(statusId,"Selected file is 0 bytes — please re-select it","error");return;}
+    setEvidenceStatus(statusId,"Ready — "+file.name+" ("+Math.round(file.size/1024)+" KB). Processing OCR…");
+    const result=await ocrFile(file,id.replace("File",""),statusId);
+    if(id==="invoiceFile")evidenceResults.invoice=result;
+    else if(id==="warrantyFile")evidenceResults.warranty=result;
+    else if(id==="repairFile")evidenceResults.repair=result;
+    updateEvidenceSummary();
+  }));
+  ["faultEvidence","serialEvidence","diagnosticReport"].forEach(id=>document.getElementById(id).addEventListener("change",()=>{
+    const file=document.getElementById(id).files[0], statusId=id+"Status";
+    if(!file){setEvidenceStatus(statusId,"Optional");return;}
+    try{window.AssureXStorage.validate(file);setEvidenceStatus(statusId,"Ready — "+file.name+" ("+Math.round(file.size/1024)+" KB)","success");}
+    catch(e){document.getElementById(id).value="";setEvidenceStatus(statusId,e.message,"error");}
+  }));
+  async function ensureEvidenceProcessed(){if(evidenceResults.invoice&&evidenceResults.warranty&&evidenceResults.photos.length)return true;await processEvidence();return !!(evidenceResults.invoice&&evidenceResults.warranty&&evidenceResults.photos.length);}
+
+  function updateEvidenceSummary(){document.getElementById("ocrSummary").textContent=[evidenceResults.invoice?"Invoice OCR ready":"Invoice pending",evidenceResults.warranty?"Warranty OCR ready":"Warranty pending",evidenceResults.repair?"Repair OCR ready":"Repair OCR optional"].join(" · ");document.getElementById("damageSummary").textContent=evidenceResults.photos.length?(evidenceResults.photos.map(p=>p.status).join(" · ")):"No photos analyzed";}
+
+  function updateReview(){
+    const p=currentProduct||{},e=evidenceResults,user=window.fbAuth&&window.fbAuth.currentUser;
+    const productName=p.name||p.product_name||"—",productId=p.id||productSelect.value||"—";
+    const serial=p.serial_number||p.serialNumber||"—",category=p.category||"—";
+    const purchaseDate=dateText(p.purchase_date||p.purchaseDate),price=p.price!=null?p.price:(p.product_price!=null?p.product_price:"—");
+    const retailer=p.retailer||"—",warranty=p.warranty_months!=null?p.warranty_months:0,extended=p.extended_warranty_months!=null?p.extended_warranty_months:0;
+    const provider=p.warranty_provider||"—",service=p.service_center||"—";
+    const photoText=e.photos.length?e.photos.map(x=>x.name+": "+x.status+(x.modelClass?" · "+x.modelClass+" "+Math.round(x.confidence*100)+"%":"")).join(" · "):"No photos analyzed";
+    document.getElementById("reviewDetails").innerHTML=
+      '<div class="review-section"><h3>Customer</h3><div class="review-grid"><div><span>Name</span><strong>'+esc(currentUserProfile&&currentUserProfile.displayName||user&&user.displayName||"—")+'</strong></div><div><span>Email</span><strong>'+esc(currentUserProfile&&currentUserProfile.email||user&&user.email||"—")+'</strong></div><div><span>User ID</span><strong>'+esc(user&&user.uid||"—")+'</strong></div></div></div>'+ 
+      '<div class="review-section"><h3>Product</h3><div class="review-grid"><div><span>Product</span><strong>'+esc(productName)+'</strong></div><div><span>Product ID</span><strong>'+esc(productId)+'</strong></div><div><span>Brand</span><strong>'+esc(p.brand||"—")+'</strong></div><div><span>Model</span><strong>'+esc(p.model_number||p.modelNumber||"—")+'</strong></div><div><span>Serial Number</span><strong>'+esc(serial)+'</strong></div><div><span>Category</span><strong>'+esc(category)+'</strong></div></div></div>'+ 
+      '<div class="review-section"><h3>Purchase &amp; warranty</h3><div class="review-grid"><div><span>Purchase Date</span><strong>'+esc(purchaseDate)+'</strong></div><div><span>Price</span><strong>'+esc(String(price))+'</strong></div><div><span>Retailer</span><strong>'+esc(retailer)+'</strong></div><div><span>Warranty</span><strong>'+esc(String(warranty))+' months</strong></div><div><span>Extended Warranty</span><strong>'+esc(String(extended))+' months</strong></div><div><span>Provider</span><strong>'+esc(provider)+'</strong></div><div><span>Service Center</span><strong>'+esc(service)+'</strong></div></div></div>'+ 
+      '<div class="review-section"><h3>Reported fault &amp; repairs</h3><div class="review-grid"><div><span>Damage Category</span><strong>'+esc(val("faultType")||"—")+'</strong></div><div><span>Previously Repaired</span><strong>'+esc(val("previouslyRepaired")||"—")+'</strong></div><div><span>Repair Count</span><strong>'+esc(val("repairCount")||"0")+'</strong></div><div class="wide-review"><span>Description</span><strong>'+esc(val("faultDescription")||"—")+'</strong></div><div class="wide-review"><span>Repair Notes</span><strong>'+esc(val("repairNotes")||"—")+'</strong></div></div></div>'+ 
+      '<div class="review-section"><h3>Evidence analysis</h3><div class="review-grid"><div class="wide-review"><span>Invoice OCR</span><strong>'+esc(e.invoice&&e.invoice.text?e.invoice.text.slice(0,600):(e.invoice&&e.invoice.error?"OCR error: "+e.invoice.error:"Not processed"))+'</strong></div><div class="wide-review"><span>Warranty OCR</span><strong>'+esc(e.warranty&&e.warranty.text?e.warranty.text.slice(0,600):(e.warranty&&e.warranty.error?"OCR error: "+e.warranty.error:"Not processed"))+'</strong></div><div class="wide-review"><span>Repair OCR</span><strong>'+esc(e.repair&&e.repair.text?e.repair.text.slice(0,600):(e.repair&&e.repair.error?"OCR error: "+e.repair.error:(val("previouslyRepaired")==="yes"?"Not readable / not processed":"Not supplied")))+'</strong></div><div class="wide-review"><span>Photo analysis</span><strong>'+esc(photoText)+'</strong></div></div></div>';
+  }
+
+  async function uploadClaimFiles(claimId, productId){
+    const files=[];
+    const invoice=document.getElementById("invoiceFile").files[0], warranty=document.getElementById("warrantyFile").files[0], repair=repairFile.files[0];
+    if(invoice)files.push({file:invoice,documentType:"purchase_invoice"});
+    if(warranty)files.push({file:warranty,documentType:"warranty_card"});
+    if(repair)files.push({file:repair,documentType:"repair_report"});
+    [...document.getElementById("productPhotos").files].forEach(f=>files.push({file:f,documentType:"product_image"}));
+    const optional=[
+      ["faultEvidence","fault_evidence"],
+      ["serialEvidence","serial_evidence"],
+      ["diagnosticReport","diagnostic_report"]
+    ];
+    optional.forEach(([id,type])=>{const f=document.getElementById(id)?.files?.[0];if(f)files.push({file:f,documentType:type});});
+    const uploaded=[];
+    for(const item of files){
+      showStatus("Storing "+item.file.name+" in Firestore…");
+      uploaded.push(await window.AssureXStorage.uploadFile(item.file,{claimId,productId,documentType:item.documentType}));
+    }
+    return uploaded;
+  }
+
+  async function submitClaim(){
+    const user=window.fbAuth&&window.fbAuth.currentUser;if(!user){showStatus("Please sign in before submitting a claim.","error");return;}
+    for(let i=1;i<=3;i++){if(!validateStep(i)){showStep(i);return;}}
+    submitting=true;showStep(3);showStatus("Preparing claim and secure evidence upload…");
+    let claimRef=null, uploaded=[];
+    try{
+      const p=currentProduct||{};
+      if(!evidenceResults.invoice||!evidenceResults.warranty||!evidenceResults.photos.length){await processEvidence();}
+      if(!window.AssureXStorage)throw new Error("Document storage service is not available.");
+      // Reserve the claim ID first so every stored file can be linked to the claim.
+      claimRef=window.fbDb.collection("claims").doc();
+      uploaded=await uploadClaimFiles(claimRef.id,p.id||"");
+      const documentIds=uploaded.map(d=>d.id);
+      const documentHashes=uploaded.map(d=>d.sha256).filter(Boolean);
+      const byType={};uploaded.forEach(d=>{(byType[d.documentType]||(byType[d.documentType]=[])).push(d.id);});
+      const claimData={predictedDecision:"Manual Review",predictionStatus:"manual_review_pending",predictionReason:"Claim is queued for human review until a configured AI decision model provides a supported claim-level prediction.",predictionSource:"assurex-rbac-default",userId:user.uid,userProfile:{displayName:currentUserProfile&&currentUserProfile.displayName||user.displayName||"",email:currentUserProfile&&currentUserProfile.email||user.email||"",phone:currentUserProfile&&currentUserProfile.phone||currentUserProfile&&currentUserProfile.phoneNumber||user.phoneNumber||""},status:"pending",statusHistory:[{status:"pending",note:"Claim submitted",changedBy:user.uid,source:"claim_submission",changedAt:new Date().toISOString()}],productId:p.id||"",product:{name:p.name||p.product_name||"",brand:p.brand||"",modelNumber:p.model_number||"",serialNumber:p.serial_number||"",category:p.category||"",price:p.price!=null?p.price:null},purchase:{date:p.purchase_date||"",retailer:p.retailer||"",warrantyMonths:Number(p.warranty_months||0),extendedWarrantyMonths:Number(p.extended_warranty_months||0),warrantyProvider:p.warranty_provider||"",serviceCenter:p.service_center||""},fault:{category:val("faultType"),description:val("faultDescription"),date:val("faultDate")},repairHistory:{previouslyRepaired:val("previouslyRepaired"),repairCount:val("previouslyRepaired")==="yes"?Number(val("repairCount")||0):0,notes:val("repairNotes")},evidence:{storageUploaded:true,documentIds,documentHashes,documents:byType,ocr:{invoice:evidenceText(evidenceResults.invoice),warranty:evidenceText(evidenceResults.warranty),repair:evidenceText(evidenceResults.repair)},photoAnalysis:{text:photoAnalysisText(evidenceResults.photos),results:evidenceResults.photos.map(x=>({name:x.name||"",status:x.status||"",width:x.width||null,height:x.height||null,brightness:x.brightness!=null?x.brightness:null,contrast:x.contrast!=null?x.contrast:null,darkPixelRatio:x.darkPixelRatio!=null?x.darkPixelRatio:null,modelClass:x.modelClass||"",confidence:x.confidence!=null?Number(x.confidence):null,error:x.error||""}))}},createdAt:firebase.firestore.FieldValue.serverTimestamp(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+      // Run the complete server-side pipeline when the trained model artifacts are installed.
+      // If artifacts are intentionally absent, the claim remains safely queued for manual review.
+      try{
+        if(window.AssureXAPI){
+          showStatus("Running AssureX validation, AI models, warranty rules and duplicate checks…");
+          const modelClaim={
+            claim_id:claimRef.id, userId:user.uid,
+            product_id:p.id||"", product_category:p.category||"", product_age_months:p.product_age_months!=null?Number(p.product_age_months):0,
+            warranty_duration:Number(p.warranty_months||0), extended_warranty:Number(p.extended_warranty_months||0)>0?1:0,
+            purchase_price:p.price!=null?Number(p.price):0, damage_type:val("faultType")||"",
+            repair_history_count:val("previouslyRepaired")==="yes"?Number(val("repairCount")||0):0, previous_repair_unauthorized:0,
+            // Verification-derived ML features must come from actual validation results.
+            // Do not send fabricated success flags to either model.
+            product:claimData.product, purchase:claimData.purchase, fault:claimData.fault, repairHistory:claimData.repairHistory, evidence:claimData.evidence,
+            serial_number:p.serial_number||"", damage_type:val("faultType")||"", fault_description:val("faultDescription")||"",
+            purchase_date:p.purchase_date||"", claim_submission_date:new Date().toISOString(),
+            fault_date:val("faultDate")||new Date().toISOString().slice(0,10),
+            documents:byType, document_hashes:documentHashes
+          };
+          // Send the existing records needed by the deterministic duplicate checks.
+          // The backend still treats these as untrusted data and performs its own checks.
+          const existingClaims=await DbService.getClaims(user.uid);
+          const existingDocuments=await DbService.getDocuments(user.uid);
+          const analysis=await window.AssureXAPI.analyzeClaim(modelClaim,{existing_claims:existingClaims,existing_documents:existingDocuments,required_documents:["purchase_invoice","warranty_document","product_photo","fault_evidence","serial_evidence"]});
+          claimData.predictedDecision=analysis.decision;
+          claimData.finalDecision=analysis.decision;
+          claimData.predictionStatus=analysis.decision==="Manual Review Required"?"manual_review_required":"evaluated";
+          claimData.predictionSource="assurex-dual-model-pipeline";
+          claimData.status=analysis.decision==="Manual Review Required"?"manual_review":"under_evaluation";
+          claimData.aiAnalysis=analysis;
+          claimData.modelVersions=analysis.modelVersions;
+          claimData.updatedAt=firebase.firestore.FieldValue.serverTimestamp();
+        }
+      }catch(aiError){
+        console.warn("[AssureX] AI pipeline unavailable; preserving claim for manual review",aiError);
+        claimData.predictedDecision="Manual Review Required";
+        claimData.finalDecision="Manual Review Required";
+        claimData.predictionStatus="manual_review_required";
+        claimData.predictionSource="assurex-pipeline-pending-model-artifacts";
+        claimData.status="manual_review";
+        claimData.aiPipelineError={code:aiError.status===503?"MODEL_RUNTIME_NOT_READY":"PIPELINE_UNAVAILABLE",message:aiError.message,at:new Date().toISOString()};
+      }
+      await claimRef.set(claimData);
+      const intelligenceClaim=Object.assign({id:claimRef.id},claimData);
+      if(window.AssureXIntelligence){ window.AssureXIntelligence.setCurrent(intelligenceClaim); window.AssureXIntelligence.open("explain"); }
+      showStatus("Claim submitted successfully. Evidence is securely stored in Firestore. Claim ID: "+claimRef.id,"success");nextButton.textContent="Claim Saved ✓";nextButton.disabled=true;
+    }catch(e){
+      console.error("[AssureX] Claim submission failed",e);if(window.DbService&&DbService.logError)DbService.logError(e,{operation:"claim_submission"});
+      for(const d of uploaded){try{await window.AssureXStorage.deleteDocument(d.id);}catch(cleanupError){console.warn("[AssureX] Evidence cleanup failed",cleanupError);}}
+      if(claimRef){try{await claimRef.delete();}catch(cleanupError){console.warn("[AssureX] Claim cleanup failed",cleanupError);}}
+      showStatus(e.code==="duplicate-document"?"One of the selected files is already stored in AssureX. Replace it with a new file.":(e.code==="permission-denied"?"Firestore denied this operation. Publish the updated Firestore rules.":(e.message||"Could not save the claim.")),"error");submitting=false;showStep(3);
+    }
+  }
+
+
+  prevButton.addEventListener("click",()=>{if(currentStep>1){clearStatus();showStep(currentStep-1);}});
+  nextButton.addEventListener("click",async()=>{if(currentStep<3){if(currentStep===2){if(!document.getElementById("invoiceFile").files.length||!document.getElementById("warrantyFile").files.length||!document.getElementById("productPhotos").files.length){showStatus("Select the purchase invoice, warranty document and at least one product photo.","error");return;}await ensureEvidenceProcessed();if(!validateStep(2))return;}else if(!validateStep(currentStep))return;clearStatus();showStep(currentStep+1);}else await submitClaim();});
+  indicators.forEach(b=>b.addEventListener("click",()=>{const target=Number(b.dataset.step);if(target<currentStep){clearStatus();showStep(target);}}));
+
+  if(window.fbAuth)window.fbAuth.onAuthStateChanged(async user=>{if(!user){showStatus("Sign in to submit and view claims.","error");return;}await loadUser(user);await loadProducts(user);});
+  syncRepairVisibility();showStep(1);
+})();
+</script>
+<script src="js/nav-fix.js"></script>
+<script src="js/profile-shortcut.js"></script>
+<link rel="stylesheet" href="css/topbar-upgrade.css"><script src="js/topbar-upgrade.js"></script><script src="js/ai-intelligence.js" defer></script>
+<script src="js/experience-features.js" defer></script>
+  <script src="js/assurex-chatbot.js" defer></script>
+<script src="js/sidebar-memory.js" defer></script><script src="js/backend-health.js" defer></script></body>
+</html>

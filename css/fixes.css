@@ -1,0 +1,402 @@
+/* =====================================================================
+   AssureX fixes — load AFTER theme.css
+   1) Search bar (unique, both themes)
+   2) Add Product popup: real glass + high-contrast text in light mode
+   ===================================================================== */
+
+/* ---------- 1. SEARCH BAR ---------- */
+@property --sx-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+
+.topbar .global-search {
+  --sb-bg: rgba(12, 19, 36, .82);
+  --sb-text: #f8fafc;
+  --sb-muted: #8b95a9;
+  --sb-ring: linear-gradient(120deg, rgba(102,119,255,.55), rgba(67,217,255,.30), rgba(124,92,255,.55));
+  position: relative;
+  width: min(440px, 100%);
+  height: 44px;
+  padding: 0 8px 0 6px;
+  gap: 6px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--sb-bg), var(--sb-bg)) padding-box,
+    var(--sb-ring) border-box;
+  box-shadow: 0 6px 22px -12px rgba(102,119,255,.55), inset 0 1px 0 rgba(255,255,255,.06);
+  transition: width .35s cubic-bezier(.22,1,.36,1), box-shadow .3s ease;
+}
+.topbar .global-search:focus-within {
+  width: min(600px, 100%);
+  --sb-ring: conic-gradient(from var(--sx-angle), #6677ff, #43d9ff, #7c5cff, #ff7ad9, #6677ff);
+  animation: sxSpin 3.2s linear infinite;
+  box-shadow: 0 0 0 4px rgba(102,119,255,.14), 0 14px 36px -12px rgba(102,119,255,.65);
+}
+@keyframes sxSpin { to { --sx-angle: 360deg; } }
+
+.topbar .global-search > span.gs-icon,
+.topbar .global-search > span {
+  flex: 0 0 34px;
+  width: 34px; height: 34px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, #6677ff, #7c5cff);
+  box-shadow: 0 6px 14px -6px rgba(102,119,255,.9);
+  font-size: 15px;
+  transition: transform .3s ease;
+}
+.topbar .global-search:focus-within > span { transform: rotate(-12deg) scale(1.06); }
+
+.topbar .global-search input {
+  flex: 1; min-width: 0;
+  height: 100%;
+  padding: 0 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sb-text);
+  background: transparent;
+  border: 0; outline: 0; box-shadow: none;
+}
+.topbar .global-search input::placeholder { color: var(--sb-muted); font-weight: 400; }
+.topbar .global-search input::-webkit-search-cancel-button { -webkit-appearance: none; display: none; }
+
+.topbar .global-search kbd {
+  flex: 0 0 auto;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(125,140,255,.35);
+  background: rgba(102,119,255,.14);
+  color: #b9c2ff;
+  font: 700 10px/1 Inter, system-ui, sans-serif;
+  letter-spacing: .04em;
+  transition: opacity .2s ease;
+}
+.topbar .global-search:focus-within kbd { opacity: 0; }
+
+html[data-assurex-theme="light"] .topbar .global-search {
+  --sb-bg: rgba(255, 255, 255, .92);
+  --sb-text: #0f172a;
+  --sb-muted: #64748b;
+  --sb-ring: linear-gradient(120deg, rgba(37,99,235,.45), rgba(8,145,178,.35), rgba(124,58,237,.45));
+  box-shadow: 0 8px 24px -14px rgba(37,99,235,.55), inset 0 1px 0 #fff;
+  color: #0f172a !important;
+}
+html[data-assurex-theme="light"] .topbar .global-search:focus-within {
+  --sb-ring: conic-gradient(from var(--sx-angle), #2563eb, #0891b2, #7c3aed, #db2777, #2563eb);
+  box-shadow: 0 0 0 4px rgba(37,99,235,.12), 0 14px 34px -14px rgba(37,99,235,.55);
+}
+html[data-assurex-theme="light"] .topbar .global-search kbd {
+  background: rgba(37,99,235,.08); color: #1d4ed8; border-color: rgba(37,99,235,.25);
+}
+
+@media (max-width: 720px) {
+  .topbar .global-search, .topbar .global-search:focus-within { width: 100%; }
+  .topbar .global-search kbd { display: none; }
+}
+
+/* ---------- 2. ADD PRODUCT POPUP — LIGHT MODE GLASS ---------- */
+html[data-assurex-theme="light"] #addProductModal {
+  background: rgba(15, 23, 42, .38) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+  backdrop-filter: blur(10px) saturate(120%) !important;
+}
+
+html[data-assurex-theme="light"] #addProductModal .add-product-modal {
+  background: linear-gradient(155deg, rgba(255,255,255,.97), rgba(243,247,255,.95)) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(170%) !important;
+  backdrop-filter: blur(28px) saturate(170%) !important;
+  border: 1px solid rgba(255,255,255,.85) !important;
+  box-shadow:
+    0 40px 90px -28px rgba(30,64,175,.45),
+    0 0 0 1px rgba(37,99,235,.14),
+    inset 0 1px 0 #fff !important;
+  color: #0f172a !important;
+}
+
+/* All plain text inside the popup */
+html[data-assurex-theme="light"] #addProductModal h2,
+html[data-assurex-theme="light"] #addProductModal h3,
+html[data-assurex-theme="light"] #addProductModal strong { color: #0f172a !important; }
+html[data-assurex-theme="light"] #addProductModal .eyebrow { color: #4f46e5 !important; }
+html[data-assurex-theme="light"] #addProductModal .add-product-header p,
+html[data-assurex-theme="light"] #addProductModal .add-product-panel-copy,
+html[data-assurex-theme="light"] #addProductModal .field-help { color: #475569 !important; }
+html[data-assurex-theme="light"] #addProductModal .form-section {
+  color: #4338ca !important; border-top-color: rgba(30,64,175,.16) !important;
+}
+
+/* Labels + fields */
+html[data-assurex-theme="light"] #addProductModal label {
+  color: #1e293b !important; font-weight: 700 !important;
+}
+html[data-assurex-theme="light"] #addProductModal input,
+html[data-assurex-theme="light"] #addProductModal select,
+html[data-assurex-theme="light"] #addProductModal textarea {
+  background: rgba(255,255,255,.96) !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: 0 1px 2px rgba(15,23,42,.05) !important;
+}
+html[data-assurex-theme="light"] #addProductModal input::placeholder,
+html[data-assurex-theme="light"] #addProductModal textarea::placeholder {
+  color: #64748b !important; -webkit-text-fill-color: #64748b !important; opacity: 1;
+}
+html[data-assurex-theme="light"] #addProductModal input:focus,
+html[data-assurex-theme="light"] #addProductModal select:focus,
+html[data-assurex-theme="light"] #addProductModal textarea:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 4px rgba(37,99,235,.16) !important;
+  outline: none !important;
+}
+html[data-assurex-theme="light"] #addProductModal input[readonly],
+html[data-assurex-theme="light"] #addProductModal input:disabled {
+  background: #eef2f9 !important; color: #334155 !important; -webkit-text-fill-color: #334155 !important;
+}
+html[data-assurex-theme="light"] #addProductModal select option { background: #fff; color: #0f172a; }
+
+/* Step indicator */
+html[data-assurex-theme="light"] #addProductModal .add-product-step {
+  background: rgba(255,255,255,.75) !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #334155 !important;
+}
+html[data-assurex-theme="light"] #addProductModal .add-product-step span { color: inherit !important; }
+html[data-assurex-theme="light"] #addProductModal .add-product-step .step-number {
+  background: #e2e8f0 !important; color: #334155 !important;
+}
+html[data-assurex-theme="light"] #addProductModal .add-product-step.active {
+  background: rgba(37,99,235,.10) !important; border-color: #2563eb !important; color: #1d4ed8 !important;
+}
+html[data-assurex-theme="light"] #addProductModal .add-product-step.active .step-number,
+html[data-assurex-theme="light"] #addProductModal .add-product-step.complete .step-number {
+  background: linear-gradient(135deg, #2563eb, #7c3aed) !important; color: #fff !important;
+}
+html[data-assurex-theme="light"] #addProductModal .add-product-step.complete {
+  color: #166534 !important; border-color: rgba(22,163,74,.45) !important;
+}
+html[data-assurex-theme="light"] #addProductModal .add-product-progress {
+  background: rgba(30,64,175,.12) !important;
+}
+
+/* Review step */
+html[data-assurex-theme="light"] #addProductModal .product-review {
+  background: rgba(255,255,255,.72) !important; border: 1px solid rgba(30,64,175,.16) !important;
+}
+html[data-assurex-theme="light"] #addProductModal .review-item {
+  background: rgba(255,255,255,.85) !important; border: 1px solid rgba(30,64,175,.12) !important;
+}
+html[data-assurex-theme="light"] #addProductModal .review-item span { color: #475569 !important; }
+html[data-assurex-theme="light"] #addProductModal .review-item strong { color: #0f172a !important; }
+
+/* Messages */
+html[data-assurex-theme="light"] #addProductModal .add-product-message.success {
+  background: #dcfce7 !important; color: #14532d !important; border: 1px solid #86efac !important;
+}
+html[data-assurex-theme="light"] #addProductModal .add-product-message.error {
+  background: #fee2e2 !important; color: #7f1d1d !important; border: 1px solid #fca5a5 !important;
+}
+
+/* Footer buttons + close */
+html[data-assurex-theme="light"] #addProductModal .add-product-footer { border-top-color: rgba(30,64,175,.14) !important; }
+html[data-assurex-theme="light"] #addProductModal .btn:not(.btn-gradient) {
+  background: #fff !important; color: #1e293b !important; border: 1.5px solid #cbd5e1 !important;
+}
+html[data-assurex-theme="light"] #addProductModal .btn:not(.btn-gradient):hover { background: #eef2ff !important; }
+html[data-assurex-theme="light"] #addProductModal .btn-gradient {
+  background: linear-gradient(135deg, #2563eb, #7c3aed) !important; color: #fff !important; border: 0 !important;
+  box-shadow: 0 10px 24px -10px rgba(37,99,235,.7) !important;
+}
+html[data-assurex-theme="light"] #addProductModal .btn:disabled { opacity: .55; }
+html[data-assurex-theme="light"] #addProductModal .icon-button {
+  background: #fff !important; color: #0f172a !important; border: 1.5px solid #cbd5e1 !important;
+}
+html[data-assurex-theme="light"] #addProductModal .icon-button:hover { background: #eef2ff !important; }
+
+
+/* =====================================================================
+   3) ADD PRODUCT — no dark shading behind the popup (both themes)
+   ===================================================================== */
+#addProductModal,
+html[data-assurex-theme="light"] #addProductModal,
+html[data-assurex-theme="dark"] #addProductModal {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+/* popup floats with its own soft shadow instead of a dimmed page */
+#addProductModal .add-product-modal {
+  box-shadow: 0 24px 60px -18px rgba(15, 23, 42, .35), 0 0 0 1px rgba(100, 116, 139, .22) !important;
+}
+html[data-assurex-theme="light"] #addProductModal .add-product-modal {
+  box-shadow: 0 24px 60px -20px rgba(30, 64, 175, .28), 0 0 0 1px rgba(30, 64, 175, .16), inset 0 1px 0 #fff !important;
+}
+
+/* =====================================================================
+   4) LIGHT THEME — global readability pass (audited with real contrast checks)
+   ===================================================================== */
+html[data-assurex-theme="light"] {
+  --muted: #475569;
+  --text-2: #334155;
+}
+
+/* small uppercase labels / eyebrows */
+html[data-assurex-theme="light"] .eyebrow,
+html[data-assurex-theme="light"] .card-number,
+html[data-assurex-theme="light"] .form-section,
+html[data-assurex-theme="light"] .section {
+  color: #4338ca !important;
+}
+
+/* secondary text */
+html[data-assurex-theme="light"] p,
+html[data-assurex-theme="light"] small,
+html[data-assurex-theme="light"] .helper-text,
+html[data-assurex-theme="light"] .hint,
+html[data-assurex-theme="light"] .empty,
+html[data-assurex-theme="light"] .muted {
+  color: #475569 !important;
+}
+html[data-assurex-theme="light"] .metric span,
+html[data-assurex-theme="light"] .tr span,
+html[data-assurex-theme="light"] .th span,
+html[data-assurex-theme="light"] .step,
+html[data-assurex-theme="light"] .step span,
+html[data-assurex-theme="light"] label span {
+  color: #475569 !important;
+}
+html[data-assurex-theme="light"] .step.active,
+html[data-assurex-theme="light"] .step.active span { color: #1d4ed8 !important; }
+
+/* sidebar */
+html[data-assurex-theme="light"] .nav-item span { color: #475569 !important; }
+html[data-assurex-theme="light"] .nav-item.active span,
+html[data-assurex-theme="light"] .nav-item:hover span { color: #1d4ed8 !important; }
+html[data-assurex-theme="light"] .avatar { color: #fff !important; }
+
+/* status colours: darker shades so they read on white */
+html[data-assurex-theme="light"] small.warning,
+html[data-assurex-theme="light"] .warning { color: #854d0e !important; }
+html[data-assurex-theme="light"] small.positive,
+html[data-assurex-theme="light"] .positive,
+html[data-assurex-theme="light"] .good { color: #047857 !important; }
+html[data-assurex-theme="light"] small.negative,
+html[data-assurex-theme="light"] .negative,
+html[data-assurex-theme="light"] .danger-text { color: #b91c1c !important; }
+html[data-assurex-theme="light"] .queue-icon.warning { color: #854d0e !important; background: #fef3c7 !important; }
+html[data-assurex-theme="light"] .queue-icon.blue { color: #1d4ed8 !important; background: #dbeafe !important; }
+html[data-assurex-theme="light"] .queue-icon.danger { color: #b91c1c !important; background: #fee2e2 !important; }
+html[data-assurex-theme="light"] strong.valid,
+html[data-assurex-theme="light"] .model-status,
+html[data-assurex-theme="light"] .live-status { color: #047857 !important; }
+html[data-assurex-theme="light"] .form-status.error,
+html[data-assurex-theme="light"] .form-status.err { color: #b91c1c !important; }
+html[data-assurex-theme="light"] .form-status.success { color: #047857 !important; }
+
+/* links / text buttons */
+html[data-assurex-theme="light"] .text-button,
+html[data-assurex-theme="light"] .link-button,
+html[data-assurex-theme="light"] .back-to-landing { color: #1d4ed8 !important; }
+html[data-assurex-theme="light"] .auth-tab { color: #475569 !important; }
+html[data-assurex-theme="light"] .auth-tab.active { color: #1d4ed8 !important; }
+html[data-assurex-theme="light"] .password-toggle,
+html[data-assurex-theme="light"] .toggle-password,
+html[data-assurex-theme="light"] input + button { color: #1d4ed8 !important; }
+
+/* primary buttons: keep white text on solid blue gradient */
+html[data-assurex-theme="light"] .btn-gradient,
+html[data-assurex-theme="light"] .mlbtn,
+html[data-assurex-theme="light"] .primary,
+html[data-assurex-theme="light"] .btn.primary {
+  background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
+  color: #fff !important;
+}
+html[data-assurex-theme="light"] .btn.secondary,
+html[data-assurex-theme="light"] button.secondary { color: #1e293b !important; }
+
+/* search bar shortcut chip */
+html[data-assurex-theme="light"] .topbar .global-search kbd { color: #1e3a8a !important; }
+html[data-assurex-theme="light"] .topbar .global-search > span { color: #fff !important; }
+
+/* toast (was invisible: white on white) */
+html[data-assurex-theme="light"] .toast {
+  background: #0f172a !important; color: #fff !important; border: 1px solid #334155 !important;
+}
+
+/* theme toggle moon icon */
+html[data-assurex-theme="light"] .theme-icon { color: #1e293b !important; }
+
+/* ---- 5) Light theme: landing / auth / misc pages ---- */
+html[data-assurex-theme="light"] i.check-icon,
+html[data-assurex-theme="light"] .auth-benefits i,
+html[data-assurex-theme="light"] .agreement-icon,
+html[data-assurex-theme="light"] .hero-checks i { color: #047857 !important; }
+html[data-assurex-theme="light"] .auth-benefits i { color: #fff !important; }
+html[data-assurex-theme="light"] i.warning-icon { color: #854d0e !important; }
+html[data-assurex-theme="light"] .live-status,
+html[data-assurex-theme="light"] .badge.valid,
+html[data-assurex-theme="light"] .status-valid,
+html[data-assurex-theme="light"] strong.valid,
+html[data-assurex-theme="light"] .model-card strong,
+html[data-assurex-theme="light"] .final-decision strong { color: #047857 !important; }
+html[data-assurex-theme="light"] .auth-copy p,
+html[data-assurex-theme="light"] .auth-benefits div { color: #334155 !important; }
+html[data-assurex-theme="light"] .back-to-landing { color: #1e3a8a !important; }
+html[data-assurex-theme="light"] .auth-tab.active {
+  background: linear-gradient(135deg, #2563eb, #7c3aed) !important; color: #fff !important;
+}
+html[data-assurex-theme="light"] .auth-tab { color: #334155 !important; }
+html[data-assurex-theme="light"] .field button,
+html[data-assurex-theme="light"] .password-wrap button,
+html[data-assurex-theme="light"] .input-wrap button { color: #1d4ed8 !important; }
+html[data-assurex-theme="light"] .form-status.error,
+html[data-assurex-theme="light"] .readiness-error { color: #991b1b !important; background: #fee2e2 !important; }
+html[data-assurex-theme="light"] .readiness-error { border: 1px solid #fca5a5 !important; }
+
+/* readiness / analytics summary chips */
+html[data-assurex-theme="light"] .readiness-summary span,
+html[data-assurex-theme="light"] .readiness-summary strong,
+html[data-assurex-theme="light"] .readiness-meta span,
+html[data-assurex-theme="light"] .readiness-detail { color: #334155 !important; }
+html[data-assurex-theme="light"] .readiness-summary strong { color: #0f172a !important; }
+html[data-assurex-theme="light"] .ring strong,
+html[data-assurex-theme="light"] .donut strong,
+html[data-assurex-theme="light"] .distribution strong,
+html[data-assurex-theme="light"] .chart-center strong { color: #0f172a !important; }
+
+/* stand-alone add-product page */
+html[data-assurex-theme="light"] .btn.secondary,
+html[data-assurex-theme="light"] button.secondary {
+  background: #fff !important; color: #1e293b !important; border: 1.5px solid #cbd5e1 !important;
+}
+html[data-assurex-theme="light"] .avatar span,
+html[data-assurex-theme="light"] .avatar { color: #fff !important; }
+
+/* ---- 6) Light theme: remaining small fixes ---- */
+html[data-assurex-theme="light"] .eyebrow { color: #3730a3 !important; }
+html[data-assurex-theme="light"] .analytics-bars strong { color: #0f172a !important; }
+html[data-assurex-theme="light"] .analytics-bars span { color: #334155 !important; }
+html[data-assurex-theme="light"] .prediction strong,
+html[data-assurex-theme="light"] .final-result strong,
+html[data-assurex-theme="light"] .model-card strong,
+html[data-assurex-theme="light"] .agreement-box span { color: #047857 !important; }
+html[data-assurex-theme="light"] .final-result span,
+html[data-assurex-theme="light"] .final-result small,
+html[data-assurex-theme="light"] .agreement-box small { color: #334155 !important; }
+html[data-assurex-theme="light"] .floating-metric { background: rgba(255,255,255,.92) !important; }
+html[data-assurex-theme="light"] .floating-metric small,
+html[data-assurex-theme="light"] .floating-metric span { color: #334155 !important; }
+html[data-assurex-theme="light"] .floating-metric strong { color: #0f172a !important; }
+html[data-assurex-theme="light"] .artifact-header span,
+html[data-assurex-theme="light"] .artifact-header strong,
+html[data-assurex-theme="light"] .artifact-header small { color: #334155 !important; }
+html[data-assurex-theme="light"] .artifact-header strong { color: #0f172a !important; }
+html[data-assurex-theme="light"] .profile-avatar span { color: #fff !important; }
+html[data-assurex-theme="light"] .readiness-status { color: #0f172a !important; }
+
+/* landing page tick icons */
+html[data-assurex-theme="light"] .hero i,
+html[data-assurex-theme="light"] .hero-list i,
+html[data-assurex-theme="light"] .hero-points i,
+html[data-assurex-theme="light"] .agreement-icon,
+html[data-assurex-theme="light"] i.check-icon { color: #065f46 !important; }

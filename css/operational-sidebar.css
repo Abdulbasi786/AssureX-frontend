@@ -1,0 +1,19 @@
+/* Two operational pages share the standard role-aware application shell. */
+html,body.operational-workspace{min-width:0;max-width:100%;}
+body.operational-workspace .app{min-height:100dvh;height:auto;align-items:stretch;}
+body.operational-workspace .app-main{min-width:0;min-height:100dvh;height:auto;overflow:visible;}
+body.operational-workspace .operational-main{min-width:0;max-width:100%;padding:0;flex:1;}
+body.operational-workspace .wrap{width:100%;max-width:1320px!important;margin:0 auto!important;padding:clamp(18px,3vw,34px)!important;}
+body.operational-workspace .wrap *,body.operational-workspace .card,body.operational-workspace .form-grid>*,body.operational-workspace .row>*{min-width:0;overflow-wrap:anywhere;}
+body.operational-workspace .top{margin-bottom:22px;}
+body.operational-workspace .workspace-context{font-size:11px;letter-spacing:.14em;color:var(--op-muted);font-weight:800;}
+body.operational-workspace .toolbar{flex-wrap:wrap;min-width:0;gap:12px;}
+body.operational-workspace .toolbar .actions{flex-wrap:wrap;max-width:100%;}
+body.operational-workspace .toolbar .search{max-width:100%;min-width:0;}
+body.operational-workspace .form-grid,body.operational-workspace .row,body.operational-workspace .grid{max-width:100%;}
+body.operational-workspace .sidebar{position:sticky;top:0;height:100dvh;max-height:100dvh;overflow-y:auto;flex:none;}
+body.operational-workspace .card h2,body.operational-workspace .card h3{overflow-wrap:anywhere;}
+body.operational-workspace .operational-main input,body.operational-workspace .operational-main select,body.operational-workspace .operational-main textarea{max-width:100%;}
+html[data-assurex-theme="light"] body.operational-workspace .workspace-context{color:#536582;}
+@media(max-width:900px){body.operational-workspace .sidebar{position:fixed;height:100dvh;z-index:1000;}body.operational-workspace .app-main{width:100%;}body.operational-workspace .wrap{padding:20px 15px 60px!important;}}
+@media(max-width:560px){body.operational-workspace .row{grid-template-columns:1fr!important;}body.operational-workspace .top{align-items:flex-start;flex-wrap:wrap;}body.operational-workspace .toolbar .actions{width:100%;}body.operational-workspace .toolbar .search{flex:1;}}

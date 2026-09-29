@@ -1,0 +1,2 @@
+// Footer account chip is a real, keyboard-accessible profile shortcut.
+(function(){function init(){document.querySelectorAll('.sidebar-bottom .sidebar-user').forEach(el=>{el.setAttribute('role','link');el.setAttribute('tabindex','0');el.setAttribute('aria-label','Open profile');el.addEventListener('click',()=>{location.href='profile.html'});el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();location.href='profile.html'}})})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init()})();

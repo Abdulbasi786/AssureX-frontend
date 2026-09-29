@@ -1,0 +1,39 @@
+/* Targeted layout adjustments; loaded after existing theme and component styles. */
+/* User management: prevent the Accounts grid, record strings and metrics from expanding the page. */
+body.assurex-admin-layout .app-main,body.assurex-admin-layout .dashboard-content,body.assurex-admin-layout .admin-wrap,body.assurex-admin-layout #adminContent,body.assurex-admin-layout #adminContent>.admin-card{min-width:0;max-width:100%;}
+body.assurex-admin-layout .admin-grid{grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:16px;}
+body.assurex-admin-layout .admin-card{min-width:0;overflow:hidden;}
+body.assurex-admin-layout #usersList,body.assurex-admin-layout #adminUserDetails{min-width:0;max-width:100%;}
+body.assurex-admin-layout .user-row{grid-template-columns:minmax(0,1fr) minmax(0,86px) minmax(0,66px);gap:9px;padding:12px 3px;}
+body.assurex-admin-layout .user-row>*{min-width:0;max-width:100%;overflow-wrap:anywhere;}
+body.assurex-admin-layout .user-row>*:last-child{grid-column:1/-1;overflow-wrap:anywhere;word-break:break-all;opacity:.8;}
+body.assurex-admin-layout .user-row strong,body.assurex-admin-layout .user-row small,body.assurex-admin-layout #adminUserDetails p{overflow-wrap:anywhere;word-break:break-word;}
+body.assurex-admin-layout .admin-detail-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,145px),1fr));}
+body.assurex-admin-layout #adminMetrics{min-width:0;max-width:100%;grid-template-columns:repeat(4,minmax(0,1fr))!important;}
+body.assurex-admin-layout #adminMetrics>div{min-width:0;overflow-wrap:anywhere;}
+@media(max-width:1250px){body.assurex-admin-layout .admin-grid{grid-template-columns:minmax(0,1fr);}body.assurex-admin-layout #adminMetrics{grid-template-columns:repeat(2,minmax(0,1fr))!important;}}
+@media(max-width:520px){body.assurex-admin-layout .user-row{grid-template-columns:minmax(0,1fr) auto;gap:7px;}body.assurex-admin-layout .user-row>*:nth-child(3){grid-column:2;}body.assurex-admin-layout #adminMetrics{grid-template-columns:repeat(2,minmax(0,1fr))!important;}}
+/* Analytics uses the same main-shell geometry as all other workspace pages. */
+body.assurex-analytics-layout .app-main{box-sizing:border-box;width:calc(100% - var(--sidebar-width,270px));max-width:calc(100% - var(--sidebar-width,270px));margin-left:var(--sidebar-width,270px);min-width:0;overflow-x:clip;}
+body.assurex-analytics-layout .dashboard-content{box-sizing:border-box;width:100%;max-width:100%;margin:0;padding:38px 25px 70px;min-width:0;overflow-x:clip;}
+body.assurex-analytics-layout section[data-page="analytics"]{display:block;width:100%;min-width:0;max-width:100%;margin:0;}
+body.assurex-analytics-layout section[data-page="analytics"]>*{min-width:0;max-width:100%;box-sizing:border-box;}
+body.assurex-analytics-layout .analytics-summary{width:100%;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
+body.assurex-analytics-layout .analytics-summary .stat-card{width:100%;min-width:0;overflow:hidden;overflow-wrap:anywhere;}
+body.assurex-analytics-layout .analytics-summary .stat-card strong{display:block;max-width:100%;overflow-wrap:anywhere;font-size:clamp(19px,2vw,30px);}
+body.assurex-analytics-layout .analytics-chart,body.assurex-analytics-layout .analytics-chart .card-header{min-width:0;max-width:100%;}
+body.assurex-analytics-layout .analytics-chart .card-header{display:flex;align-items:flex-start;flex-wrap:wrap;gap:12px;}
+body.assurex-analytics-layout .analytics-chart .card-header>div{min-width:0;max-width:100%;}
+body.assurex-analytics-layout .analytics-chart .card-header>div:last-child{display:flex;flex-wrap:wrap;gap:8px;}
+body.assurex-analytics-layout .analytics-chart .compact-input{flex:1 1 145px;max-width:100%;min-width:0;}
+body.assurex-analytics-layout .analytics-bars{max-width:100%;min-width:0;padding:10px clamp(10px,2vw,21px) 25px;}
+body.assurex-analytics-layout .analytics-bars>div{grid-template-columns:minmax(0,120px) minmax(0,1fr) minmax(35px,auto);min-width:0;}
+body.assurex-analytics-layout .analytics-bars>div span{overflow-wrap:anywhere;}
+@media(max-width:1200px){body.assurex-analytics-layout .analytics-summary{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:900px){body.assurex-analytics-layout .app-main{width:100%;max-width:100%;margin-left:0;}body.assurex-analytics-layout .dashboard-content{padding:24px 16px 70px;}}
+@media(max-width:480px){body.assurex-analytics-layout .analytics-summary{grid-template-columns:minmax(0,1fr);}body.assurex-analytics-layout .analytics-bars>div{grid-template-columns:minmax(0,100px) minmax(0,1fr) auto;gap:7px;}}
+/* Operational pages: fixed sidebar and dashboard-aligned content, not a second sticky flex column. */
+@media(min-width:901px){body.operational-workspace .app{display:block;}body.operational-workspace .sidebar{position:fixed!important;top:16px!important;left:16px!important;bottom:16px!important;height:auto!important;max-height:calc(100dvh - 32px)!important;margin-left:-10px;overflow:hidden;}body.operational-workspace .sidebar .sidebar-nav{overflow-y:auto;min-height:0;}body.operational-workspace .app-main{box-sizing:border-box;width:calc(100% - var(--sidebar-width,270px));max-width:calc(100% - var(--sidebar-width,270px));margin-left:var(--sidebar-width,270px);padding:16px;}body.operational-workspace .wrap{width:100%;max-width:none!important;margin:0!important;padding:38px 25px 70px!important;}}
+@media(max-width:900px){body.operational-workspace .sidebar{position:fixed!important;top:16px!important;bottom:16px!important;height:auto!important;max-height:calc(100dvh - 32px)!important;}body.operational-workspace .app-main{width:100%;max-width:100%;margin-left:0;padding:8px;}body.operational-workspace .wrap{max-width:none!important;margin:0!important;padding:20px 14px 60px!important;}}
+body.operational-workspace .operational-main{width:100%;min-width:0;max-width:100%;}
+body.operational-workspace .operational-main .card{max-width:100%;min-width:0;}

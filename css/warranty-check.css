@@ -1,0 +1,1066 @@
+/* =========================================================
+   ASSUREX — DYNAMIC WARRANTIES PAGE
+   warranties.css
+========================================================= */
+
+:root {
+
+    --warranty-accent:
+        var(--accent, #5b8cff);
+
+    --warranty-accent-2:
+        var(--accent-2, #39d8ff);
+
+    --warranty-success:
+        var(--success, #35e6a4);
+
+    --warranty-warning:
+        #ffbd5a;
+
+    --warranty-danger:
+        #ff6b7a;
+
+    --warranty-text:
+        var(--text, #f4f7ff);
+
+    --warranty-text-2:
+        var(--text-2, #aeb9cc);
+
+    --warranty-muted:
+        var(--muted, #7f8ba3);
+
+    --warranty-border:
+        var(--border, rgba(255, 255, 255, .10));
+
+    --warranty-border-strong:
+        var(--border-strong, rgba(255, 255, 255, .17));
+
+    --warranty-surface:
+        var(--surface, rgba(255, 255, 255, .045));
+
+    --warranty-radius:
+        18px;
+}
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
+[data-page="warranties"] .page-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 18px;
+    margin-top: -20px;
+}
+
+
+[data-page="warranties"] .eyebrow {
+
+    margin-bottom: 7px;
+
+    color:
+        var(--warranty-accent-2);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+
+}
+
+
+[data-page="warranties"] .page-heading h1 {
+
+    margin: 0;
+
+    color:
+        var(--warranty-text);
+
+    font-size:
+        clamp(26px, 3vw, 38px);
+
+    line-height: 1.05;
+
+    letter-spacing: -.035em;
+
+}
+
+
+[data-page="warranties"] .page-heading p {
+
+    margin: 8px 0 0;
+
+    color:
+        var(--warranty-muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.policy-toolbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 14px;
+
+    min-height: 54px;
+
+    margin-bottom: 14px;
+
+    padding: 10px 12px;
+
+    border:
+        1px solid var(--warranty-border);
+
+    border-radius: 13px;
+
+    background:
+        rgba(255, 255, 255, .018);
+
+    backdrop-filter:
+        blur(12px);
+
+}
+
+
+.policy-toolbar>div {
+
+    min-width: 0;
+
+}
+
+
+.policy-toolbar strong {
+
+    display: block;
+
+    color:
+        var(--warranty-text);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+.policy-toolbar span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color:
+        var(--warranty-muted);
+
+    font-size: 9px;
+
+}
+
+
+/* =========================================================
+   REFRESH BUTTON
+========================================================= */
+
+#refreshWarranties {
+
+    flex: 0 0 auto;
+
+    min-width: 82px;
+
+    min-height: 32px;
+
+    padding: 7px 13px;
+
+    border:
+        1px solid var(--warranty-border-strong);
+
+    border-radius: 9px;
+
+    color:
+        var(--warranty-text);
+
+    background:
+        var(--warranty-surface);
+
+    font: inherit;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .18s ease,
+        border-color .18s ease,
+        background .18s ease,
+        box-shadow .18s ease,
+        opacity .18s ease;
+
+}
+
+
+#refreshWarranties:hover:not(:disabled) {
+
+    transform:
+        translateY(-1px);
+
+    border-color:
+        color-mix(in srgb,
+            var(--warranty-accent) 55%,
+            transparent);
+
+    background:
+        rgba(255, 255, 255, .07);
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, .16);
+
+}
+
+
+#refreshWarranties:active:not(:disabled) {
+
+    transform:
+        translateY(0);
+
+}
+
+
+#refreshWarranties:disabled {
+
+    opacity: .55;
+
+    cursor: not-allowed;
+
+}
+
+
+#refreshWarranties:focus-visible {
+
+    outline:
+        2px solid var(--warranty-accent);
+
+    outline-offset: 2px;
+
+}
+
+
+/* =========================================================
+   WARRANTY GRID
+========================================================= */
+
+.policy-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+
+    max-height: 68vh;
+
+    min-height: 180px;
+
+    padding:
+        2px 4px 10px 2px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    overscroll-behavior:
+        contain;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        rgba(125, 140, 255, .45) rgba(255, 255, 255, .03);
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.policy-grid::-webkit-scrollbar {
+
+    width: 7px;
+
+}
+
+
+.policy-grid::-webkit-scrollbar-track {
+
+    background:
+        rgba(255, 255, 255, .025);
+
+    border-radius:
+        99px;
+
+}
+
+
+.policy-grid::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(125, 140, 255, .45);
+
+    border-radius:
+        99px;
+
+}
+
+
+.policy-grid::-webkit-scrollbar-thumb:hover {
+
+    background:
+        rgba(125, 140, 255, .68);
+
+}
+
+
+/* =========================================================
+   WARRANTY CARD
+========================================================= */
+
+.policy-card {
+
+    position: relative;
+
+    min-width: 0;
+
+    min-height: 205px;
+
+    padding: 18px;
+
+    overflow: hidden;
+
+    border:
+        1px solid var(--warranty-border);
+
+    border-radius:
+        var(--warranty-radius);
+
+    background:
+        radial-gradient(circle at 100% 0%,
+            rgba(91, 140, 255, .08),
+            transparent 38%),
+        rgba(255, 255, 255, .025);
+
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, .18);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+
+}
+
+
+/* TOP ACCENT LINE */
+
+.policy-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 18px;
+
+    right: 18px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(90deg,
+            transparent,
+            var(--warranty-accent),
+            transparent);
+
+    opacity: .45;
+
+}
+
+
+/* CARD HOVER */
+
+.policy-card:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        var(--warranty-border-strong);
+
+    background:
+        radial-gradient(circle at 100% 0%,
+            rgba(91, 140, 255, .12),
+            transparent 40%),
+        rgba(255, 255, 255, .035);
+
+    box-shadow:
+        0 22px 55px rgba(0, 0, 0, .22);
+
+}
+
+
+/* =========================================================
+   CARD TITLE
+========================================================= */
+
+.policy-card h2 {
+
+    margin:
+        15px 0 8px;
+
+    color:
+        var(--warranty-text);
+
+    font-size: 17px;
+
+    line-height: 1.25;
+
+    letter-spacing: -.02em;
+
+    overflow-wrap:
+        anywhere;
+
+}
+
+
+.policy-card p {
+
+    min-height: 36px;
+
+    margin: 0;
+
+    color:
+        var(--warranty-text-2);
+
+    font-size: 11px;
+
+    line-height: 1.65;
+
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.policy-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    min-width: 0;
+
+    color:
+        var(--warranty-muted);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .07em;
+
+    text-transform: uppercase;
+
+}
+
+
+.policy-top>span:last-child {
+
+    max-width: 55%;
+
+    overflow: hidden;
+
+    text-overflow:
+        ellipsis;
+
+    white-space:
+        nowrap;
+
+}
+
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.policy-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    min-height: 22px;
+
+    padding: 4px 8px;
+
+    border:
+        1px solid currentColor;
+
+    border-radius:
+        999px;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: .12em;
+
+    line-height: 1;
+
+}
+
+
+.policy-status.active {
+
+    color:
+        var(--warranty-success);
+
+    background:
+        rgba(53, 230, 164, .08);
+
+}
+
+
+.policy-status.review {
+
+    color:
+        var(--warranty-warning);
+
+    background:
+        rgba(255, 189, 90, .08);
+
+}
+
+
+.policy-status.expired {
+
+    color:
+        var(--warranty-danger);
+
+    background:
+        rgba(255, 107, 122, .08);
+
+}
+
+
+/* =========================================================
+   WARRANTY META
+========================================================= */
+
+.policy-meta {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 14px;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid var(--warranty-border);
+
+}
+
+
+.policy-meta span {
+
+    min-width: 0;
+
+    color:
+        var(--warranty-muted);
+
+    font-size: 8px;
+
+    line-height: 1.45;
+
+    overflow-wrap:
+        anywhere;
+
+}
+
+
+.policy-meta span:nth-child(even) {
+
+    text-align: right;
+
+}
+
+
+.policy-meta strong {
+
+    color:
+        var(--warranty-text-2);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   EXPIRY INFORMATION
+========================================================= */
+
+.policy-expiry {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: 13px;
+
+    padding-top: 11px;
+
+    border-top:
+        1px solid var(--warranty-border);
+
+    color:
+        var(--warranty-muted);
+
+    font-size: 8px;
+
+    line-height: 1.45;
+
+}
+
+
+.policy-expiry span:last-child {
+
+    text-align: right;
+
+}
+
+
+.policy-expiry strong {
+
+    color:
+        var(--warranty-text-2);
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   LOADING / EMPTY / ERROR STATES
+========================================================= */
+
+.policy-state {
+
+    grid-column:
+        1 / -1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 190px;
+
+    padding: 30px;
+
+    border:
+        1px dashed var(--warranty-border);
+
+    border-radius: 16px;
+
+    background:
+        rgba(255, 255, 255, .018);
+
+    text-align: center;
+
+}
+
+
+.policy-state strong {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color:
+        var(--warranty-text);
+
+    font-size: 14px;
+
+}
+
+
+.policy-state p {
+
+    min-height: 0;
+
+    margin: 0;
+
+    color:
+        var(--warranty-muted);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+
+.policy-state small {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color:
+        var(--warranty-muted);
+
+    font-size: 9px;
+
+}
+
+
+/* =========================================================
+   LOADING SPINNER
+========================================================= */
+
+.policy-state.loading::before {
+
+    content: "";
+
+    width: 22px;
+
+    height: 22px;
+
+    margin-right: 12px;
+
+    border:
+        2px solid rgba(255, 255, 255, .08);
+
+    border-top-color:
+        var(--warranty-accent);
+
+    border-radius: 50%;
+
+    animation:
+        warranties-spin .8s linear infinite;
+
+}
+
+
+@keyframes warranties-spin {
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* =========================================================
+   ERROR STATE
+========================================================= */
+
+.policy-state.error {
+
+    border-color:
+        rgba(255, 107, 122, .22);
+
+    background:
+        radial-gradient(circle at 100% 0%,
+            rgba(255, 107, 122, .055),
+            transparent 45%),
+        rgba(255, 255, 255, .018);
+
+}
+
+
+.policy-state.error strong {
+
+    color:
+        #ffb6c0;
+
+}
+
+
+/* =========================================================
+   LIGHT THEME
+========================================================= */
+
+body.theme-light {
+
+    --warranty-shadow:
+        0 16px 38px rgba(15, 23, 42, .08);
+
+}
+
+
+body.theme-light .policy-toolbar {
+
+    background:
+        rgba(0, 0, 0, .018);
+
+}
+
+
+body.theme-light .policy-card {
+
+    background:
+        radial-gradient(circle at 100% 0%,
+            rgba(91, 140, 255, .07),
+            transparent 38%),
+        rgba(255, 255, 255, .72);
+
+}
+
+
+body.theme-light .policy-card:hover {
+
+    background:
+        radial-gradient(circle at 100% 0%,
+            rgba(91, 140, 255, .10),
+            transparent 40%),
+        rgba(255, 255, 255, .9);
+
+}
+
+
+body.theme-light #refreshWarranties {
+
+    background:
+        rgba(15, 23, 42, .035);
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .policy-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL DESKTOP / TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    [data-page="warranties"] .page-heading {
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .policy-grid {
+
+        max-height:
+            70vh;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    [data-page="warranties"] .page-heading h1 {
+
+        font-size:
+            28px;
+
+    }
+
+
+    .policy-toolbar {
+
+        align-items:
+            center;
+
+        padding:
+            9px 10px;
+
+    }
+
+
+    .policy-toolbar>div {
+
+        max-width:
+            70%;
+
+    }
+
+
+    .policy-grid {
+
+        grid-template-columns:
+            1fr;
+
+        max-height:
+            72vh;
+
+        gap:
+            12px;
+
+        padding-right:
+            2px;
+
+    }
+
+
+    .policy-card {
+
+        min-height:
+            190px;
+
+        padding:
+            16px;
+
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .policy-toolbar {
+
+        gap:
+            8px;
+
+    }
+
+
+    #refreshWarranties {
+
+        min-width:
+            72px;
+
+        padding:
+            7px 10px;
+
+    }
+
+
+    .policy-meta {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .policy-meta span:nth-child(even) {
+
+        text-align:
+            left;
+
+    }
+
+
+    .policy-expiry {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .policy-expiry span:last-child {
+
+        text-align:
+            left;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .policy-card,
+    #refreshWarranties {
+
+        transition:
+            none;
+
+    }
+
+
+    .policy-state.loading::before {
+
+        animation:
+            none;
+
+    }
+
+}

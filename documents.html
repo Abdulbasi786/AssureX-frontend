@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AssureX — Documents</title>
+<link rel="stylesheet" href="css/documents-vault.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <script src="js/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/animate.js" defer></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/fixes.css"><link rel="stylesheet" href="css/role-ui.css"><link rel="stylesheet" href="css/documents-shell.css">
+<link rel="stylesheet" href="css/ai-intelligence.css">
+<link rel="stylesheet" href="css/experience-features.css">
+  <link rel="stylesheet" href="css/assurex-chatbot.css">
+<link rel="stylesheet" href="css/assurex-premium-all-pages.css">
+<link rel="stylesheet" href="css/assurex-viewport-controls.css">
+</head>
+<body class="documents-screen"><div class="background-grid"></div><div class="ambient ambient-one"></div><div class="app" id="appView"><aside class="sidebar glass" id="sidebar">
+<div class="sidebar-header"><a class="dashboard-brand" href="#"><img alt="AssureX" src="asset/assurex-logo-dark.png"/></a><button aria-label="Close menu" class="icon-button mobile-only" id="closeSidebar">×</button></div>
+<div class="sidebar-section-label">WORKSPACE</div>
+<nav class="sidebar-nav">
+<button class="nav-item" data-page="dashboard"><span>⌂</span>Dashboard</button>
+<button class="nav-item" data-page="products"><span>▣</span>Products</button>
+<button class="nav-item" data-page="warranties"><span>◇</span>Warranties</button>
+<button class="nav-item active" data-page="documents"><span>▤</span>Documents</button>
+<button class="nav-item" data-page="claims"><span>◉</span>Claims</button>
+<button class="nav-item" data-page="validation"><span>✓</span>Validation</button>
+<button class="nav-item" data-page="evaluation"><span>AI</span>AI Evaluation</button>
+<button class="nav-item" data-page="decision"><span>◆</span>Decision &amp; Review</button>
+<div class="sidebar-section-label">MANAGEMENT</div>
+<button class="nav-item" data-page="analytics"><span>▥</span>Analytics</button>
+<button class="nav-item" data-page="readiness"><span>◎</span>Readiness</button>
+<button class="nav-item" data-page="profile"><span>◯</span>Profile</button>
+</nav>
+<div class="sidebar-bottom"><div class="sidebar-user"><div class="avatar" id="userAvatar">U</div><div><strong id="profileName">User</strong><small id="profileRole">Reviewer</small></div></div><button class="logout-button" id="logout"><span aria-hidden="true">↪</span> Sign out</button></div>
+</aside><div class="app-main"><header class="topbar glass"><button class="icon-button mobile-only" id="sidebarToggle" aria-label="Open menu">☰</button><div class="global-search"><span>⌕</span><input placeholder="Search claims, products, documents..." type="search" id="globalSearch"><kbd>⌘ K</kbd></div><div class="topbar-actions"><button class="icon-button" id="themeButton" title="Themes">◐</button></div></header>
+<main class="dashboard-content documents-content"><div class="wrap">
+<div class="top page-heading"><div class="document-heading"><span class="eyebrow document-eyebrow">WORKSPACE / DOCUMENTS</span><h1>Documents &amp; evidence</h1><p>Manage receipts, warranty cards and claim evidence securely.</p></div><a class="btn secondary" href="dashboard.html">← Dashboard</a></div>
+<div class="grid">
+<section class="card glass" id="uploadCard">
+<h2 style="margin-top:0">Upload document</h2>
+<p class="hint">Files are validated in the browser and stored as chunked Firestore data on the Firebase Spark plan. A SHA-256 hash is saved with the metadata to prevent duplicate uploads.</p>
+<label class="field"><span>Document type</span><select id="documentType"><option value="purchase_invoice">Purchase Invoice</option><option value="warranty_card">Warranty Card</option><option value="product_image">Product Image</option><option value="fault_evidence">Fault Image / Video</option><option value="serial_evidence">Serial Image</option><option value="repair_report">Repair Report</option><option value="diagnostic_report">Diagnostic Report</option></select></label>
+<label class="field"><span>Product ID</span><input id="productId" placeholder="Firestore product document ID"></label>
+<label class="field"><span>Claim ID <small>(optional for product documents)</small></span><input id="claimId" placeholder="Firestore claim document ID"></label>
+<label class="field"><span>File</span><input id="file" type="file" accept=".pdf,.jpg,.jpeg,.png,.mp4,.webm,.mov,application/pdf,image/jpeg,image/png,video/mp4,video/webm,video/quicktime"></label>
+<button class="btn" id="upload">Upload securely</button>
+<div class="status" id="status"></div>
+<p class="hint">Limits: PDF/JPG/JPEG/PNG up to 25 MB. Video up to 100 MB. Allowed video: MP4, WEBM, MOV.</p>
+</section>
+<section class="card glass">
+<div class="toolbar"><div><h2>Document vault</h2><div class="hint">Evidence is organized by Product → Claim → Document Type. Users and employees see their own files; reviewers and admins can inspect authorized operational evidence.</div></div><button class="btn secondary" id="refresh">Refresh</button></div>
+<div class="org-toolbar"><input id="docSearch" type="search" placeholder="Search file, Product ID, Claim ID…" autocomplete="off"><select id="docTypeFilter"><option value="">All document types</option><option value="purchase_invoice">Purchase Invoice</option><option value="warranty_card">Warranty Card</option><option value="product_image">Product Image</option><option value="fault_evidence">Fault Image / Video</option><option value="serial_evidence">Serial Image</option><option value="repair_report">Repair Report</option><option value="diagnostic_report">Diagnostic Report</option></select><select id="docScopeFilter"><option value="">All records</option><option value="product">Product-linked</option><option value="claim">Claim-linked</option><option value="unlinked">Unlinked</option></select></div><div class="org-summary" id="orgSummary"></div>
+<div id="list"><div class="empty">Loading documents…</div></div>
+</section>
+</div>
+</div></main></div></div>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="js/firebase-config.js"></script><script src="js/firebase-auth.js"></script><script src="js/role-guard.js"></script><script src="js/firebase-firestore.js"></script><script src="js/storage-service.js"></script><script src="js/ocr-lazy.js"></script><script src="js/ocr-service.js"></script><script src="js/ocr-verification.js"></script>
+<script>
+(function(){'use strict';
+const $=id=>document.getElementById(id); const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+function msg(t,c){$('status').textContent=t;$('status').className='status '+(c||'');}
+function size(n){n=Number(n||0);if(n<1024) return n+' B';if(n<1048576)return (n/1024).toFixed(1)+' KB';return (n/1048576).toFixed(1)+' MB';}
+function date(v){if(v?.toDate)return v.toDate().toLocaleString();if(v?.seconds)return new Date(v.seconds*1000).toLocaleString();return v?new Date(v).toLocaleString():'—';}
+function applyRoleUI(){const role=window.AssureXRole||'user';if(role==='reviewer')$('uploadCard').style.display='none';}
+function docTypeLabel(v){const m={purchase_invoice:'Purchase Invoice',warranty_card:'Warranty Card',product_image:'Product Image',fault_evidence:'Fault Image / Video',serial_evidence:'Serial Image',repair_report:'Repair Report',diagnostic_report:'Diagnostic Report'};return m[v]||String(v||'Evidence');}
+function groupRows(rows){
+ const q=String($('docSearch').value||'').trim().toLowerCase(), type=$('docTypeFilter').value, scope=$('docScopeFilter').value;
+ const filtered=rows.filter(d=>{
+   const hay=[d.fileName,d.productId,d.claimId,d.documentType,d.fileType].map(v=>String(v||'').toLowerCase()).join(' ');
+   if(q&&!hay.includes(q))return false; if(type&&String(d.documentType||'')!==type)return false;
+   const hasP=!!String(d.productId||'').trim(),hasC=!!String(d.claimId||'').trim();
+   if(scope==='product'&&!hasP)return false;if(scope==='claim'&&!hasC)return false;if(scope==='unlinked'&&(hasP||hasC))return false;return true;
+ });
+ const groups=new Map(); filtered.forEach(d=>{const p=String(d.productId||'Unlinked Product'),c=String(d.claimId||'Product-level / Unlinked Claim'),key=p+'||'+c;if(!groups.has(key))groups.set(key,{product:p,claim:c,docs:[]});groups.get(key).docs.push(d);});
+ return {filtered,groups:[...groups.values()].sort((a,b)=>(a.product+' '+a.claim).localeCompare(b.product+' '+b.claim))};
+}
+function render(rows){
+ const result=groupRows(rows), role=window.AssureXRole||'user'; $('orgSummary').textContent=result.filtered.length+' document'+(result.filtered.length===1?'':'s')+' in '+result.groups.length+' product/claim group'+(result.groups.length===1?'':'s');
+ if(!result.filtered.length){$('list').innerHTML='<div class="empty">No documents match the current organization filters.</div>';return;}
+ $('list').innerHTML=result.groups.map(g=>'<div class="org-group"><div class="org-head"><div><strong>Product: '+esc(g.product)+'</strong><small class="path"> → Claim: '+esc(g.claim)+'</small></div><small>'+g.docs.length+' file'+(g.docs.length===1?'':'s')+'</small></div><div class="org-docs">'+g.docs.map(d=>{const canEdit=role==='user'||role==='employee'||role==='admin';return '<div class="doc"><div class="doc-main"><div class="doc-name">'+esc(d.fileName||'Unnamed file')+'</div><div class="meta"><span class="pill">'+esc(docTypeLabel(d.documentType))+'</span> · '+size(d.fileSize)+' · '+esc(d.fileType||'')+' · Uploaded: '+esc(date(d.uploadedAt))+' · Backend: Firestore chunks'+(d.ocrStatus?'<br>OCR: <strong>'+esc(d.ocrStatus)+'</strong>'+(d.ocr&&d.ocr.confidence!=null?' · '+esc(d.ocr.confidence)+'% confidence':''):'')+(d.ocr&&d.ocr.structured?'<br>Extracted: '+esc(Object.entries(d.ocr.structured).filter(([k,v])=>v!==''&&v!=null).slice(0,4).map(([k,v])=>k+': '+v).join(' · ')):'')+(d.ocr&&d.ocr.structured?'<br>Verification: <strong>'+esc(window.AssureXOCRVerification.status(d))+'</strong>':'')+'</div></div><div class="actions"><button class="btn secondary view" data-id="'+esc(d.id)+'">View / Download</button>'+(canEdit?'<label class="btn secondary" style="display:inline-block">Replace<input class="replace" data-id="'+esc(d.id)+'" type="file" hidden></label><button class="btn secondary ocr" data-id="'+esc(d.id)+'">OCR / Extract</button><button class="btn secondary verify" data-id="'+esc(d.id)+'">Verify OCR</button><button class="btn danger delete" data-id="'+esc(d.id)+'">Delete</button>':'')+'</div></div>';}).join('')+'</div></div>').join('');
+ document.querySelectorAll('.view').forEach(b=>b.addEventListener('click',async()=>{try{msg('Reconstructing document from Firestore…');const d=cachedRows.find(x=>x.id===b.dataset.id);if(!d)throw new Error('Document not found.');const blob=await AssureXStorage.getFileBlob(d);const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=d.fileName||'document';a.target='_blank';a.rel='noopener';a.click();setTimeout(()=>URL.revokeObjectURL(url),60000);msg('Document opened/downloaded successfully.','success');}catch(err){msg(err.message||'Could not open document.','error');}}));
+ document.querySelectorAll('.replace').forEach(input=>input.addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{AssureXStorage.validate(file);msg('Replacing '+file.name+'…');await AssureXStorage.replaceDocument(e.target.dataset.id,file,p=>msg('Replacing… '+p+'%'));msg('Document replaced successfully.','success');await load();}catch(err){msg(err.message||'Could not replace document.','error');}}));
+ document.querySelectorAll('.ocr').forEach(b=>b.addEventListener('click',async()=>{try{msg('Reconstructing stored document for OCR…');const id=b.dataset.id;const d=cachedRows.find(x=>x.id===id);if(!d)throw new Error('Document not found.');if(!['application/pdf','image/jpeg','image/png'].includes(String(d.fileType||'').toLowerCase()))throw new Error('OCR is supported for PDF/JPG/JPEG/PNG only.');const blob=await AssureXStorage.getFileBlob(d);msg('Preparing OCR engine…');await AssureXLoadOCR(d.fileType);msg('Running structured OCR…');const result=await AssureXOCR.run(blob,d,m=>msg(m));await window.fbDb.collection('documents').doc(id).set({ocr:{status:'completed',rawText:String(result.rawText||'').slice(0,700000),structured:result.structured,confidence:result.confidence,pages:result.pages,processedPages:result.processedPages,truncated:result.truncated,engine:result.engine,engineVersion:result.engineVersion,processedAt:firebase.firestore.FieldValue.serverTimestamp(),verificationStatus:'pending'},ocrStatus:'completed',ocrVerificationStatus:'pending',updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});msg('OCR completed and structured fields saved.','success');await load();}catch(err){msg(err.message||'OCR failed.','error');}}));
+ document.querySelectorAll('.verify').forEach(b=>b.addEventListener('click',async()=>{try{const d=cachedRows.find(x=>x.id===b.dataset.id);if(!d)throw new Error('Document not found.');window.AssureXOCRVerification.open(d,load);}catch(err){msg(err.message||'Could not open OCR verification.','error');}}));
+ document.querySelectorAll('.delete').forEach(b=>b.addEventListener('click',async()=>{if(!confirm('Delete this document from Firestore?'))return;try{msg('Deleting…');await AssureXStorage.deleteDocument(b.dataset.id);msg('Document deleted.','success');await load();}catch(err){msg(err.message||'Could not delete document.','error');}}));
+}
+let cachedRows=[];
+async function load(){try{cachedRows=await AssureXStorage.getDocuments();render(cachedRows);}catch(e){$('list').innerHTML='<div class="empty">'+esc(e.message||'Unable to load documents.')+'</div>';}}
+$('upload').addEventListener('click',async()=>{const f=$('file').files[0];if(!f){msg('Choose a file first.','error');return;}try{AssureXStorage.validate(f);const u=window.fbAuth.currentUser;if(!u)throw new Error('Please sign in first.');msg('Store securely…');$('upload').disabled=true;await AssureXStorage.uploadFile(f,{documentType:$('documentType').value,productId:$('productId').value.trim(),claimId:$('claimId').value.trim()});msg('Document uploaded successfully.','success');$('file').value='';await load();}catch(e){msg(e.message||'Upload failed.','error');}finally{$('upload').disabled=false;}});
+$('refresh').addEventListener('click',load); let docSearchTimer; $('docSearch').addEventListener('input',()=>{clearTimeout(docSearchTimer);docSearchTimer=setTimeout(()=>render(cachedRows),120)}); $('docTypeFilter').addEventListener('change',()=>render(cachedRows)); $('docScopeFilter').addEventListener('change',()=>render(cachedRows));
+window.addEventListener('assurex-role-ready',()=>{applyRoleUI();if(window.fbAuth?.currentUser)load();});
+if(window.fbAuth)window.fbAuth.onAuthStateChanged(u=>{if(!u){cachedRows=[];$('list').innerHTML='<div class="empty">Please sign in to use the document vault.</div>';}});
+})();
+</script>
+<script src="js/standalone-controls.js"></script>
+<script src="js/nav-fix.js"></script><script src="js/profile-shortcut.js"></script><link rel="stylesheet" href="css/topbar-upgrade.css"><script src="js/topbar-upgrade.js"></script><script src="js/assurex-api.js" defer></script>
+<script src="js/ai-intelligence.js" defer></script>
+<script src="js/experience-features.js" defer></script>
+  <script src="js/assurex-chatbot.js" defer></script>
+<script src="js/sidebar-memory.js" defer></script></body></html>

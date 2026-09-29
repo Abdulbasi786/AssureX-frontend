@@ -1,0 +1,191 @@
+/* The dashboard's shared fixed controls and sidebar. Loaded last to win over legacy page styles. */
+body:has(> .app > #sidebar) #sidebar.sidebar {
+  display:flex!important;
+  flex-direction:column!important;
+  box-sizing:border-box!important;
+  position:fixed!important;
+  top:16px!important;
+  bottom:16px!important;
+  left:6px!important;
+  right:auto!important;
+  height:calc(100vh - 32px)!important;
+  height:calc(100dvh - 32px)!important;
+  max-height:calc(100dvh - 32px)!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  width:var(--sidebar-width,270px)!important;
+  margin:0!important;
+  z-index:100!important;
+}
+body:has(> .app > #sidebar) #sidebar.sidebar > .sidebar-header,
+body:has(> .app > #sidebar) #sidebar.sidebar > .sidebar-section-label {
+  flex:0 0 auto!important;
+}
+body:has(> .app > #sidebar) #sidebar.sidebar > .sidebar-nav {
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  flex:1 1 auto!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(121,151,221,.52) transparent;
+  overscroll-behavior-y:contain;
+  padding-right:5px!important;
+  padding-bottom:8px!important;
+  gap:4px!important;
+}
+body:has(> .app > #sidebar) #sidebar.sidebar > .sidebar-nav > * {
+  flex:0 0 auto!important;
+}
+body:has(> .app > #sidebar) #sidebar.sidebar > .sidebar-nav .nav-item {
+  min-width:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-height:40px!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+}
+body:has(> .app > #sidebar) #sidebar.sidebar > .sidebar-bottom {
+  position:relative!important;
+  inset:auto!important;
+  flex:0 0 auto!important;
+  display:block!important;
+  margin-top:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  padding-top:12px!important;
+  z-index:1!important;
+}
+body:has(> .app > #sidebar) #sidebar.sidebar .sidebar-user {min-width:0!important;}
+body:has(> .app > #sidebar) #sidebar.sidebar .sidebar-user > div:last-child{min-width:0;overflow:hidden;}
+body:has(> .app > #sidebar) #sidebar.sidebar .sidebar-user :is(strong,small) {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+body:has(> .app > #sidebar) #sidebar.sidebar .logout-button{position:static!important;width:100%!important;min-height:42px!important;margin:12px 0 0!important;}
+@media(max-width:900px){
+  body:has(> .app > #sidebar) #sidebar.sidebar{
+    top:10px!important;bottom:10px!important;left:10px!important;
+    height:calc(100dvh - 20px)!important;max-height:calc(100dvh - 20px)!important;
+    transform:translateX(-115%);
+  }
+  body:has(> .app > #sidebar) #sidebar.sidebar.open{transform:translateX(0)!important;}
+}
+/* Keep fixed controls completely separate, including at browser zoom levels. */
+:root{--ax-control-edge:24px;--ax-control-size:56px;--ax-help-bottom:16px;--ax-help-height:36px;--ax-theme-bottom:70px;--ax-chat-bottom:144px;}
+html body .assurex-theme-toggle{
+  right:var(--ax-control-edge)!important;
+  bottom:var(--ax-theme-bottom)!important;
+  width:var(--ax-control-size)!important;
+  height:var(--ax-control-size)!important;
+  border-radius:50%!important;
+}
+html body .ax-chat-shell{
+  position:fixed!important;
+  right:var(--ax-control-edge)!important;
+  bottom:var(--ax-chat-bottom)!important;
+  z-index:99999!important;
+}
+html body .ax-chat-shell .ax-chat-launcher{
+  width:var(--ax-control-size)!important;
+  height:var(--ax-control-size)!important;
+  min-width:var(--ax-control-size)!important;
+  min-height:var(--ax-control-size)!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:50%!important;
+}
+html body .ax-chat-shell .ax-chat-panel{
+  position:fixed!important;
+  right:var(--ax-control-edge)!important;
+  bottom:calc(var(--ax-chat-bottom) + var(--ax-control-size) + 14px)!important;
+  max-width:calc(100vw - 2 * var(--ax-control-edge))!important;
+  width:min(380px,calc(100vw - 2 * var(--ax-control-edge)))!important;
+  max-height:calc(100dvh - var(--ax-chat-bottom) - var(--ax-control-size) - 28px)!important;
+  height:min(570px,calc(100dvh - var(--ax-chat-bottom) - var(--ax-control-size) - 28px))!important;
+  min-height:0!important;
+}
+html body .ax-chat-messages{min-height:0!important;overflow-y:auto!important;}
+/* Need Help sits BELOW the theme toggle with its own unobstructed tap target. */
+html body #axUxLauncher.ax-ux-launcher{
+  position:fixed!important;
+  right:var(--ax-control-edge)!important;
+  bottom:calc(var(--ax-help-bottom) + env(safe-area-inset-bottom, 0px))!important;
+  width:90px!important;
+  min-width:90px!important;
+  height:var(--ax-help-height)!important;
+  min-height:var(--ax-help-height)!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:0 10px!important;
+  margin:0!important;
+  border-radius:999px!important;
+  z-index:99998!important;
+  line-height:1.1!important;
+  white-space:nowrap!important;
+  color:#eef7ff!important;
+  background:linear-gradient(135deg,#172947,#154354)!important;
+  border:1px solid rgba(112,218,225,.42)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.28)!important;
+}
+html body #axUxLauncher.ax-ux-launcher:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.34)!important;}
+html[data-assurex-theme="light"] body #axUxLauncher.ax-ux-launcher{
+  background:linear-gradient(135deg,#fff,#e9f1ff)!important;
+  border-color:#bfd2f1!important;
+  color:#204eab!important;
+  box-shadow:0 8px 24px rgba(42,89,162,.16)!important;
+}
+html[data-assurex-theme="light"] body #axUxLauncher.ax-ux-launcher:hover{box-shadow:0 12px 30px rgba(42,89,162,.20)!important;}
+/* The Personalize action belongs to dashboard content, not the fixed right-hand stack. */
+html body .dashboard-content .page-heading .ax-heading-controls{display:flex;flex:0 0 auto;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:10px;min-width:0;}
+@media(max-width:700px){html body .dashboard-content .page-heading .ax-heading-controls{width:100%;justify-content:stretch;}html body .dashboard-content .page-heading .ax-heading-controls>*{flex:1 1 130px;width:auto!important;}}
+html body .dashboard-content .page-heading .ax-personal-button{
+  position:static!important;right:auto!important;bottom:auto!important;
+  z-index:auto!important;flex:0 0 auto!important;
+  display:inline-flex!important;justify-content:center;align-items:center;
+  min-height:40px;padding:10px 17px;font-size:12px;font-weight:700;
+  color:var(--axp-ink,#f4f8ff);background:var(--axp-soft,rgba(255,255,255,.08));
+  border:1px solid var(--axp-stroke,rgba(255,255,255,.12));
+  border-radius:12px;box-shadow:0 7px 22px rgba(0,0,0,.08);
+}
+html body .dashboard-content .page-heading .ax-personal-button:hover{transform:translateY(-1px);border-color:var(--chat-accent,#65dcca);}
+@media(max-width:700px){
+  :root{--ax-control-edge:16px;--ax-control-size:50px;--ax-help-bottom:10px;--ax-help-height:34px;--ax-theme-bottom:58px;--ax-chat-bottom:122px;}
+  html body .ax-chat-shell .ax-chat-panel{
+    max-height:calc(100dvh - var(--ax-chat-bottom) - var(--ax-control-size) - 28px)!important;
+    height:min(540px,calc(100dvh - var(--ax-chat-bottom) - var(--ax-control-size) - 28px))!important;
+  }
+}
+@media(max-height:470px){
+  html body .ax-chat-shell .ax-chat-panel{
+    bottom:8px!important;
+    max-height:calc(100dvh - 16px)!important;
+    height:calc(100dvh - 16px)!important;
+  }
+  html body .ax-chat-intro{display:none;}
+}
+/* A compact connection badge with an actionable details/retry popover. */
+html body .ax-api-widget{position:relative;flex:0 0 auto;display:inline-flex;align-items:center;max-width:100%;}
+html body .ax-api-indicator{
+  display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;
+  min-height:36px;padding:8px 12px;font-size:11px;line-height:1.1;
+  max-width:100%;border-radius:999px;background:var(--axp-soft,rgba(255,255,255,.06));
+  color:var(--axp-secondary,#c0cade);border:1px solid var(--axp-stroke,rgba(255,255,255,.16));
+}
+html body .ax-api-indicator[data-status="error"]{color:#eeabac;}
+html[data-assurex-theme="light"] body .ax-api-indicator[data-status="error"]{color:#a82c46;}
+html body .ax-api-detail{
+  position:absolute;top:calc(100% + 10px);right:0;
+  width:min(335px,calc(100vw - 32px));max-width:calc(100vw - 32px);
+  background:var(--axp-panel,#112039);color:var(--axp-ink,#f4f8ff);
+  border:1px solid var(--axp-stroke,rgba(255,255,255,.16));
+  border-radius:15px;box-shadow:0 15px 42px rgba(0,0,0,.28);
+  padding:15px;z-index:100005;font-size:12px;line-height:1.5;
+}
+html body .ax-api-detail[hidden]{display:none!important;}
+html body .ax-api-detail strong{display:block;margin-bottom:6px;font-size:13px;}
+html body .ax-api-detail p{margin:0 0 11px;color:var(--axp-secondary,#b2c3dc);overflow-wrap:anywhere;}
+html body .ax-api-retry{min-height:34px;border-radius:9px;padding:7px 12px;background:var(--axp-soft,rgba(255,255,255,.08));color:var(--axp-ink,#fff);border:1px solid var(--axp-stroke,rgba(255,255,255,.16));font:700 12px inherit;cursor:pointer;}
+@media(max-width:680px){html body .topbar .ax-api-indicator{padding:8px;font-size:10px;}}

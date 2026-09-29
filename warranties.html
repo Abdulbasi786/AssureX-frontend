@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AssureX — Dynamic warranty coverage from registered products.">
+  <meta name="theme-color" content="#060912">
+  <title>AssureX — Warranties</title>
+  <link rel="shortcut icon" href="asset/fav.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/fixes.css">
+  <script src="js/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/animate.js" defer></script>
+<link rel="stylesheet" href="css/role-ui.css">
+<link rel="stylesheet" href="css/warranties-dashboard.css">
+<link rel="stylesheet" href="css/ai-intelligence.css">
+<link rel="stylesheet" href="css/experience-features.css">
+  <link rel="stylesheet" href="css/assurex-chatbot.css">
+<link rel="stylesheet" href="css/assurex-premium-all-pages.css">
+<link rel="stylesheet" href="css/assurex-viewport-controls.css">
+</head>
+<body class="warranties-screen">
+  <div class="background-grid"></div>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="ambient ambient-three"></div>
+
+  <div class="app" id="appView">
+    <aside class="sidebar glass" id="sidebar">
+      <div class="sidebar-header">
+        <a class="dashboard-brand" href="#">
+          <img src="asset/assurex-logo-dark.png" alt="AssureX">
+          </a>
+        <button class="icon-button mobile-only" id="closeSidebar" aria-label="Close menu">×</button>
+      </div>
+
+      <div class="sidebar-section-label">WORKSPACE</div>
+      <nav class="sidebar-nav">
+        <button class="nav-item" data-page="dashboard"><span>⌂</span>Dashboard</button>
+        <button class="nav-item" data-page="products"><span>▣</span>Products</button>
+        <button class="nav-item active" data-page="warranties"><span>◇</span>Warranties</button>
+        <button class="nav-item" data-page="documents"><span>▤</span>Documents</button>
+        <button class="nav-item" data-page="claims"><span>◉</span>Claims</button>
+        <button class="nav-item" data-page="validation"><span>✓</span>Validation</button>
+        <button class="nav-item" data-page="evaluation"><span>AI</span>AI Evaluation</button>
+        <button class="nav-item" data-page="decision"><span>◆</span>Decision &amp; Review</button>
+
+        <div class="sidebar-section-label">MANAGEMENT</div>
+        <button class="nav-item" data-page="analytics"><span>▥</span>Analytics</button>
+        <button class="nav-item" data-page="readiness"><span>◎</span>Readiness</button>
+        <button class="nav-item" data-page="profile"><span>◯</span>Profile</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-user">
+          <div class="avatar" id="userAvatar">U</div>
+          <div><strong id="profileName">User</strong><small id="profileRole">Reviewer</small></div>
+        </div>
+        <button class="logout-button" id="logout"><span aria-hidden="true">↪</span> Sign out</button>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar glass">
+        <button class="icon-button mobile-only" id="sidebarToggle" aria-label="Open menu">☰</button>
+        <div class="global-search">
+          <span>⌕</span>
+          <input id="globalSearch" type="search" placeholder="Search claims, products, documents...">
+          
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-button" id="themeButton" title="Themes">◐</button>
+          
+          
+          <button class="icon-button notification-button" id="notifyButton" title="Notifications">♢<i></i></button>
+        </div>
+      </header>
+
+      <div class="theme-menu glass hidden" id="themeMenu">
+        <div class="theme-menu-header">
+          <strong>Appearance</strong>
+          <button class="icon-button" id="closeTheme">×</button>
+        </div>
+        <small id="currentTheme">Electric Blue &amp; Teal</small>
+        <button class="theme-choice" data-theme="light">Light Mode</button>
+        <button class="theme-choice" data-theme="dark">Dark Mode</button>
+      </div>
+
+      <main class="dashboard-content">
+        <section class="page" data-page="warranties">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow">COVERAGE</div>
+              <h1>Warranties</h1>
+              <p>Live warranty coverage calculated from your registered products and configurable policy rules.</p>
+              <div style="margin-top:12px"><a id="policyAdmin" class="btn" href="warranty-policies.html" style="display:none">Manage Warranty Policies</a></div>
+            </div>
+          </div>
+
+          <div class="warranty-overview" aria-label="Coverage overview">
+            <div class="card glass warranty-stat"><span>Total warranties</span><strong id="warrantyTotal">—</strong><small>Registered coverage</small></div>
+            <div class="card glass warranty-stat"><span>Active</span><strong id="warrantyActive">—</strong><small>Currently covered</small></div>
+            <div class="card glass warranty-stat"><span>Expired</span><strong id="warrantyExpired">—</strong><small>Coverage ended</small></div>
+            <div class="card glass warranty-stat"><span>Needs review</span><strong id="warrantyReview">—</strong><small>Incomplete coverage details</small></div>
+          </div>
+          <div class="policy-toolbar card glass">
+            <div>
+              <strong id="warrantySummary">Loading warranty records…</strong>
+              <span>Coverage is loaded from Firestore for the signed-in account.</span>
+            </div>
+            <button class="btn" id="refreshWarranties" type="button">Refresh</button>
+          </div>
+
+          <div class="policy-grid" id="warrantyPolicies" aria-live="polite">
+            <div class="policy-state loading">
+              <div>
+                <strong>Loading warranties</strong>
+                <p>Fetching warranty coverage from Firestore.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-overlay hidden" id="commandPalette">
+    <div class="command-palette glass">
+      <div class="command-header">
+        <input id="commandInput" placeholder="Search commands...">
+        <button class="icon-button" id="closeCommand">×</button>
+      </div>
+      <div id="commandResults"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Ready</div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  
+  <script src="js/firebase-config.js"></script><script src="js/firebase-auth.js"></script><script src="js/role-guard.js"></script>
+  <script src="js/firebase-firestore.js"></script><script src="js/warranty-policy-engine.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const grid = document.getElementById("warrantyPolicies");
+      const refreshButton = document.getElementById("refreshWarranties");
+      const summary = document.getElementById("warrantySummary");
+      const counts = {total:document.getElementById('warrantyTotal'),active:document.getElementById('warrantyActive'),expired:document.getElementById('warrantyExpired'),review:document.getElementById('warrantyReview')};
+      function setCounts(total, active, expired, review){counts.total.textContent=total;counts.active.textContent=active;counts.expired.textContent=expired;counts.review.textContent=review;}
+
+      function escapeHtml(value) {
+        return String(value == null ? "" : value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function toDate(value) {
+        if (!value) return null;
+        if (value instanceof Date) return isNaN(value.getTime()) ? null : value;
+        if (typeof value.toDate === "function") return value.toDate();
+        if (typeof value === "number") {
+          const d = new Date(value);
+          return isNaN(d.getTime()) ? null : d;
+        }
+        if (typeof value === "string") {
+          const d = new Date(value);
+          return isNaN(d.getTime()) ? null : d;
+        }
+        if (value.seconds != null) return new Date(Number(value.seconds) * 1000);
+        return null;
+      }
+
+      function addMonths(date, months) {
+        const d = new Date(date.getTime());
+        const day = d.getDate();
+        d.setDate(1);
+        d.setMonth(d.getMonth() + Number(months || 0));
+        const lastDay = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+        d.setDate(Math.min(day, lastDay));
+        return d;
+      }
+
+      function formatDate(date) {
+        if (!date) return "Not available";
+        return date.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        });
+      }
+
+      function warrantyInfo(product) {
+        const purchaseDate = toDate(product.purchase_date);
+        const warrantyMonths = Math.max(0, Number(product.warranty_months || 0));
+        const extendedMonths = Math.max(0, Number(product.extended_warranty_months || 0));
+        const totalMonths = warrantyMonths + extendedMonths;
+        const expiry = purchaseDate && totalMonths > 0 ? addMonths(purchaseDate, totalMonths) : null;
+        const now = new Date();
+
+        if (!expiry) {
+          return {
+            purchaseDate, warrantyMonths, extendedMonths, totalMonths,
+            expiry: null, status: "REVIEW", statusClass: "review"
+          };
+        }
+
+        return {
+          purchaseDate, warrantyMonths, extendedMonths, totalMonths, expiry,
+          status: expiry >= now ? "ACTIVE" : "EXPIRED",
+          statusClass: expiry >= now ? "active" : "expired"
+        };
+      }
+
+      function stateMarkup(type, title, message, meta) {
+        return '<div class="policy-state ' + escapeHtml(type) + '">' +
+          '<div>' +
+          '<strong>' + escapeHtml(title) + '</strong>' +
+          '<p>' + escapeHtml(message) + '</p>' +
+          (meta ? '<small>' + escapeHtml(meta) + '</small>' : '') +
+          '</div>' +
+          '</div>';
+      }
+
+      let engineResults = {};
+
+      function render(products) {
+        if (!products.length) {
+          setCounts(0,0,0,0);
+          summary.textContent = "0 warranty records";
+          grid.innerHTML = stateMarkup(
+            "empty",
+            "No warranty records found",
+            "Add a product with warranty information to see its coverage here.",
+            "0 products"
+          );
+          return;
+        }
+
+        let active = 0;
+        let expired = 0;
+        let review = 0;
+
+        const cards = products.map(function (product) {
+          const info = warrantyInfo(product);
+          const engine = engineResults[product.id] || null;
+          if (info.status === "ACTIVE") active++;
+          else if (info.status === "EXPIRED") expired++;
+          else review++;
+
+          const productName = product.product_name || product.name || "Unnamed Product";
+          const productId = product.product_id || product.id || "PRODUCT";
+          const brand = product.brand || "Brand not specified";
+          const category = product.category || "Product";
+          const model = product.model_number || "Not specified";
+          const provider = product.warranty_provider || "Provider not specified";
+          const extended = info.extendedMonths > 0
+            ? info.extendedMonths + " mo extended"
+            : "No extended warranty";
+          const coverage = info.totalMonths > 0
+            ? info.totalMonths + " months total"
+            : "Coverage not configured";
+          const expiry = info.expiry ? formatDate(info.expiry) : "Not available";
+
+          return '<article class="policy-card">' +
+            '<div class="policy-top">' +
+              '<span class="policy-status ' + info.statusClass + '">' + escapeHtml(info.status) + '</span>' +
+              '<span title="' + escapeHtml(productId) + '">' + escapeHtml(productId) + '</span>' +
+            '</div>' +
+            '<h2>' + escapeHtml(productName) + '</h2>' +
+            '<p>' + escapeHtml(brand) + ' · ' + escapeHtml(category) + ' · ' + escapeHtml(provider) + '</p>' +
+            '<div class="policy-meta">' +
+              '<span>Model<br><strong>' + escapeHtml(model) + '</strong></span>' +
+              '<span>Coverage<br><strong>' + escapeHtml(coverage) + '</strong></span>' +
+              '<span>Standard<br><strong>' + escapeHtml(info.warrantyMonths + " mo") + '</strong></span>' +
+              '<span>Extended<br><strong>' + escapeHtml(extended) + '</strong></span>' +
+            '</div>' +
+            '<div class="policy-expiry">' +
+              '<span>Purchase: <strong>' + escapeHtml(info.purchaseDate ? formatDate(info.purchaseDate) : "Not available") + '</strong></span>' +
+              '<span>Expiry: <strong>' + escapeHtml(expiry) + '</strong></span>' +
+            '</div>' +
+          '</article>';
+        }).join("");
+
+        setCounts(products.length,active,expired,review);
+        summary.textContent = products.length + " product" + (products.length === 1 ? "" : "s") +
+          " · " + active + " active · " + expired + " expired" + (review ? " · " + review + " review" : "");
+        grid.innerHTML = cards;
+      }
+
+      async function loadWarranties() {
+        if (!grid) return;
+
+        const user = window.fbAuth && window.fbAuth.currentUser;
+        if (!user) {
+          summary.textContent = "Authentication required";
+          grid.innerHTML = stateMarkup(
+            "review",
+            "Sign in to view warranties",
+            "Warranty coverage is loaded from products belonging to the signed-in Firebase account.",
+            "Authentication required"
+          );
+          return;
+        }
+
+        if (refreshButton) refreshButton.disabled = true;
+        summary.textContent = "Loading warranty records…";
+        grid.innerHTML = stateMarkup("loading", "Loading warranties", "Fetching warranty coverage from Firestore.", "Please wait");
+
+        try {
+          const productQuery = window.fbDb.collection("products");
+          const snapshot = await (["user","employee"].includes(window.AssureXRole||"user") ? productQuery.where("user_id", "==", user.uid) : productQuery).get();
+
+          const products = snapshot.docs.map(function (doc) {
+            return Object.assign({ id: doc.id }, doc.data());
+          });
+
+          engineResults = {};
+          // One policy fetch for the whole page, not one Firestore query per product.
+          const policies = await window.AssureXWarranty.loadPolicies();
+          products.forEach(function(product){
+            try {
+              const policy=window.AssureXWarranty.selectPolicy(policies,product);
+              engineResults[product.id]=policy?window.AssureXWarranty.evaluate(product,policy):{status:'REVIEW',policyName:'No matching policy',reasons:['No matching policy.']};
+            } catch(e) {engineResults[product.id]={status:'REVIEW',policyName:'Engine unavailable',reasons:[e.message||'Could not evaluate policy.']};}
+          });
+
+          products.sort(function (a, b) {
+            const da = warrantyInfo(a).expiry;
+            const db = warrantyInfo(b).expiry;
+            if (!da && !db) {
+              return String(a.product_name || a.name || "").localeCompare(String(b.product_name || b.name || ""));
+            }
+            if (!da) return 1;
+            if (!db) return -1;
+            return da - db;
+          });
+
+          render(products);
+        } catch (error) {
+          setCounts('—','—','—','—');
+          console.error("[AssureX] Warranty load failed:", error);
+          summary.textContent = "Unable to load warranty records";
+          grid.innerHTML = stateMarkup(
+            "error",
+            "Unable to load warranties",
+            error && error.message ? error.message : "Firestore request failed.",
+            "Check Firebase permissions and try Refresh"
+          );
+        } finally {
+          if (refreshButton) refreshButton.disabled = false;
+        }
+      }
+
+      const policyAdmin = document.getElementById('policyAdmin');
+      if (policyAdmin) { policyAdmin.style.display = window.AssureXRole === 'admin' ? 'inline-block' : 'none'; }
+      if (refreshButton) refreshButton.addEventListener("click", loadWarranties);
+
+      if (window.fbAuth) {
+        window.fbAuth.onAuthStateChanged(function(user){
+          if(!user){setCounts('—','—','—','—');summary.textContent='Authentication required';grid.innerHTML=stateMarkup('review','Sign in to view warranties','Authentication required','');}
+        });
+        window.addEventListener("assurex-role-ready", function(){
+          if(window.fbAuth.currentUser){if(policyAdmin)policyAdmin.style.display=window.AssureXRole==='admin'?'inline-block':'none';loadWarranties();}
+        });
+      } else {
+        loadWarranties();
+      }
+    })();
+  </script>
+<script src="js/nav-fix.js"></script>
+<script src="js/profile-shortcut.js"></script>
+<link rel="stylesheet" href="css/topbar-upgrade.css"><script src="js/topbar-upgrade.js"></script><script src="js/assurex-api.js" defer></script>
+<script src="js/ai-intelligence.js" defer></script>
+<script src="js/experience-features.js" defer></script>
+  <script src="js/assurex-chatbot.js" defer></script>
+<script src="js/sidebar-memory.js" defer></script></body>
+</html>

@@ -1,0 +1,42 @@
+/* 2026-09 layout stabilization: constrained to shared dashboard shell. */
+*,*::before,*::after{box-sizing:border-box}
+.app{min-width:0;max-width:100%;}
+.app-main{min-width:0;max-width:100%;}
+.dashboard-content,.dashboard-content .page,.page-heading,.card,.card-header{min-width:0}
+.dashboard-content .page{max-width:100%}
+.sidebar{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.sidebar .sidebar-header,.sidebar>.sidebar-section-label,.sidebar .sidebar-bottom{flex-shrink:0}
+.sidebar .sidebar-nav{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin}
+/* Analytics workspace is in MAIN, never allowed to grow or overlap the sidebar. */
+body:has(section[data-page="analytics"]) .app-main,body:has(section[data-page="analytics"]) .dashboard-content,body:has(section[data-page="analytics"]) section[data-page="analytics"]{min-width:0;max-width:100%}
+section[data-page="analytics"] .analytics-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;max-width:100%;min-width:0}
+section[data-page="analytics"] .analytics-summary>*{min-width:0;max-width:100%;overflow-wrap:anywhere}
+section[data-page="analytics"] .card-header{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between}
+section[data-page="analytics"] .card-header>div{min-width:0;max-width:100%}
+section[data-page="analytics"] .compact-input{max-width:100%;min-width:0;flex:1 1 145px}
+section[data-page="analytics"] #analyticsBreakdowns,section[data-page="analytics"] #analyticsBars{max-width:100%;min-width:0;overflow-wrap:anywhere}
+section[data-page="analytics"] #mlWorkspace{display:block;min-width:0;width:100%;max-width:100%;clear:both;overflow:clip}
+section[data-page="analytics"] .mlbar{max-width:100%;min-width:0;z-index:5;top:10px}
+section[data-page="analytics"] .mlgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;max-width:100%;min-width:0}
+section[data-page="analytics"] .mlgrid .mlcard{min-width:0;max-width:100%;grid-column:auto!important}
+section[data-page="analytics"] .mlgrid .mlcard.wide{grid-column:span 2!important}
+section[data-page="analytics"] .mlcard header{flex-wrap:wrap;min-width:0}
+section[data-page="analytics"] .mlcard h3{overflow-wrap:anywhere;min-width:0}
+section[data-page="analytics"] .mlbody,section[data-page="analytics"] .mlbody svg{min-width:0;max-width:100%}
+/* Decision panel: no raw report markup leaking into page; keep content in viewport. */
+section[data-page="decision"],section[data-page="decision"] .decision-grid,section[data-page="decision"] .decision-models{min-width:0;max-width:100%}
+section[data-page="decision"] .decision-grid>*{min-width:0;overflow-wrap:anywhere}
+section[data-page="decision"] .decision-claim-bar select{min-width:0;max-width:100%}
+/* Documents: dashboard card palette plus responsive vault records. */
+body.documents-screen .app-main{min-width:0}
+body.documents-screen .documents-content,body.documents-screen .documents-content .wrap,body.documents-screen .documents-content .grid{min-width:0;max-width:100%}
+body.documents-screen .documents-content .grid>*{min-width:0;max-width:100%}
+body.documents-screen .documents-content .card,body.documents-screen .documents-content .org-group{background:var(--theme-surface-solid,var(--surface-solid,#111d2e));border:1px solid var(--theme-border,var(--border,rgba(150,170,200,.16)));border-radius:18px;box-shadow:var(--theme-shadow,none)}
+body.documents-screen .documents-content .doc,body.documents-screen .documents-content .doc-main{min-width:0;max-width:100%}
+body.documents-screen .documents-content .doc-name,body.documents-screen .documents-content .meta,body.documents-screen .documents-content .path{overflow-wrap:anywhere;word-break:break-word}
+body.documents-screen .documents-content .actions{display:flex;flex-wrap:wrap;gap:8px}
+body.documents-screen .documents-content .org-toolbar>*{min-width:0}
+@media(max-width:1100px){section[data-page="analytics"] .analytics-summary{grid-template-columns:repeat(2,minmax(0,1fr))}body.documents-screen .documents-content .grid{grid-template-columns:minmax(0,1fr)!important}}
+@media(max-width:850px){.sidebar{overflow-y:auto}.sidebar .sidebar-nav{overflow-y:visible;flex:none} .app-main{width:100%;max-width:100%}}
+@media(max-width:700px){section[data-page="analytics"] .mlgrid{grid-template-columns:minmax(0,1fr)!important}section[data-page="analytics"] .mlgrid .mlcard.wide{grid-column:auto!important}section[data-page="analytics"] .analytics-summary{grid-template-columns:repeat(2,minmax(0,1fr))}body.documents-screen .documents-content .top.page-heading{align-items:flex-start;flex-wrap:wrap}}
+@media(max-width:420px){section[data-page="analytics"] .analytics-summary{grid-template-columns:minmax(0,1fr)}}

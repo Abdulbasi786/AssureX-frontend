@@ -1,0 +1,101 @@
+/* Shared, final application shell. Loaded last on every page with the standard sidebar. */
+body:has(> .app > #sidebar) #sidebar{
+  position:fixed!important;inset:16px auto 16px 16px!important;
+  width:var(--sidebar-width,270px)!important;height:calc(100dvh - 32px)!important;
+  max-height:calc(100dvh - 32px)!important;min-height:0!important;
+  margin-left:-10px!important;display:flex!important;flex-direction:column!important;
+  overflow:hidden!important;box-sizing:border-box!important;z-index:100!important;
+}
+body:has(> .app > #sidebar) #sidebar > .sidebar-header,
+body:has(> .app > #sidebar) #sidebar > .sidebar-section-label{flex:0 0 auto!important;}
+body:has(> .app > #sidebar) #sidebar > .sidebar-nav{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  flex:1 1 auto!important;min-height:0!important;max-height:100%!important;
+  overflow-y:auto!important;overflow-x:hidden!important;scrollbar-width:thin;
+  overscroll-behavior:contain;gap:4px;align-content:start!important;
+}
+body:has(> .app > #sidebar) #sidebar > .sidebar-nav > *{flex:0 0 auto!important;}
+body:has(> .app > #sidebar) #sidebar > .sidebar-nav > .nav-item{
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  margin:0!important;position:relative!important;float:none!important;
+  align-items:center!important;transform:none;
+}
+body:has(> .app > #sidebar) #sidebar > .sidebar-nav > .nav-item:hover{transform:translateX(2px)!important;}
+body:has(> .app > #sidebar) #sidebar > .sidebar-bottom{
+  position:relative!important;inset:auto!important;flex:0 0 auto!important;
+  margin-top:auto!important;width:100%!important;min-width:0!important;
+  padding-top:12px!important;z-index:1!important;
+}
+body:has(> .app > #sidebar) #sidebar .sidebar-user{min-width:0!important;}
+body:has(> .app > #sidebar) #sidebar .sidebar-user > div:last-child{min-width:0;overflow:hidden;}
+body:has(> .app > #sidebar) #sidebar .sidebar-user strong,
+body:has(> .app > #sidebar) #sidebar .sidebar-user small{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+body:has(> .app > #sidebar) #sidebar .logout-button{
+  display:flex!important;justify-content:center!important;align-items:center!important;
+  width:100%!important;min-height:43px!important;position:static!important;
+  margin:12px 0 0!important;
+}
+/* Same main content offset on Analytics and both operational pages as on Dashboard. */
+@media(min-width:901px){
+  body.assurex-analytics-layout > .app,
+  body.operational-workspace > .app{display:block!important;}
+  body.assurex-analytics-layout > .app > .app-main,
+  body.operational-workspace > .app > .app-main{
+    display:block!important;position:relative!important;
+    box-sizing:border-box!important;width:calc(100% - var(--sidebar-width,270px))!important;
+    max-width:calc(100% - var(--sidebar-width,270px))!important;
+    margin:0 0 0 var(--sidebar-width,270px)!important;padding:16px!important;
+    min-width:0!important;overflow:visible!important;transform:none!important;
+  }
+}
+body.assurex-analytics-layout main.dashboard-content{
+  box-sizing:border-box!important;min-width:0!important;max-width:100%!important;
+  width:100%!important;margin:0!important;padding:38px 25px 70px!important;
+  overflow:visible!important;
+}
+body.assurex-analytics-layout main.dashboard-content > section.page[data-page="analytics"]{
+  display:block!important;position:relative!important;inset:auto!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  margin:0!important;float:none!important;transform:none!important;
+}
+body.assurex-analytics-layout main.dashboard-content > section.page[data-page="analytics"] > *{
+  min-width:0!important;max-width:100%!important;box-sizing:border-box!important;
+}
+body.assurex-analytics-layout .analytics-summary{grid-template-columns:repeat(4,minmax(0,1fr))!important;}
+body.assurex-analytics-layout #mlWorkspace,
+body.assurex-analytics-layout #mlWorkspace .mlbar,
+body.assurex-analytics-layout #mlWorkspace .mlgrid{max-width:100%!important;min-width:0!important;box-sizing:border-box!important;}
+body.assurex-analytics-layout #mlWorkspace .mlbar{position:relative!important;top:auto!important;}
+body.operational-workspace > .app > .app-main .operational-main{min-width:0!important;max-width:100%!important;width:100%!important;}
+body.operational-workspace > .app > .app-main .operational-main > .wrap{
+  width:100%!important;max-width:100%!important;margin:0!important;
+  padding:38px 25px 70px!important;box-sizing:border-box!important;
+}
+body.operational-workspace .operational-main .card{min-width:0!important;max-width:100%!important;}
+body.operational-workspace .operational-main .form-grid > *,
+body.operational-workspace .operational-main .row > *{min-width:0!important;}
+@media(min-width:901px) and (max-width:1200px){body.assurex-analytics-layout .analytics-summary{grid-template-columns:repeat(2,minmax(0,1fr))!important;}}
+@media(max-width:900px){
+ body:has(> .app > #sidebar) #sidebar{inset:10px auto 10px 10px!important;height:calc(100dvh - 20px)!important;max-height:calc(100dvh - 20px)!important;transform:translateX(-110%);}
+ body:has(> .app > #sidebar) #sidebar.open{transform:translateX(0)!important;}
+ body.assurex-analytics-layout > .app > .app-main,
+ body.operational-workspace > .app > .app-main{margin-left:0!important;width:100%!important;max-width:100%!important;padding:8px!important;}
+ body.assurex-analytics-layout main.dashboard-content,
+ body.operational-workspace > .app > .app-main .operational-main > .wrap{padding:24px 14px 64px!important;}
+ body.assurex-analytics-layout .analytics-summary{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+}
+@media(max-width:470px){body.assurex-analytics-layout .analytics-summary{grid-template-columns:minmax(0,1fr)!important;}}
+
+/* Role-guard visibility always wins over general navigation styling. */
+html:not([data-role]) body:has(> .app > #sidebar) #sidebar .nav-item:is([data-page="admin"],[data-page="analytics"],[data-page="validation"],[data-page="evaluation"],[data-page="decision"],[data-page="readiness"],[data-page="repairHistory"],[data-page="warrantyPolicies"]){display:none!important;}
+
+/* Topbar search must look identical on every page: operational form-field rules must not restyle it. */
+body.operational-workspace .topbar .global-search input,
+body.operational-workspace .topbar .global-search input:focus{
+  background:transparent!important;border:0!important;border-radius:12px!important;
+  padding:0 6px!important;min-height:0!important;height:100%!important;
+  box-shadow:none!important;outline:0!important;color:var(--sb-text,#f8fafc)!important;
+  font-size:13px!important;font-weight:500!important;
+}
+body.operational-workspace .topbar .global-search input::placeholder{color:var(--sb-muted,#8b95a9)!important;opacity:1!important;font-weight:400!important;}
+html[data-assurex-theme="light"] body.operational-workspace .topbar .global-search input{color:#1e293b!important;}

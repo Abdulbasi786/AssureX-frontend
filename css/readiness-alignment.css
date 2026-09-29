@@ -1,0 +1,10 @@
+/* Protect card content against long Firebase identifiers, emails and narrow/zoomed viewports. */
+.readiness-item{grid-template-columns:42px minmax(0,1fr) minmax(0,34%)!important;min-width:0;max-width:100%;box-sizing:border-box;}
+.readiness-main,.readiness-meta,.readiness-header>*,.readiness-detail{min-width:0;overflow-wrap:anywhere;word-break:break-word;}
+.readiness-main strong,.readiness-main p{max-width:100%;overflow-wrap:anywhere;white-space:normal;}
+.readiness-meta{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;text-align:right;}
+.readiness-detail{white-space:normal!important;line-height:1.5;}
+.readiness-status{flex:none;white-space:nowrap;}
+.readiness-header{flex-wrap:wrap;}
+.artifact-list,.readiness-header,.readiness-item{max-width:100%;}
+@media(max-width:760px){.readiness-item{grid-template-columns:36px minmax(0,1fr)!important;align-items:start;gap:10px;padding:13px!important}.readiness-meta{grid-column:2;text-align:left;justify-content:flex-start}.readiness-icon{width:32px;height:32px}}

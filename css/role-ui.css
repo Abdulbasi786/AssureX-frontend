@@ -1,0 +1,15 @@
+
+/* Scoped AssureX role/navigation refinements. Existing visual language retained. */
+.sidebar-bottom .sidebar-user{border-radius:14px;padding:9px 10px;transition:background .2s,border-color .2s;cursor:pointer;border:1px solid transparent}
+.sidebar-bottom .sidebar-user:hover,.sidebar-bottom .sidebar-user:focus-visible{background:rgba(105,125,255,.12);border-color:rgba(130,151,255,.22);outline:none}
+.sidebar-bottom .sidebar-user strong{display:block}
+.sidebar-bottom .logout-button{display:flex;justify-content:center;align-items:center;gap:9px;width:100%;min-height:43px;border-radius:12px;transition:background .2s,transform .2s,box-shadow .2s;border:1px solid rgba(255,112,135,.23);background:rgba(255,86,115,.09);color:#ff9faf;font-weight:700;cursor:pointer}
+.sidebar-bottom .logout-button:hover{background:rgba(255,86,115,.19);transform:translateY(-1px);box-shadow:0 7px 22px rgba(255,50,100,.12)}
+.sidebar-bottom .logout-button:focus-visible{outline:2px solid #91a0ff;outline-offset:2px}
+html[data-role="reviewer"] .reviewer-readonly-note{display:block}
+/* Keep entire account overview in the viewport on desktop; retain responsive scrolling on short screens. */
+@media(min-width:851px) and (min-height:660px){body.profile-screen .app,body.profile-screen .app-main{height:100dvh;min-height:0;overflow:hidden}body.profile-screen .dashboard-content{height:calc(100dvh - 76px);min-height:0;overflow:hidden;padding-top:16px;padding-bottom:14px}body.profile-screen .page-heading{margin-bottom:14px}body.profile-screen .profile-card{max-height:calc(100dvh - 205px);overflow:hidden;padding:clamp(14px,2vh,24px)}body.profile-screen .profile-avatar{flex-shrink:0}body.profile-screen .profile-form{gap:clamp(6px,1vh,12px)}}
+@media(max-height:659px){body.profile-screen .dashboard-content{overflow-y:auto}}
+
+/* Do not flash privileged links before account role has resolved. */
+html:not([data-role]) .sidebar .sidebar-nav{visibility:hidden}

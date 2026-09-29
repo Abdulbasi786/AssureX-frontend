@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="AssureX — AI-powered warranty claim intelligence and decision support." name="description" />
+    <meta content="#060912" name="theme-color" />
+    <title>AssureX — Products</title>
+    <link href="asset/fav.png" rel="shortcut icon" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Manrope:wght@500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="css/products-page.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/fixes.css">
+  <script src="js/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/animate.js" defer></script>
+<link rel="stylesheet" href="css/role-ui.css">
+<link rel="stylesheet" href="css/ai-intelligence.css">
+<link rel="stylesheet" href="css/experience-features.css">
+  <link rel="stylesheet" href="css/assurex-chatbot.css">
+  <link rel="stylesheet" href="css/barcode-scan.css">
+<link rel="stylesheet" href="css/assurex-premium-all-pages.css">
+<link rel="stylesheet" href="css/assurex-viewport-controls.css">
+</head>
+
+<body>
+    <div class="background-grid"></div>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="ambient ambient-three"></div>
+    <div class="app" id="appView">
+        <!-- SIDEBAR -->
+        <aside class="sidebar glass" id="sidebar">
+            <div class="sidebar-header">
+                <a class="dashboard-brand" href="#">
+                    <img alt="AssureX" src="asset/assurex-logo-dark.png" />
+                    </a>
+                <button aria-label="Close menu" class="icon-button mobile-only" id="closeSidebar">
+                    ×
+                </button>
+            </div>
+            <div class="sidebar-section-label">
+                WORKSPACE
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item" data-page="dashboard">
+                    <span>⌂</span>
+                    Dashboard
+                </button>
+                <button class="nav-item active" data-page="products">
+                    <span>▣</span>
+                    Products
+                </button>
+                <button class="nav-item" data-page="warranties">
+                    <span>◇</span>
+                    Warranties
+                </button>
+                <button class="nav-item" data-page="documents">
+                    <span>▤</span>
+                    Documents
+                </button>
+                <button class="nav-item" data-page="claims">
+                    <span>◉</span>
+                    Claims
+                </button>
+                <button class="nav-item" data-page="validation">
+                    <span>✓</span>
+                    Validation
+                </button>
+                <button class="nav-item" data-page="evaluation">
+                    <span>AI</span>
+                    AI Evaluation
+                </button>
+                <button class="nav-item" data-page="decision">
+                    <span>◆</span>
+                    Decision &amp; Review
+                </button>
+                <div class="sidebar-section-label">
+                    MANAGEMENT
+                </div>
+                <button class="nav-item" data-page="analytics">
+                    <span>▥</span>
+                    Analytics
+                </button>
+                <button class="nav-item" data-page="readiness">
+                    <span>◎</span>
+                    Readiness
+                </button>
+                <button class="nav-item" data-page="profile">
+                    <span>◯</span>
+                    Profile
+                </button>
+            </nav>
+            <div class="sidebar-bottom">
+                <div class="sidebar-user">
+                    <div class="avatar" id="userAvatar">
+                        U
+                    </div>
+                    <div>
+                        <strong id="profileName">User</strong>
+                        <small id="profileRole">Reviewer</small>
+                    </div>
+                </div>
+                <button class="logout-button" id="logout">
+                    <span aria-hidden="true">↪</span> Sign out
+                </button>
+            </div>
+        </aside>
+        <!-- MAIN APPLICATION -->
+        <div class="app-main">
+            <!-- TOPBAR -->
+            <header class="topbar glass">
+                <button class="icon-button mobile-only" id="sidebarToggle">
+                    ☰
+                </button>
+                <div class="global-search">
+                    <span>⌕</span>
+                    <input id="globalSearch" placeholder="Search claims, products, documents..." type="search" />
+                    
+                </div>
+                <div class="topbar-actions">
+                    <button class="icon-button" id="themeButton" title="Themes">
+                        ◐
+                    </button>
+                    
+                    
+                    <button class="icon-button notification-button" id="notifyButton" title="Notifications">
+                        ♢
+                        <i></i>
+                    </button>
+                </div>
+            </header>
+            <!-- THEME MENU -->
+            <div class="theme-menu glass hidden" id="themeMenu">
+                <div class="theme-menu-header">
+                    <strong>Appearance</strong>
+                    <button class="icon-button" id="closeTheme">
+                        ×
+                    </button>
+                </div>
+                <small id="currentTheme">
+                    Electric Blue &amp; Teal
+                </small>
+                <button class="theme-choice" data-theme="light">
+                    Light Mode
+                </button>
+                <button class="theme-choice" data-theme="dark">
+                    Dark Mode
+                </button>
+            </div>
+            <!-- =====================================================
+           PAGES
+      ====================================================== -->
+            <main class="dashboard-content">
+                <!-- DASHBOARD -->
+                <!-- PRODUCTS -->
+                <section class="page" data-page="products">
+                    <div class="page-heading">
+                        <div>
+                            <div class="eyebrow">REGISTRY</div>
+                            <h1>Products</h1>
+                            <p>Manage registered products and warranty information.</p>
+                        </div>
+                        <a class="btn btn-gradient" id="addProduct" href="add-product.html">
+                            + Add Product
+                        </a>
+                    </div>
+                    <div class="card table-card glass products-registry-card">
+                        <div class="products-toolbar">
+                            <div class="products-toolbar-copy">
+                                <span class="eyebrow">PRODUCT REGISTRY</span>
+                                <h2>Registered Products</h2>
+                                <p>Products connected to your AssureX account.</p>
+                            </div>
+                            <div class="products-toolbar-actions">
+                                <label class="product-search"><span>⌕</span><input id="productSearch" type="search"
+                                        placeholder="Search products..." autocomplete="off"></label>
+                                <button class="btn" type="button" id="refreshProducts" title="Refresh products">↻
+                                    Refresh</button>
+                            </div>
+                        </div>
+                        <div class="products-summary" id="productsSummary"><span><b id="productCount">0</b>
+                                products</span><span class="summary-dot"></span><span id="productSyncStatus">Waiting for
+                                sign-in</span></div>
+                        <div class="products-table-wrap">
+                            <div class="table products-table" data-page="products" id="productsTable">
+                                <div class="tr th"><span>Product</span><span>Serial Number</span><span>Purchase
+                                        Date</span><span>Warranty</span><span>Status</span></div>
+                                <div class="products-state" id="productsLoading"><span class="loading-dot"></span>
+                                    Loading products...</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- WARRANTIES -->
+                <!-- DOCUMENTS -->
+                <!-- CLAIMS -->
+                <!-- VALIDATION -->
+                <!-- EVALUATION -->
+                <!-- DECISION -->
+                <!-- ANALYTICS -->
+                <!-- READINESS -->
+                <!-- PROFILE -->
+            </main>
+        </div>
+    </div>
+    <!-- ADD PRODUCT MODAL -->
+    <div class="modal-overlay hidden" id="addProductModal" aria-hidden="true">
+        <section class="card glass add-product-modal" role="dialog" aria-modal="true" aria-labelledby="addProductTitle">
+            <header class="add-product-header">
+                <div>
+                    <div class="eyebrow">PRODUCT REGISTRY</div>
+                    <h2 id="addProductTitle">Add Product</h2>
+                    <p>Complete the registration step by step.</p>
+                </div>
+                <button class="icon-button" type="button" id="closeAddProduct" aria-label="Close add product">×</button>
+            </header>
+
+            <div class="add-product-steps" aria-label="Product registration steps">
+                <div class="add-product-step active" data-step-indicator="1"><span
+                        class="step-number">1</span><span>Product Details</span></div>
+                <div class="add-product-step" data-step-indicator="2"><span
+                        class="step-number">2</span><span>Warranty</span></div>
+                <div class="add-product-step" data-step-indicator="3"><span
+                        class="step-number">3</span><span>Coverage</span></div>
+            </div>
+            <div class="add-product-progress"><span id="addProductProgress"></span></div>
+
+            <form id="addProductForm" class="add-product-form" novalidate>
+                <section class="add-product-panel active" data-step="1">
+                    <h3 class="add-product-panel-title">Step 1 — Product Details</h3>
+                    <p class="add-product-panel-copy">Enter the basic information used to identify and register the
+                        product.</p>
+                    <div class="form-grid">
+                        <label>Product ID *<input id="product_id" name="product_id" required placeholder="PRD-55645"
+                                autocomplete="off"></label>
+                        <label>Product Name *<input id="name" name="name" required placeholder="Laptop"></label>
+                        <label>Brand *<input id="brand" name="brand" required placeholder="Samsung"></label>
+                        <label>Category *<input id="category" name="category" required
+                                placeholder="Home Appliance"></label>
+                        <label>Model Number *<input id="model_number" name="model_number" required
+                                placeholder="123456789"></label>
+                        <label>Serial Number *<input id="serial_number" name="serial_number" required
+                                placeholder="Test-Se-123"></label>
+                        <label>Price *<input id="price" name="price" type="number" min="0" step="1" required
+                                placeholder="95299"></label>
+                        <label>Retailer<input id="retailer" name="retailer" placeholder="Tech Zone"></label>
+                        <label>Purchase Date *<input id="purchase_date" name="purchase_date" type="date"
+                                required></label>
+                        <label>Firebase User ID<input id="user_id" name="user_id" readonly
+                                placeholder="Waiting for signed-in user"><span class="field-help">Filled automatically
+                                from Firebase Authentication.</span></label>
+                    </div>
+                </section>
+
+                <section class="add-product-panel" data-step="2">
+                    <h3 class="add-product-panel-title">Step 2 — Warranty</h3>
+                    <p class="add-product-panel-copy">Define the standard and extended warranty information for this
+                        product.</p>
+                    <div class="form-grid">
+                        <label>Warranty Months *<input id="warranty_months" name="warranty_months" type="number" min="0"
+                                step="1" required placeholder="12"></label>
+                        <label>Extended Warranty Months<input id="extended_warranty_months"
+                                name="extended_warranty_months" type="number" min="0" step="1" value="0"></label>
+                        <label>Warranty Provider *<input id="warranty_provider" name="warranty_provider" required
+                                placeholder="Samsung"></label>
+                        <label>Service Center<input id="service_center" name="service_center"
+                                placeholder="Samsung Care Center"></label>
+                    </div>
+                </section>
+
+                <section class="add-product-panel" data-step="3">
+                    <h3 class="add-product-panel-title">Step 3 — Coverage & Review</h3>
+                    <p class="add-product-panel-copy">Confirm the warranty coverage, review the product information,
+                        then add it to your registry.</p>
+                    <div class="product-review" id="productReview">
+                        <div class="review-item"><span>Product</span><strong id="reviewName">—</strong></div>
+                        <div class="review-item"><span>Brand / Model</span><strong id="reviewBrandModel">—</strong>
+                        </div>
+                        <div class="review-item"><span>Serial Number</span><strong id="reviewSerial">—</strong></div>
+                        <div class="review-item"><span>Warranty</span><strong id="reviewWarranty">—</strong></div>
+                    </div>
+                    <div class="form-grid two-col">
+                        <label>Coverage Conditions<textarea id="coverage_conditions" name="coverage_conditions"
+                                placeholder="Enter covered conditions..."></textarea></label>
+                        <label>Exclusions<textarea id="exclusions" name="exclusions"
+                                placeholder="Enter exclusions..."></textarea></label>
+                    </div>
+                </section>
+
+                <div id="addProductMessage" class="add-product-message" hidden></div>
+
+                <footer class="add-product-footer">
+                    <button type="button" class="btn" id="cancelAddProduct">Cancel</button>
+                    <div class="footer-right">
+                        <button type="button" class="btn" id="prevProductStep" hidden>Back</button>
+                        <button type="button" class="btn btn-gradient" id="nextProductStep">Next</button>
+                        <button type="submit" class="btn btn-gradient" id="saveProductButton" hidden>Add
+                            Product</button>
+                    </div>
+                </footer>
+            </form>
+        </section>
+    </div>
+
+    <div class="modal-overlay hidden" id="commandPalette">
+        <div class="command-palette glass">
+            <div class="command-header">
+                <input id="commandInput" placeholder="Search commands..." />
+                <button class="icon-button" id="closeCommand">
+                    ×
+                </button>
+            </div>
+            <div id="commandResults"></div>
+        </div>
+    </div>
+    <div class="toast" id="toast">
+        Ready
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/firebase-auth.js"></script>
+    <script src="js/role-guard.js"></script>
+    <script src="js/firebase-firestore.js"></script>
+
+    <script>
+        (function () {
+            "use strict";
+            // Shared auth/Firestore instance; role guard and notifications use the same app.
+            const fbAuth = window.fbAuth;
+            const fbDb = window.fbDb;
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const openButton = document.getElementById("addProduct"), modal = document.getElementById("addProductModal"), closeButton = document.getElementById("closeAddProduct"), cancelButton = document.getElementById("cancelAddProduct"), form = document.getElementById("addProductForm"), message = document.getElementById("addProductMessage"), userIdInput = document.getElementById("user_id"), saveButton = document.getElementById("saveProductButton"), nextButton = document.getElementById("nextProductStep"), prevButton = document.getElementById("prevProductStep"), progressBar = document.getElementById("addProductProgress");
+                const panels = [...document.querySelectorAll(".add-product-panel")], indicators = [...document.querySelectorAll(".add-product-step")];
+                const productsTable = document.getElementById("productsTable"), productSearch = document.getElementById("productSearch"), refreshProducts = document.getElementById("refreshProducts"), productCount = document.getElementById("productCount"), productSyncStatus = document.getElementById("productSyncStatus");
+                let currentStep = 1, allProducts = [];
+                if (!openButton || !modal || !form) return;
+                const value = name => String(form.elements[name]?.value || "").trim();
+                const showMessage = (text, type) => { message.hidden = false; message.className = "add-product-message " + type; message.textContent = text; };
+                const clearMessage = () => { message.hidden = true; message.textContent = ""; message.className = "add-product-message"; };
+                const syncUser = user => { userIdInput.value = user ? user.uid : ""; userIdInput.placeholder = user ? "Firebase UID" : "Sign in to add a product"; };
+                const escapeHtml = v => String(v ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+                const initials = name => String(name || "P").split(/\s+/).filter(Boolean).slice(0, 2).map(x => x[0]).join("").toUpperCase();
+                const statusFor = p => {
+                    const start = p.purchase_date ? new Date(p.purchase_date + "T00:00:00") : null, months = Number(p.warranty_months || 0) + Number(p.extended_warranty_months || 0);
+                    if (!start || Number.isNaN(start.getTime()) || !months) return { label: "Unknown", cls: "" };
+                    const expiry = new Date(start); expiry.setMonth(expiry.getMonth() + months); const days = (expiry - Date.now()) / 86400000;
+                    if (days < 0) return { label: "Expired", cls: "danger" }; if (days <= 30) return { label: "Expiring", cls: "warn" }; return { label: "Active", cls: "good" };
+                };
+                const renderProducts = () => {
+                    if (!productsTable) return;
+                    [...productsTable.querySelectorAll(".product-data-row,.products-state")].forEach(el => el.remove());
+                    const q = String(productSearch?.value || "").trim().toLowerCase();
+                    const list = allProducts.filter(p => [p.name, p.brand, p.model_number, p.serial_number, p.product_id, p.category].some(v => String(v || "").toLowerCase().includes(q)));
+                    productCount.textContent = list.length;
+                    if (!list.length) {
+                        const empty = document.createElement("div"); empty.className = "products-state empty"; empty.innerHTML = q ? "<strong>No matching products</strong><span>Try another search term.</span>" : "<strong>No products registered yet</strong><span>Use + Add Product to register your first product.</span>"; productsTable.appendChild(empty); return;
+                    }
+                    list.forEach(p => {
+                        const st = statusFor(p), row = document.createElement("div"); row.className = "tr product-data-row";
+                        row.innerHTML = `<div class="product-cell"><span class="product-avatar">${escapeHtml(initials(p.name))}</span><div><strong>${escapeHtml(p.name || p.product_id || "Unnamed Product")}</strong><small>${escapeHtml([p.brand, p.model_number].filter(Boolean).join(" · ") || p.category || "Product")}</small></div></div><span class="product-serial">${escapeHtml(p.serial_number || "—")}</span><span class="product-date">${escapeHtml(p.purchase_date || "—")}</span><div class="warranty-cell"><strong>${escapeHtml(String(p.warranty_months ?? 0))} months</strong><small>${Number(p.extended_warranty_months || 0) > 0 ? escapeHtml(`+ ${p.extended_warranty_months} extended`) : "Standard warranty"}</small></div><em class="pill ${st.cls}">${escapeHtml(st.label)}</em>`;
+                        productsTable.appendChild(row);
+                    });
+                };
+                const fetchProducts = async () => {
+                    if (!fbAuth || !fbDb) { productSyncStatus.textContent = "Firebase unavailable"; return; }
+                    const user = fbAuth.currentUser;
+                    if (!user) { allProducts = []; productCount.textContent = "0"; productSyncStatus.textContent = "Sign in to load products"; renderProducts(); return; }
+                    productSyncStatus.textContent = "Syncing...";
+                    [...productsTable.querySelectorAll(".product-data-row,.products-state")].forEach(el => el.remove());
+                    const loading = document.createElement("div"); loading.className = "products-state"; loading.innerHTML = '<span class="loading-dot"></span> Loading products...'; productsTable.appendChild(loading);
+                    try {
+                        const role = window.AssureXRole || "user"; const q = fbDb.collection("products"); const snap = await (["user", "employee"].includes(role) ? q.where("user_id", "==", user.uid) : q).get();
+                        allProducts = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                        allProducts.sort((a, b) => String(b.created_at?.toDate?.() || b.purchase_date || "").localeCompare(String(a.created_at?.toDate?.() || a.purchase_date || "")));
+                        productSyncStatus.textContent = `Last synced ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`; renderProducts();
+                    } catch (error) {
+                        console.error("[AssureX] Product fetch failed:", error); allProducts = []; productCount.textContent = "0"; productSyncStatus.textContent = "Could not load products";
+                        [...productsTable.querySelectorAll(".product-data-row,.products-state")].forEach(el => el.remove()); const err = document.createElement("div"); err.className = "products-state error"; err.textContent = error?.code === "permission-denied" ? "Firestore denied access. Check your deployed rules." : (error?.message || "Could not load products."); productsTable.appendChild(err);
+                    }
+                };
+                const updateReview = () => {
+                    document.getElementById("reviewName").textContent = value("name") || "—";
+                    document.getElementById("reviewBrandModel").textContent = [value("brand"), value("model_number")].filter(Boolean).join(" / ") || "—";
+                    document.getElementById("reviewSerial").textContent = value("serial_number") || "—";
+                    const months = Number(value("warranty_months") || 0), ext = Number(value("extended_warranty_months") || 0); document.getElementById("reviewWarranty").textContent = `${months} months${ext ? ` + ${ext} extended` : ""}`;
+                };
+                const showStep = step => { currentStep = step; panels.forEach(p => p.classList.toggle("active", Number(p.dataset.step) === step)); indicators.forEach(i => { const n = Number(i.dataset.stepIndicator); i.classList.toggle("active", n === step); i.classList.toggle("complete", n < step) }); progressBar.style.width = `${step / 3 * 100}%`; prevButton.hidden = step === 1; nextButton.hidden = step === 3; saveButton.hidden = step !== 3; clearMessage(); if (step === 3) updateReview(); const first = panels[step - 1]?.querySelector("input:not([readonly]),textarea,select"); setTimeout(() => first?.focus(), 50); };
+                const validateStep = step => { const panel = panels[step - 1]; if (!panel) return true; for (const field of [...panel.querySelectorAll("input,textarea,select")].filter(el => !el.readOnly)) { if (!field.checkValidity()) { field.reportValidity(); return false; } } if (step === 1 && (!Number.isFinite(Number(value("price"))) || Number(value("price")) < 0)) { showMessage("Enter a valid product price.", "error"); return false; } if (step === 2 && (!Number.isInteger(Number(value("warranty_months"))) || Number(value("warranty_months")) < 0)) { showMessage("Enter valid warranty months.", "error"); return false; } return true; };
+                const openModal = () => { clearMessage(); form.reset(); document.getElementById("extended_warranty_months").value = "0"; syncUser(fbAuth?.currentUser); showStep(1); modal.classList.remove("hidden"); modal.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; setTimeout(() => document.getElementById("product_id")?.focus(), 50); };
+                const closeModal = () => { modal.classList.add("hidden"); modal.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; };
+                openButton.addEventListener("click", (event) => { event.preventDefault(); window.location.href = "add-product.html"; }); nextButton.addEventListener("click", () => { if (validateStep(currentStep) && currentStep < 3) showStep(currentStep + 1) }); prevButton.addEventListener("click", () => { if (currentStep > 1) showStep(currentStep - 1) }); closeButton.addEventListener("click", closeModal); cancelButton.addEventListener("click", closeModal); modal.addEventListener("click", e => { if (e.target === modal) closeModal() }); document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal() });
+                // Debounce local filtering; fetch once, only after Firebase has resolved the role.
+                let searchTimer;
+                productSearch?.addEventListener("input", () => { clearTimeout(searchTimer); searchTimer = setTimeout(renderProducts, 120); });
+                refreshProducts?.addEventListener("click", fetchProducts);
+                if (fbAuth) fbAuth.onAuthStateChanged(user => {
+                    syncUser(user);
+                    if (!user) { allProducts = []; renderProducts(); productSyncStatus.textContent = "Sign in to load products"; }
+                }); else syncUser(null);
+                window.addEventListener("assurex-role-ready", () => { if (fbAuth?.currentUser) fetchProducts(); });
+                form.addEventListener("submit", async event => {
+                    event.preventDefault(); if (!validateStep(3)) return; clearMessage(); const user = fbAuth?.currentUser;
+                    if (!user) { showMessage("You must be signed in to add a product.", "error"); return; }
+                    const payload = { product_id: value("product_id"), name: value("name"), brand: value("brand"), category: value("category"), model_number: value("model_number"), serial_number: value("serial_number"), price: Number(value("price")), retailer: value("retailer"), purchase_date: value("purchase_date"), warranty_months: Number(value("warranty_months")), extended_warranty_months: Number(value("extended_warranty_months") || 0), warranty_provider: value("warranty_provider"), service_center: value("service_center"), coverage_conditions: value("coverage_conditions"), exclusions: value("exclusions"), user_id: user.uid };
+                    if (!payload.product_id || !payload.name || !payload.brand || !payload.category || !payload.model_number || !payload.serial_number || !payload.purchase_date || !payload.warranty_provider) { showMessage("Please complete all required fields.", "error"); return; }
+                    if (!Number.isFinite(payload.price) || payload.price < 0) { showMessage("Enter a valid product price.", "error"); return; } if (!Number.isInteger(payload.warranty_months) || payload.warranty_months < 0) { showMessage("Enter valid warranty months.", "error"); return; } if (!Number.isInteger(payload.extended_warranty_months) || payload.extended_warranty_months < 0) { showMessage("Enter valid extended warranty months.", "error"); return; } if (!fbDb) { showMessage("Firebase Firestore is not initialized.", "error"); return; }
+                    try { saveButton.disabled = true; saveButton.textContent = "Adding..."; await fbDb.collection("products").doc(payload.product_id).set({ ...payload, created_at: firebase.firestore.FieldValue.serverTimestamp(), updated_at: firebase.firestore.FieldValue.serverTimestamp() }); showMessage("Product added successfully.", "success"); await fetchProducts(); setTimeout(closeModal, 700); } catch (error) { console.error("[AssureX] Add product failed:", error); showMessage(error?.code === "permission-denied" ? "Firestore denied this write. Confirm you are signed in and user_id equals the Firebase UID." : error?.code === "already-exists" ? "That Product ID already exists. Use a unique Product ID." : (error?.message || "Could not add product."), "error"); } finally { saveButton.disabled = false; saveButton.textContent = "Add Product"; }
+                });
+                showStep(1);
+            });
+        })();
+    </script>
+
+<script src="js/standalone-controls.js"></script>
+<script src="js/nav-fix.js"></script>
+<script src="js/profile-shortcut.js"></script>
+<link rel="stylesheet" href="css/topbar-upgrade.css"><script src="js/topbar-upgrade.js"></script><script src="js/assurex-api.js" defer></script>
+<script src="js/ai-intelligence.js" defer></script>
+<script src="js/experience-features.js" defer></script>
+  <script src="js/assurex-chatbot.js" defer></script>
+  <script src="js/barcode-scan.js" defer></script>
+<script src="js/sidebar-memory.js" defer></script></body>
+
+</html>

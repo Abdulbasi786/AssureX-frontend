@@ -1,0 +1,41 @@
+/* Scoped, theme-aware warranty screen, matching Dashboard surface/grid typography. */
+.warranties-screen .dashboard-content{width:min(1450px,100%);padding:38px 25px 70px}
+.warranties-screen .page-heading{margin-bottom:23px}
+.warranties-screen .page-heading .eyebrow{font-weight:800;letter-spacing:.14em}
+.warranties-screen .page-heading h1{font:800 clamp(29px,3vw,43px)/1.08 Manrope,Inter,system-ui,sans-serif;letter-spacing:-.04em;color:var(--theme-text)}
+.warranties-screen .page-heading p{font-size:12px;color:var(--theme-text-2)}
+.warranties-screen .warranty-overview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.warranties-screen .warranty-stat{min-height:126px;border:1px solid var(--theme-border);border-radius:18px;padding:20px 21px;display:flex;flex-direction:column;gap:5px;background:var(--theme-surface)}
+.warranties-screen .warranty-stat span{font-size:12px;font-weight:750;color:var(--theme-text-2)}
+.warranties-screen .warranty-stat strong{font:800 clamp(25px,2.2vw,34px)/1.2 Manrope,Inter,sans-serif;color:var(--theme-text);font-variant-numeric:tabular-nums}
+.warranties-screen .warranty-stat small{font-size:11px;color:var(--theme-muted)}
+.warranties-screen .policy-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 20px;border:1px solid var(--theme-border);border-radius:18px;background:var(--theme-surface);margin-bottom:17px}
+.warranties-screen .policy-toolbar strong{display:block;font-size:14px;color:var(--theme-text);font-weight:750}
+.warranties-screen .policy-toolbar span{display:block;font-size:11px;color:var(--theme-text-2);margin-top:4px}
+.warranties-screen .policy-toolbar .btn{min-height:39px;padding:9px 16px;border-radius:11px;background:var(--theme-surface-strong);border:1px solid var(--theme-border-strong);color:var(--theme-text);font-weight:750}
+.warranties-screen .policy-toolbar .btn:hover{border-color:var(--theme-accent)}
+.warranties-screen .policy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.warranties-screen .policy-card{display:flex;flex-direction:column;min-width:0;gap:0;min-height:230px;padding:21px;background:var(--theme-surface);border:1px solid var(--theme-border);border-radius:19px;box-shadow:var(--theme-shadow);overflow:hidden}
+.warranties-screen .policy-card .policy-top{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;color:var(--theme-muted)}
+.warranties-screen .policy-card .policy-top span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60%}
+.warranties-screen .policy-card h2{font:750 17px/1.35 Manrope,Inter,sans-serif;margin:17px 0 0;color:var(--theme-text)}
+.warranties-screen .policy-card p{font-size:12px;margin-top:4px;color:var(--theme-text-2)}
+.warranties-screen .policy-card .policy-status{padding:5px 10px;font-size:10px;letter-spacing:.04em;border-radius:99px}
+.warranties-screen .policy-status.active{background:rgba(53,211,154,.15);color:#41d7a3}
+.warranties-screen .policy-status.expired{background:rgba(255,112,135,.14);color:#ff899b}
+.warranties-screen .policy-status.review{background:rgba(245,196,81,.14);color:#e9bf64}
+.warranties-screen .policy-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:18px}
+.warranties-screen .policy-meta span{font-size:11px;line-height:1.55;min-width:0;overflow-wrap:anywhere;border:1px solid var(--theme-border);border-radius:10px;padding:9px 10px;background:var(--theme-surface-strong);color:var(--theme-text-2)}
+.warranties-screen .policy-meta strong{color:var(--theme-text);font-size:12px}
+.warranties-screen .policy-expiry{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-top:auto;padding-top:17px;color:var(--theme-text-2);font-size:11px}
+.warranties-screen .policy-expiry strong{color:var(--theme-text)}
+.warranties-screen .policy-state{grid-column:1/-1;min-height:170px;display:grid;place-items:center;text-align:center;background:var(--theme-surface);border:1px solid var(--theme-border);border-radius:18px;padding:25px;color:var(--theme-text-2)}
+.warranties-screen .policy-state strong{font-size:15px;color:var(--theme-text)}
+.warranties-screen .policy-state p{font-size:12px;margin:8px auto}
+.warranties-screen .policy-state small{font-size:11px}
+html[data-assurex-theme="light"] .warranties-screen .policy-status.active{background:#d1fae5;color:#047857}
+html[data-assurex-theme="light"] .warranties-screen .policy-status.expired{background:#fee2e2;color:#b42339}
+html[data-assurex-theme="light"] .warranties-screen .policy-status.review{background:#fef3c7;color:#92400e}
+@media(max-width:1000px){.warranties-screen .warranty-overview{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:850px){.warranties-screen .dashboard-content{padding:25px 16px 45px}}
+@media(max-width:650px){.warranties-screen .policy-grid{grid-template-columns:1fr}.warranties-screen .warranty-stat{padding:16px;min-height:112px}.warranties-screen .policy-toolbar{align-items:flex-start;flex-direction:column}.warranties-screen .policy-card{padding:18px}}

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AssureX — AI-powered warranty claim intelligence and decision support." />
+    <meta name="theme-color" content="#060912" />
+    <title>AssureX — Sign In</title>
+
+    <link href="asset/fav.png" rel="shortcut icon" type="image/x-icon" />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link href="css/style.css" rel="stylesheet" />
+
+    <style>
+        /*
+     * login.html is intentionally standalone.
+     * Do not depend on app.js for authentication-page visibility.
+     */
+
+        .auth-view {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .auth-view.hidden {
+            display: block !important;
+        }
+
+        .form-status {
+            min-height: 20px;
+            margin-top: 12px;
+        }
+
+        .form-status.error {
+            color: #ff7b8a;
+        }
+
+        .form-status.success {
+            color: #65e6a5;
+        }
+
+        .auth-tab {
+            cursor: pointer;
+        }
+
+        .back-to-landing {
+            cursor: pointer;
+        }
+
+        .btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+    </style>
+
+
+  <link rel="stylesheet" href="css/theme.css">
+  <script src="js/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/animate.js" defer></script>
+  <link rel="stylesheet" href="css/fixes.css">
+<link rel="stylesheet" href="css/ai-intelligence.css">
+<link rel="stylesheet" href="css/experience-features.css">
+  <link rel="stylesheet" href="css/assurex-chatbot.css">
+<link rel="stylesheet" href="css/assurex-premium-all-pages.css">
+<link rel="stylesheet" href="css/assurex-viewport-controls.css">
+</head>
+
+<body>
+
+    <div class="background-grid"></div>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="ambient ambient-three"></div>
+
+    <div class="auth-view" id="authView">
+
+        <div class="auth-layout">
+
+            <div class="auth-copy">
+
+                <button class="back-to-landing" id="backToLanding" type="button">
+                    ← Back to AssureX
+                </button>
+
+                <div class="auth-brand">
+                    <img alt="AssureX" class="auth-logo" src="asset/assurex-logo-dark.png" />
+
+                    </div>
+
+                <div class="eyebrow">CLAIM ENGINE</div>
+
+                <h1>
+                    Intelligence for
+                    <span>every claim.</span>
+                </h1>
+
+                <p>
+                    Sign in to access your warranty claim workspace,
+                    validation tools, AI evaluation and decision-support workflow.
+                </p>
+
+                <div class="auth-benefits">
+                    <div>
+                        <i>✓</i>
+                        Warranty validation
+                    </div>
+
+                    <div>
+                        <i>✓</i>
+                        Dual-model comparison
+                    </div>
+
+                    <div>
+                        <i>✓</i>
+                        Claim analytics
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="auth-card glass">
+
+                <div class="auth-tabs">
+
+                    <button class="auth-tab active" data-auth="login" id="loginTab" type="button">
+                        Login
+                    </button>
+
+                    <button class="auth-tab" data-auth="register" id="registerTab" type="button">
+                        Create Account
+                    </button>
+
+                </div>
+
+                <!-- LOGIN -->
+                <form class="auth-form" id="loginForm">
+
+                    <div class="form-heading">
+                        <h2>Welcome back</h2>
+                        <p>Sign in to your AssureX workspace.</p>
+                    </div>
+
+                    <label>
+                        Email
+
+                        <input autocomplete="email" id="loginEmail" name="email" placeholder="you@example.com" required
+                            type="email" />
+                    </label>
+
+                    <label>
+                        Password
+
+                        <div class="password-field">
+
+                            <input autocomplete="current-password" id="loginPassword" name="password"
+                                placeholder="Enter your password" required type="password" />
+
+                            <button id="showPassword" type="button">
+                                Show
+                            </button>
+
+                        </div>
+                    </label>
+
+                    <button class="btn btn-gradient btn-full" id="loginButton" type="submit">
+                        Sign In
+                    </button>
+
+                    <p class="form-status" id="loginStatus" aria-live="polite"></p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="toast" id="toast">
+        Ready
+    </div>
+
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
+    <!-- AssureX Firebase configuration -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/firebase-auth.js"></script>
+
+    <script>
+        (function () {
+            "use strict";
+
+            const loginForm = document.getElementById("loginForm");
+            const loginEmail = document.getElementById("loginEmail");
+            const loginPassword = document.getElementById("loginPassword");
+            const loginButton = document.getElementById("loginButton");
+            const loginStatus = document.getElementById("loginStatus");
+            const showPassword = document.getElementById("showPassword");
+
+            const backToLanding = document.getElementById("backToLanding");
+            const registerTab = document.getElementById("registerTab");
+
+            function setStatus(message, type) {
+                loginStatus.textContent = message || "";
+                loginStatus.className = "form-status";
+
+                if (type) {
+                    loginStatus.classList.add(type);
+                }
+            }
+
+            function getFirebaseErrorMessage(error) {
+                if (!error) {
+                    return "Unable to sign in. Please try again.";
+                }
+
+                switch (error.code) {
+                    case "auth/invalid-email":
+                        return "Please enter a valid email address.";
+
+                    case "auth/user-disabled":
+                        return "This account has been disabled. Please contact an administrator.";
+
+                    case "auth/user-not-found":
+                    case "auth/wrong-password":
+                    case "auth/invalid-credential":
+                        return "Incorrect email or password.";
+
+                    case "auth/too-many-requests":
+                        return "Too many failed attempts. Please wait and try again later.";
+
+                    case "auth/network-request-failed":
+                        return "Network error. Please check your internet connection.";
+
+                    default:
+                        return error.message || "Unable to sign in. Please try again.";
+                }
+            }
+
+            function setLoading(isLoading) {
+                loginButton.disabled = isLoading;
+
+                if (isLoading) {
+                    loginButton.textContent = "Signing In...";
+                } else {
+                    loginButton.textContent = "Sign In";
+                }
+            }
+
+            /*
+             * Show / hide password.
+             */
+            showPassword.addEventListener("click", function () {
+                const isPassword = loginPassword.type === "password";
+
+                loginPassword.type = isPassword
+                    ? "text"
+                    : "password";
+
+                showPassword.textContent = isPassword
+                    ? "Hide"
+                    : "Show";
+            });
+
+            /*
+             * Back to public landing page.
+             */
+            backToLanding.addEventListener("click", function () {
+                window.location.href = "index.html";
+            });
+
+            /*
+             * Public registration page.
+             *
+             * Important:
+             * Public users can only create a normal "user" account.
+             * Reviewer / Employee / Admin roles are not selectable here.
+             */
+            registerTab.addEventListener("click", function () {
+                window.location.href = "register.html";
+            });
+
+            /*
+             * Sign in.
+             */
+            loginForm.addEventListener("submit", async function (event) {
+                event.preventDefault();
+
+                const email = loginEmail.value.trim();
+                const password = loginPassword.value;
+
+                if (!email || !password) {
+                    setStatus(
+                        "Please enter your email and password.",
+                        "error"
+                    );
+                    return;
+                }
+
+                setStatus("");
+                setLoading(true);
+
+                try {
+                    /*
+                     * Use the existing AssureX AuthService.
+                     */
+                    if (
+                        typeof AuthService === "undefined" ||
+                        typeof AuthService.signIn !== "function"
+                    ) {
+                        throw new Error(
+                            "Authentication service is unavailable. Please refresh the page."
+                        );
+                    }
+
+                    await AuthService.signIn(email, password);
+
+                    setStatus(
+                        "Login successful. Opening your workspace...",
+                        "success"
+                    );
+
+                    /*
+                     * Give Firebase a moment to finish its auth-state
+                     * propagation before navigating.
+                     */
+                    setTimeout(function () {
+                        window.location.replace("dashboard.html");
+                    }, 300);
+
+                } catch (error) {
+                    console.error("AssureX login error:", error);
+
+                    setStatus(
+                        getFirebaseErrorMessage(error),
+                        "error"
+                    );
+
+                    setLoading(false);
+                }
+            });
+
+            /*
+             * If a user is already authenticated and opens login.html,
+             * send them directly to the application.
+             *
+             * Signed-out users remain on this page.
+             */
+            function watchAuthentication() {
+                if (
+                    typeof fbAuth === "undefined" ||
+                    !fbAuth ||
+                    typeof fbAuth.onAuthStateChanged !== "function"
+                ) {
+                    console.error(
+                        "Firebase Authentication is not initialized."
+                    );
+
+                    setStatus(
+                        "Authentication could not be initialized. Please refresh the page.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+                fbAuth.onAuthStateChanged(function (user) {
+                    if (user) {
+                        window.location.replace("dashboard.html");
+                    }
+                });
+            }
+
+            /*
+             * Wait until the existing Firebase configuration has finished
+             * initializing before attaching the auth listener.
+             */
+            if (window.firebaseReady) {
+                Promise.resolve(window.firebaseReady)
+                    .then(watchAuthentication)
+                    .catch(function (error) {
+                        console.error(
+                            "Firebase initialization error:",
+                            error
+                        );
+
+                        setStatus(
+                            "Firebase could not be initialized. Please refresh the page.",
+                            "error"
+                        );
+                    });
+            } else {
+                watchAuthentication();
+            }
+
+        })();
+    </script>
+
+<script src="js/assurex-api.js" defer></script>
+<script src="js/ai-intelligence.js" defer></script>
+<script src="js/experience-features.js" defer></script>
+  <script src="js/assurex-chatbot.js" defer></script>
+</body>
+
+</html>

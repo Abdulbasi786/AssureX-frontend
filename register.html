@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="AssureX — create an account for warranty claim intelligence." />
+<meta name="theme-color" content="#060912" />
+<title>AssureX — Register</title>
+<link href="asset/fav.png" rel="shortcut icon" type="image/x-icon" />
+<link href="https://fonts.googleapis.com" rel="preconnect" />
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
+<style>
+.auth-view{display:block}.auth-form{display:block}.form-status{min-height:18px;margin-top:12px;font-size:11px;line-height:1.5}.form-status.error{color:#f87171}.form-status.success{color:#4ade80}.form-status.info{color:#94a3b8}.btn-full[disabled]{opacity:.6;cursor:not-allowed}.password-note{margin-top:6px;color:var(--muted);font-size:10px}.field-error{border-color:#ef4444!important;box-shadow:0 0 0 2px rgba(239,68,68,.1)}
+</style>
+  <link rel="stylesheet" href="css/theme.css">
+  <script src="js/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/animate.js" defer></script>
+  <link rel="stylesheet" href="css/fixes.css">
+<link rel="stylesheet" href="css/ai-intelligence.css">
+<link rel="stylesheet" href="css/experience-features.css">
+  <link rel="stylesheet" href="css/assurex-chatbot.css">
+<link rel="stylesheet" href="css/assurex-premium-all-pages.css">
+<link rel="stylesheet" href="css/assurex-viewport-controls.css">
+</head>
+<body>
+<div class="background-grid"></div><div class="ambient ambient-one"></div><div class="ambient ambient-two"></div><div class="ambient ambient-three"></div>
+<div class="auth-view" id="authView">
+<div class="auth-layout">
+<div class="auth-copy">
+<button class="back-to-landing" id="backToLanding" type="button">← Back to AssureX</button>
+<div class="auth-brand"><img alt="AssureX" class="auth-logo" src="asset/assurex-logo-dark.png" /></div>
+<div class="eyebrow">CLAIM ENGINE</div>
+<h1>Intelligence for <span>every claim.</span></h1>
+<p>Create your AssureX account to access warranty claim management, validation, AI evaluation and decision-support tools.</p>
+<div class="auth-benefits"><div><i>✓</i> Warranty validation</div><div><i>✓</i> AI-assisted claim analysis</div><div><i>✓</i> Claim analytics</div></div>
+</div>
+<div class="auth-card glass">
+<div class="auth-tabs">
+<button class="auth-tab" id="loginTab" type="button">Login</button>
+<button class="auth-tab active" id="registerTab" type="button">Create Account</button>
+</div>
+<form class="auth-form" id="registerForm" novalidate>
+<div class="form-heading"><h2>Create your account</h2><p>Set up your AssureX workspace.</p></div>
+<label>Full Name<input autocomplete="name" id="regName" maxlength="100" placeholder="Your name" required type="text" /></label>
+<label>Email<input autocomplete="email" id="regEmail" placeholder="you@example.com" required type="email" /></label>
+<label>Password<input autocomplete="new-password" id="regPassword" minlength="6" placeholder="Minimum 6 characters" required type="password" /><small class="password-note">Use at least 6 characters.</small></label>
+<label>Account Role<select id="regRole" disabled><option value="user">User</option></select><small class="password-note">Public registration creates User accounts only. Reviewer and Employee accounts are created by an administrator.</small></label>
+<button class="btn btn-gradient btn-full" id="registerButton" type="submit">Create Account</button>
+<p class="form-status" id="registerStatus" aria-live="polite"></p>
+</form>
+</div>
+</div>
+</div>
+<div class="toast" id="toast">Ready</div>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="js/firebase-config.js"></script>
+<script src="js/firebase-auth.js"></script>
+<script src="js/firebase-firestore.js"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+function setStatus(message,type){const el=$("registerStatus");el.textContent=message;el.className='form-status '+(type||'info');}
+function friendlyError(error){
+ const code=error&&error.code||'';
+ const map={
+  'auth/email-already-in-use':'An account already exists with this email address.',
+  'auth/invalid-email':'Please enter a valid email address.',
+  'auth/weak-password':'Password is too weak. Use at least 6 characters.',
+  'auth/operation-not-allowed':'Email/password registration is not enabled in Firebase Authentication.',
+  'auth/network-request-failed':'Network error. Check your connection and try again.',
+  'permission-denied':'Your account was created, but the profile could not be saved because Firestore denied the write.'
+ };
+ return map[code]||error?.message||'Unable to create the account. Please try again.';
+}
+function validate(){
+ const name=$("regName"),email=$("regEmail"),password=$("regPassword");[name,email,password].forEach(x=>x.classList.remove('field-error'));
+ let ok=true;
+ if(!name.value.trim()){name.classList.add('field-error');ok=false;}
+ if(!email.checkValidity()){email.classList.add('field-error');ok=false;}
+ if(password.value.length<6){password.classList.add('field-error');ok=false;}
+ if(!ok)setStatus('Please complete the highlighted fields.','error');
+ return ok;
+}
+async function register(e){
+ e.preventDefault();
+ if(!validate())return;
+ const button=$("registerButton");button.disabled=true;button.textContent='Creating Account…';setStatus('Creating your Firebase account…','info');
+ try{
+  await window.firebaseReady;
+  if(!window.fbAuth||!window.fbDb||!window.AuthService)throw new Error('Firebase authentication is not ready.');
+  const email=$("regEmail").value.trim().toLowerCase();
+  const name=$("regName").value.trim();
+  await AuthService.signUp(email,$("regPassword").value,name);
+  setStatus('Account created successfully. Redirecting to your dashboard…','success');
+  button.textContent='Account Created';
+  setTimeout(()=>{window.location.href='dashboard.html';},700);
+ }catch(error){
+  console.error('[Register]',error);
+  setStatus(friendlyError(error),'error');
+  button.disabled=false;button.textContent='Create Account';
+ }
+}
+function init(){
+ $("registerForm").addEventListener('submit',register);
+ $("loginTab").addEventListener('click',()=>{window.location.href='login.html';});
+ $("backToLanding").addEventListener('click',()=>{window.location.href='index.html';});
+ ["regName","regEmail","regPassword"].forEach(id=>$(id).addEventListener('input',()=>$(id).classList.remove('field-error')));
+ if(window.firebaseReady){window.firebaseReady.catch(err=>setStatus('Firebase could not initialize: '+(err.message||'check your configuration.'),'error'));}
+}
+document.addEventListener('DOMContentLoaded',init);
+})();
+</script>
+<script src="js/assurex-api.js" defer></script>
+<script src="js/ai-intelligence.js" defer></script>
+<script src="js/experience-features.js" defer></script>
+  <script src="js/assurex-chatbot.js" defer></script>
+</body>
+</html>

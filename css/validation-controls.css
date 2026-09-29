@@ -1,0 +1,7 @@
+/* Accessible, theme-aware claim selector. */
+#validationClaimSelect.ax-validation-select{appearance:none;-webkit-appearance:none;min-width:0;width:min(100%,460px);max-width:100%;padding:12px 43px 12px 15px!important;border-radius:12px!important;color:var(--theme-text,#f8fafc)!important;background-color:var(--theme-surface-solid,#0c1324)!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' stroke='%238c9dbd' stroke-width='2.4' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")!important;background-position:right 14px center!important;background-repeat:no-repeat!important;background-size:18px!important;border:1px solid var(--theme-border-strong,rgba(255,255,255,.18))!important;box-shadow:0 4px 18px rgba(0,0,0,.06);cursor:pointer;text-overflow:ellipsis;}
+#validationClaimSelect option{color:var(--theme-text,#f8fafc);background:var(--theme-surface-solid,#0c1324);}
+#validationClaimSelect:focus-visible{outline:2px solid var(--theme-accent,#6677ff);outline-offset:3px;}
+html[data-assurex-theme="light"] #validationClaimSelect{background-color:#fff!important;color:#17253c!important;border-color:#c9d6ea!important;box-shadow:0 4px 18px rgba(36,64,110,.07)}
+html[data-assurex-theme="light"] #validationClaimSelect option{background:#fff;color:#17253c;}
+@media(max-width:650px){#validationClaimSelect.ax-validation-select{width:100%;}}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="AssureX — AI-powered warranty claim intelligence and decision support." name="description"/>
+<meta content="#060912" name="theme-color"/>
+<title>AssureX — Profile</title>
+<link href="asset/fav.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/fixes.css">
+  <script src="js/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/animate.js" defer></script>
+<link rel="stylesheet" href="css/role-ui.css">
+<link rel="stylesheet" href="css/ai-intelligence.css">
+<link rel="stylesheet" href="css/experience-features.css">
+  <link rel="stylesheet" href="css/assurex-chatbot.css">
+<link rel="stylesheet" href="css/assurex-premium-all-pages.css">
+<link rel="stylesheet" href="css/assurex-viewport-controls.css">
+</head>
+<body class="profile-screen"><div class="background-grid"></div><div class="ambient ambient-one"></div><div class="ambient ambient-two"></div><div class="ambient ambient-three"></div><div class="app" id="appView">
+<aside class="sidebar glass" id="sidebar">
+<div class="sidebar-header"><a class="dashboard-brand" href="#"><img alt="AssureX" src="asset/assurex-logo-dark.png"/></a><button aria-label="Close menu" class="icon-button mobile-only" id="closeSidebar">×</button></div>
+<div class="sidebar-section-label">WORKSPACE</div>
+<nav class="sidebar-nav">
+<button class="nav-item" data-page="dashboard"><span>⌂</span>Dashboard</button>
+<button class="nav-item" data-page="products"><span>▣</span>Products</button>
+<button class="nav-item" data-page="warranties"><span>◇</span>Warranties</button>
+<button class="nav-item" data-page="documents"><span>▤</span>Documents</button>
+<button class="nav-item" data-page="claims"><span>◉</span>Claims</button>
+<button class="nav-item" data-page="validation"><span>✓</span>Validation</button>
+<button class="nav-item" data-page="evaluation"><span>AI</span>AI Evaluation</button>
+<button class="nav-item" data-page="decision"><span>◆</span>Decision &amp; Review</button>
+<div class="sidebar-section-label">MANAGEMENT</div>
+<button class="nav-item" data-page="analytics"><span>▥</span>Analytics</button>
+<button class="nav-item" data-page="readiness"><span>◎</span>Readiness</button>
+<button class="nav-item active" data-page="profile"><span>◯</span>Profile</button>
+</nav>
+<div class="sidebar-bottom"><div class="sidebar-user"><div class="avatar" id="userAvatar">U</div><div><strong id="profileName">User</strong><small id="profileRole">Reviewer</small></div></div><button class="logout-button" id="logout"><span aria-hidden="true">↪</span> Sign out</button></div>
+</aside>
+<div class="app-main">
+<header class="topbar glass"><button class="icon-button mobile-only" id="sidebarToggle">☰</button><div class="global-search"><span>⌕</span><input id="globalSearch" placeholder="Search claims, products, documents..." type="search"/></div><div class="topbar-actions"><button class="icon-button" id="themeButton" title="Themes">◐</button><button class="icon-button notification-button" id="notifyButton" title="Notifications">♢<i></i></button></div></header>
+<div class="theme-menu glass hidden" id="themeMenu"><div class="theme-menu-header"><strong>Appearance</strong><button class="icon-button" id="closeTheme">×</button></div><small id="currentTheme">Electric Blue &amp; Teal</small><button class="theme-choice" data-theme="light">Light Mode</button><button class="theme-choice" data-theme="dark">Dark Mode</button></div>
+<main class="dashboard-content">
+<section class="page" data-page="profile">
+<div class="page-heading"><div><div class="eyebrow">ACCOUNT</div><h1>Profile</h1><p>Manage your AssureX account information.</p></div></div>
+<div class="profile-card glass">
+<div class="profile-avatar"><span id="profileAvatarLarge">A</span></div>
+<div class="profile-form">
+<label>Display Name<input id="profileNameInput" placeholder="Your name" autocomplete="name"/></label>
+<label>Email<input disabled id="profileEmailInput" placeholder="Email address" type="email"/></label>
+<label>Role<input disabled id="profileRoleInput" value="Reviewer"/></label>
+<label>Account ID<input disabled id="profileUidInput" placeholder="Firebase UID"/></label>
+<button class="btn btn-gradient" id="saveProfile">Save Profile</button>
+<p class="form-status" id="profileStatus" aria-live="polite"></p>
+</div></div>
+</section>
+</main></div></div>
+<div class="modal-overlay hidden" id="commandPalette"><div class="command-palette glass"><div class="command-header"><input id="commandInput" placeholder="Search commands..."/><button class="icon-button" id="closeCommand">×</button></div><div id="commandResults"></div></div></div>
+<div class="toast" id="toast">Ready</div>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script src="js/firebase-config.js"></script><script src="js/firebase-auth.js"></script><script src="js/role-guard.js"></script><script src="js/firebase-firestore.js"></script><script src="js/app.js"></script>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let currentUser=null;
+  let currentProfile={};
+  const initials=name=>{const s=(name||'User').trim();return (s.split(/\s+/).map(x=>x[0]).join('').slice(0,2)||'U').toUpperCase();};
+  const status=(msg,error)=>{const el=$('profileStatus'); if(el){el.textContent=msg;el.style.color=error?'#ff7b8a':'';}};
+  const setLoading=loading=>{const b=$('saveProfile'); if(b){b.disabled=loading;b.textContent=loading?'Saving…':'Save Profile';}};
+  function render(data){
+    const name=data.displayName||currentUser.displayName||currentUser.email?.split('@')[0]||'User';
+    const role=data.role||'Reviewer';
+    $('profileNameInput').value=name;
+    $('profileEmailInput').value=currentUser.email||data.email||'';
+    $('profileRoleInput').value=role;
+    $('profileUidInput').value=currentUser.uid||'';
+    $('profileName').textContent=name;
+    $('profileRole').textContent=role;
+    $('userAvatar').textContent=initials(name);
+    $('profileAvatarLarge').textContent=initials(name);
+  }
+  async function loadProfile(user){
+    currentUser=user;
+    status('Loading profile…');
+    try{
+      const snap=await window.fbDb.collection('users').doc(user.uid).get();
+      currentProfile=snap.exists?snap.data():{};
+      if(!snap.exists){
+        currentProfile={uid:user.uid,email:user.email||'',displayName:user.displayName||user.email?.split('@')[0]||'User',role:'user',isActive:true,createdAt:firebase.firestore.FieldValue.serverTimestamp(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+        await window.fbDb.collection('users').doc(user.uid).set(currentProfile,{merge:true});
+      }
+      render(currentProfile);
+      status('Profile loaded.');
+    }catch(e){console.error(e);render({});status('Unable to load profile: '+(e.message||'Unknown error'),true);}
+  }
+  async function saveProfile(){
+    if(!currentUser){status('Please sign in before saving.',true);return;}
+    const name=$('profileNameInput').value.trim();
+    if(!name){status('Display Name is required.',true);$('profileNameInput').focus();return;}
+    setLoading(true);status('Saving…');
+    try{
+      const now=firebase.firestore.FieldValue.serverTimestamp();
+      await window.fbDb.collection('users').doc(currentUser.uid).set({displayName:name,email:currentUser.email||currentProfile.email||'',uid:currentUser.uid,updatedAt:now},{merge:true});
+      if(typeof currentUser.updateProfile==='function') await currentUser.updateProfile({displayName:name});
+      currentProfile={...currentProfile,displayName:name};
+      render(currentProfile);status('Profile saved successfully.');
+      if(window.showToast) window.showToast('Profile saved'); else if($('toast')) $('toast').textContent='Profile saved';
+    }catch(e){console.error(e);status('Unable to save profile: '+(e.message||'Unknown error'),true);}
+    finally{setLoading(false);}
+  }
+  $('saveProfile').addEventListener('click',saveProfile);
+  $('profileNameInput').addEventListener('keydown',e=>{if(e.key==='Enter')saveProfile();});
+  function initAuth(){
+    window.addEventListener("assurex-role-ready",()=>{if(window.fbAuth&&window.fbAuth.currentUser)loadProfile(window.fbAuth.currentUser);});
+    if(window.fbAuth&&typeof window.fbAuth.onAuthStateChanged==='function'){
+      window.fbAuth.onAuthStateChanged(user=>{if(user)loadProfile(user);else{currentUser=null;status('Please sign in to view your profile.',true);}});
+    }else if(window.firebaseReady&&typeof window.firebaseReady.then==='function'){
+      window.firebaseReady.then(()=>{if(window.fbAuth)window.fbAuth.onAuthStateChanged(user=>user?loadProfile(user):status('Please sign in to view your profile.',true));});
+    }
+  }
+  initAuth();
+})();
+</script>
+<script src="js/nav-fix.js"></script>
+<script src="js/profile-shortcut.js"></script>
+<link rel="stylesheet" href="css/topbar-upgrade.css"><script src="js/topbar-upgrade.js"></script><script src="js/assurex-api.js" defer></script>
+<script src="js/ai-intelligence.js" defer></script>
+<script src="js/experience-features.js" defer></script>
+  <script src="js/assurex-chatbot.js" defer></script>
+<script src="js/sidebar-memory.js" defer></script></body></html>

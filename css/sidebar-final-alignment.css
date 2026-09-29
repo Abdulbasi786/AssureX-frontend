@@ -1,0 +1,55 @@
+/* Final shared sidebar geometry: navigation scrolls, account and logout stay fixed at the bottom. */
+body.operational-workspace #sidebar,
+body.assurex-analytics-layout #sidebar {
+  display:flex!important; flex-direction:column!important;
+  box-sizing:border-box!important; overflow:hidden!important;
+  min-height:0!important; height:calc(100dvh - 32px)!important;
+  max-height:calc(100dvh - 32px)!important;
+}
+body.operational-workspace #sidebar > .sidebar-nav,
+body.assurex-analytics-layout #sidebar > .sidebar-nav {
+  display:flex!important; flex-direction:column!important; align-content:stretch!important;
+  flex:1 1 auto!important; min-height:0!important; overflow-y:auto!important;
+  overflow-x:hidden!important; overscroll-behavior:contain;
+}
+body.operational-workspace #sidebar > .sidebar-nav .nav-item,
+body.assurex-analytics-layout #sidebar > .sidebar-nav .nav-item {flex:0 0 auto; min-height:42px;}
+body.operational-workspace #sidebar > .sidebar-bottom,
+body.assurex-analytics-layout #sidebar > .sidebar-bottom {
+  display:block!important; flex:0 0 auto!important; position:relative!important;
+  inset:auto!important; margin-top:auto!important; min-width:0;
+  z-index:1;
+}
+body.operational-workspace #sidebar .sidebar-user,
+body.assurex-analytics-layout #sidebar .sidebar-user {min-width:0;}
+body.operational-workspace #sidebar .sidebar-user > div:last-child,
+body.assurex-analytics-layout #sidebar .sidebar-user > div:last-child {min-width:0;overflow:hidden;}
+body.operational-workspace #sidebar .sidebar-user strong,
+body.assurex-analytics-layout #sidebar .sidebar-user strong {display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+body.operational-workspace #sidebar .logout-button,
+body.assurex-analytics-layout #sidebar .logout-button {position:static!important;width:100%;margin-top:12px;}
+/* Analytics content remains strictly to the right of the sidebar; no child can float above it. */
+@media(min-width:901px){
+ body.assurex-analytics-layout #sidebar{position:fixed!important;inset:16px auto 16px 16px!important;left:16px!important;width:var(--sidebar-width,270px)!important;margin-left:-10px!important;z-index:100!important;}
+ body.assurex-analytics-layout .app-main{position:relative!important;flex:0 0 auto!important;width:calc(100% - var(--sidebar-width,270px))!important;max-width:calc(100% - var(--sidebar-width,270px))!important;margin-left:var(--sidebar-width,270px)!important;min-width:0!important;transform:none!important;}
+ body.assurex-analytics-layout .dashboard-content,body.assurex-analytics-layout main.dashboard-content > section.page[data-page="analytics"]{position:relative!important;width:100%!important;max-width:100%!important;min-width:0!important;float:none!important;transform:none!important;}
+ body.assurex-analytics-layout #mlWorkspace{position:relative!important;width:100%!important;max-width:100%!important;min-width:0!important;clear:both!important;}
+}
+@media(max-width:900px){
+ body.assurex-analytics-layout .app-main{margin-left:0!important;width:100%!important;max-width:100%!important;}
+ body.operational-workspace #sidebar,body.assurex-analytics-layout #sidebar{height:calc(100dvh - 32px)!important;}
+}
+
+/* Keep the analytics navigation entry a normal sidebar row, not the full-width page. */
+body.assurex-analytics-layout #sidebar .sidebar-nav > a.nav-item[data-page="analytics"]{
+  position:relative!important;display:flex!important;width:auto!important;max-width:100%!important;
+  min-width:0!important;float:none!important;transform:none!important;flex:0 0 auto!important;
+}
+/* Keep logout pinned, while the central navigation alone can scroll. */
+body.operational-workspace #sidebar,body.assurex-analytics-layout #sidebar{overflow:hidden!important;}
+body.operational-workspace #sidebar .sidebar-header,body.assurex-analytics-layout #sidebar .sidebar-header{flex:0 0 auto!important;}
+body.operational-workspace #sidebar > .sidebar-bottom,body.assurex-analytics-layout #sidebar > .sidebar-bottom{
+  flex:0 0 auto!important;bottom:auto!important;max-width:100%!important;
+  padding-top:12px!important;background:transparent!important;
+}
+body.operational-workspace #sidebar > .sidebar-nav,body.assurex-analytics-layout #sidebar > .sidebar-nav{scrollbar-width:thin!important;}

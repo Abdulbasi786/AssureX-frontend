@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="AssureX — AI-powered warranty claim intelligence and decision support." name="description"/>
+<meta content="#060912" name="theme-color"/>
+<title>AssureX — Validation</title>
+<link href="asset/fav.png" rel="shortcut icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/fixes.css">
+  <script src="js/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/animate.js" defer></script>
+<link rel="stylesheet" href="css/role-ui.css">
+<link rel="stylesheet" href="css/ai-intelligence.css">
+<link rel="stylesheet" href="css/experience-features.css">
+  <link rel="stylesheet" href="css/assurex-chatbot.css">
+<link rel="stylesheet" href="css/assurex-premium-all-pages.css">
+<link rel="stylesheet" href="css/assurex-viewport-controls.css">
+</head>
+<body><div class="background-grid"></div><div class="ambient ambient-one"></div><div class="ambient ambient-two"></div><div class="ambient ambient-three"></div><div class="app" id="appView">
+<!-- SIDEBAR -->
+<aside class="sidebar glass" id="sidebar">
+<div class="sidebar-header">
+<a class="dashboard-brand" href="#">
+<img alt="AssureX" src="asset/assurex-logo-dark.png"/>
+</a>
+<button aria-label="Close menu" class="icon-button mobile-only" id="closeSidebar">
+                    ×
+                </button>
+</div>
+<div class="sidebar-section-label">
+                WORKSPACE
+            </div>
+<nav class="sidebar-nav">
+<button class="nav-item active" data-page="dashboard">
+<span>⌂</span>
+                    Dashboard
+                </button>
+<button class="nav-item" data-page="products">
+<span>▣</span>
+                    Products
+                </button>
+<button class="nav-item" data-page="warranties">
+<span>◇</span>
+                    Warranties
+                </button>
+<button class="nav-item" data-page="documents">
+<span>▤</span>
+                    Documents
+                </button>
+<button class="nav-item" data-page="claims">
+<span>◉</span>
+                    Claims
+                </button>
+<button class="nav-item" data-page="validation">
+<span>✓</span>
+                    Validation
+                </button>
+<button class="nav-item" data-page="evaluation">
+<span>AI</span>
+                    AI Evaluation
+                </button>
+<button class="nav-item" data-page="decision">
+<span>◆</span>
+                    Decision &amp; Review
+                </button>
+<div class="sidebar-section-label">
+                    MANAGEMENT
+                </div>
+<button class="nav-item" data-page="analytics">
+<span>▥</span>
+                    Analytics
+                </button>
+<button class="nav-item" data-page="readiness">
+<span>◎</span>
+                    Readiness
+                </button>
+<button class="nav-item" data-page="profile">
+<span>◯</span>
+                    Profile
+                </button>
+</nav>
+<div class="sidebar-bottom">
+<div class="sidebar-user">
+<div class="avatar" id="userAvatar">
+                        U
+                    </div>
+<div>
+<strong id="profileName">User</strong>
+<small id="profileRole">Reviewer</small>
+</div>
+</div>
+<button class="logout-button" id="logout">
+                    <span aria-hidden="true">↪</span> Sign out
+                </button>
+</div>
+</aside>
+<!-- MAIN APPLICATION -->
+<div class="app-main">
+<!-- TOPBAR -->
+<header class="topbar glass">
+<button class="icon-button mobile-only" id="sidebarToggle">
+                    ☰
+                </button>
+<div class="global-search">
+<span>⌕</span>
+<input id="globalSearch" placeholder="Search claims, products, documents..." type="search"/>
+
+</div>
+<div class="topbar-actions">
+<button class="icon-button" id="themeButton" title="Themes">
+                        ◐
+                    </button>
+
+
+<button class="icon-button notification-button" id="notifyButton" title="Notifications">
+                        ♢
+                        <i></i>
+</button>
+</div>
+</header>
+<!-- THEME MENU -->
+<div class="theme-menu glass hidden" id="themeMenu">
+<div class="theme-menu-header">
+<strong>Appearance</strong>
+<button class="icon-button" id="closeTheme">
+                        ×
+                    </button>
+</div>
+<small id="currentTheme">
+                    Electric Blue &amp; Teal
+                </small>
+<button class="theme-choice" data-theme="light">
+    Light Mode
+</button>
+<button class="theme-choice" data-theme="dark">
+    Dark Mode
+</button>
+</div>
+<!-- =====================================================
+           PAGES
+      ====================================================== -->
+<main class="dashboard-content">
+<!-- DASHBOARD -->
+<!-- PRODUCTS -->
+<!-- WARRANTIES -->
+<!-- DOCUMENTS -->
+<!-- CLAIMS -->
+<!-- VALIDATION -->
+<section class="page" data-page="validation">
+<div class="page-heading">
+<div>
+<div class="eyebrow">RULE ENGINE</div>
+<h1>Validation</h1>
+<p>Check warranty and claim data quality.</p>
+</div>
+<button class="btn btn-gradient" id="runValidation" type="button">Run Validation</button>
+</div>
+
+<div class="card glass" style="margin-bottom:18px;padding:18px;">
+<div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+<div>
+<strong>Claim to validate</strong>
+<div style="font-size:12px;opacity:.65;margin-top:4px;">Select a claim from your account or validate all claims.</div>
+</div>
+<select id="validationClaimSelect" style="min-width:280px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.04);color:inherit;border:1px solid rgba(255,255,255,.12);">
+<option value="all">All claims</option>
+</select>
+</div>
+<div id="validationMeta" style="margin-top:12px;font-size:12px;opacity:.7;">Loading validation data…</div>
+</div>
+
+<div class="validation-grid">
+<div class="card glass validation-card">
+<span class="validation-icon good" id="purchaseIcon">✓</span>
+<div>
+<small>PURCHASE</small>
+<h2 id="purchaseStatus">Checking…</h2>
+<p id="purchaseMessage">Checking purchase information.</p>
+</div>
+</div>
+<div class="card glass validation-card">
+<span class="validation-icon good" id="warrantyIcon">✓</span>
+<div>
+<small>WARRANTY</small>
+<h2 id="warrantyStatus">Checking…</h2>
+<p id="warrantyMessage">Checking warranty coverage.</p>
+</div>
+</div>
+<div class="card glass validation-card">
+<span class="validation-icon warning" id="repairIcon">!</span>
+<div>
+<small>REPAIR HISTORY</small>
+<h2 id="repairStatus">Checking…</h2>
+<p id="repairMessage">Checking repair information.</p>
+</div>
+</div>
+<div class="card glass validation-card">
+<span class="validation-icon good" id="qualityIcon">✓</span>
+<div>
+<small>DATA QUALITY</small>
+<h2 id="readyScore">—</h2>
+<p id="qualityMessage">Validation score will appear here.</p>
+</div>
+</div>
+</div>
+
+<div class="card glass" style="margin-top:18px;padding:18px;">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+<div>
+<strong>Validation findings</strong>
+<div style="font-size:12px;opacity:.65;margin-top:4px;">Rules are evaluated from the current Firestore claim and product records.</div>
+</div>
+<span id="validationSummary" style="font-size:12px;opacity:.7;">—</span>
+</div>
+<div id="validationFindings" style="margin-top:14px;"></div>
+</div>
+</section>
+<!-- EVALUATION -->
+<!-- DECISION -->
+<!-- ANALYTICS -->
+<!-- READINESS -->
+<!-- PROFILE -->
+</main>
+</div>
+</div><div class="modal-overlay hidden" id="commandPalette">
+<div class="command-palette glass">
+<div class="command-header">
+<input id="commandInput" placeholder="Search commands..."/>
+<button class="icon-button" id="closeCommand">
+                    ×
+                </button>
+</div>
+<div id="commandResults"></div>
+</div>
+</div><div class="toast" id="toast">
+        Ready
+    </div><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script><script src="js/firebase-config.js"></script><script src="js/firebase-auth.js"></script><script src="js/role-guard.js"></script><script src="js/firebase-firestore.js"></script><script src="js/warranty-policy-engine.js"></script><script src="js/claim-validation-engine.js"></script><script src="js/app.js"></script><script>
+(function(){
+"use strict";
+var claims=[],products=[],repairs=[],selected="all",busy=false;
+function $(id){return document.getElementById(id);}
+function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});}
+function dateOf(v){if(!v)return null;if(v.toDate)return v.toDate();if(v.seconds!=null)return new Date(Number(v.seconds)*1000);var d=new Date(v);return isNaN(d.getTime())?null:d;}
+function productForClaim(c){var pid=String(c.productId||c.product_id||c.product&&c.product.id||c.product&&c.product.productId||"");return products.find(function(p){return p.id===pid||String(p.productId||p.product_id||"")===pid;})||null;}
+function nameFor(c,p){return String(p&&((p.name||p.product_name||p.productName))||c&&c.product&&c.product.name||c.productId||c.id||"Unknown claim");}
+function setCard(icon,status,msg,good){$(icon+"Icon").textContent=good?"✓":"!";$(icon+"Icon").className="validation-icon "+(good?"good":"warning");$(icon+"Status").textContent=status;$(icon+"Message").textContent=msg;}
+function severityIcon(sev){return sev==="error"?"✕":sev==="warning"?"!":"i";}
+function renderResult(r,list){
+  if(!r){setCard("purchase","No data","No claims are available for validation.",false);setCard("warranty","No data","No claims are available for validation.",false);setCard("repair","No data","No claims are available for validation.",false);$("readyScore").textContent="—";$("qualityMessage").textContent="Create or select a claim before running validation.";$("validationSummary").textContent="No claims";$("validationFindings").innerHTML='<div style="opacity:.65;font-size:13px;">No claims found for the current account or role.</div>';return;}
+  var errors=r.counts&&r.counts.error||0,warnings=r.counts&&r.counts.warning||0;
+  var warranty=r.warranty;
+  setCard("purchase",errors?"Review":"Verified",errors?"Validation found claim/product or evidence issues.":"Product identity and required claim data passed.",!errors);
+  setCard("warranty",warranty?warranty.status:"Review",warranty?(warranty.reasons||[]).join(" ")||"Warranty policy evaluation completed.":"Warranty policy evaluation needs review.",!!warranty&&warranty.status==="COVERED");
+  var repairFindings=(r.findings||[]).filter(function(f){return f.code.indexOf("REPAIR")>=0||f.code.indexOf("MISSING_REPAIR")>=0;});
+  setCard("repair",repairFindings.length?"Review":"Verified",repairFindings.length?repairFindings.map(function(f){return f.title;}).join("; "):"Repair history checks passed or no prior repair was declared.",!repairFindings.some(function(f){return f.severity==="error";}));
+  $("readyScore").textContent=String(r.score)+"%";
+  $("qualityIcon").className="validation-icon "+(r.status==="PASS"?"good":"warning");
+  $("qualityIcon").textContent=r.status==="PASS"?"✓":"!";
+  $("qualityMessage").textContent=r.status+" · "+errors+" error"+(errors===1?"":"s")+" · "+warnings+" warning"+(warnings===1?"":"s");
+  var findings=r.findings||[];
+  $("validationSummary").textContent=(list.length)+" claim"+(list.length===1?"":"s")+" checked · "+findings.length+" finding"+(findings.length===1?"":"s");
+  $("validationFindings").innerHTML=findings.length?findings.map(function(f){return '<div style="display:flex;gap:10px;padding:11px 0;border-top:1px solid rgba(255,255,255,.07);"><span class="validation-icon '+(f.severity==="info"?"good":"warning")+'" style="width:28px;height:28px;min-width:28px;">'+severityIcon(f.severity)+'</span><div><strong>'+esc(f.title)+'</strong><div style="font-size:12px;opacity:.7;margin-top:3px;">'+esc(f.detail)+' · '+esc(f.code)+'</div></div></div>';}).join(""):'<div style="padding:12px 0;color:#7ee2b8;">✓ No validation findings for the selected claims.</div>';
+}
+async function validateClaims(list){
+  if(!window.AssureXClaimValidation)return null;
+  var results=[];
+  for(var i=0;i<list.length;i++){
+    var c=list[i],p=productForClaim(c);
+    results.push(await window.AssureXClaimValidation.validate({claim:c,product:p,claims:claims,repairs:repairs,documents:[]}));
+  }
+  if(results.length===1)return results[0];
+  var merged={status:"PASS",score:Math.round(results.reduce(function(a,r){return a+r.score;},0)/results.length),counts:{error:0,warning:0,info:0},findings:[],warranty:null};
+  results.forEach(function(r){Object.keys(merged.counts).forEach(function(k){merged.counts[k]+=(r.counts&&r.counts[k]||0);});merged.findings=merged.findings.concat(r.findings||[]);if(r.status==="BLOCKED")merged.status="BLOCKED";else if(r.status==="REVIEW"&&merged.status==="PASS")merged.status="REVIEW";});
+  return merged;
+}
+function populate(){var select=$("validationClaimSelect");select.innerHTML='<option value="all">All claims ('+claims.length+')</option>';claims.slice().sort(function(a,b){return (dateOf(b.createdAt)||0)-(dateOf(a.createdAt)||0);}).forEach(function(c){var p=productForClaim(c),o=document.createElement("option");o.value=c.id;o.textContent=(c.id||"Claim")+" — "+nameFor(c,p);select.appendChild(o);});}
+async function render(){if(busy)return;busy=true;$("runValidation").disabled=true;$("runValidation").textContent="Validating…";try{var list=selected==="all"?claims:claims.filter(function(c){return c.id===selected;});var r=await validateClaims(list);renderResult(r,list);}catch(e){console.error(e);$("validationFindings").innerHTML='<div style="color:#ff8b8b;">Validation failed: '+esc(e.message||e)+'</div>';}finally{busy=false;$("runValidation").disabled=false;$("runValidation").textContent="Run Validation";}}
+async function load(user){$("validationMeta").textContent="Loading claims, products and repair history…";try{var role=window.AssureXRole||"user";var cq=role==="user"?window.fbDb.collection("claims").where("userId","==",user.uid):role==="reviewer"?window.fbDb.collection("claims").where("predictedDecision","==","Manual Review"):window.fbDb.collection("claims");var pq=role==="user"?window.fbDb.collection("products").where("user_id","==",user.uid):window.fbDb.collection("products");var rq=role==="user"?window.fbDb.collection("repair_records").where("userId","==",user.uid):window.fbDb.collection("repair_records");var snaps=await Promise.all([cq.get(),pq.get(),rq.get()]);claims=snaps[0].docs.map(function(d){return Object.assign({id:d.id},d.data());});products=snaps[1].docs.map(function(d){return Object.assign({id:d.id},d.data());});repairs=snaps[2].docs.map(function(d){return Object.assign({id:d.id},d.data());});populate();$("validationMeta").textContent=claims.length+" claim"+(claims.length===1?"":"s")+", "+products.length+" product"+(products.length===1?"":"s")+", "+repairs.length+" repair record"+(repairs.length===1?"":"s")+" loaded.";await render();}catch(e){console.error("[AssureX] Validation load failed",e);$("validationMeta").textContent="Could not load validation data: "+(e.message||e);$("validationFindings").innerHTML='<div style="color:#ff8b8b;">Unable to read validation data. Check Firebase rules and authentication.</div>';}}
+function init(){if(!window.fbAuth||!window.fbDb){$("validationMeta").textContent="Firebase is not available.";return;}window.addEventListener("assurex-role-ready",function(){if(window.fbAuth.currentUser)load(window.fbAuth.currentUser);});window.fbAuth.onAuthStateChanged(function(user){if(user){$("profileName").textContent=user.displayName||user.email||"User";$("profileRole").textContent=window.AssureXRole||"User";$("userAvatar").textContent=(user.displayName||user.email||"U").charAt(0).toUpperCase();load(user);}else{$("validationMeta").textContent="Sign in to validate claims.";renderResult(null,[]);}});$("validationClaimSelect").addEventListener("change",function(){selected=this.value;render();});$("runValidation").addEventListener("click",function(){render();});}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script><script src="js/nav-fix.js"></script>
+<script src="js/profile-shortcut.js"></script>
+<link rel="stylesheet" href="css/topbar-upgrade.css"><script src="js/topbar-upgrade.js"></script><script src="js/assurex-api.js" defer></script>
+<script src="js/ai-intelligence.js" defer></script>
+<script src="js/experience-features.js" defer></script>
+  <script src="js/assurex-chatbot.js" defer></script>
+<script src="js/sidebar-memory.js" defer></script></body>
+</html>

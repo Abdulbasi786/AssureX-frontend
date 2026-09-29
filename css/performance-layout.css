@@ -1,0 +1,13 @@
+/* Shared performance/layout patch: nav is visible immediately without revealing protected destinations. */
+@media(min-width:851px){.sidebar{max-height:calc(100dvh - 32px);overflow:hidden;min-height:0}.sidebar .sidebar-nav{overflow-y:auto;overflow-x:hidden;min-height:0;flex:1;align-content:start;scrollbar-width:thin;scrollbar-color:var(--border,#526075) transparent}.sidebar .sidebar-header,.sidebar>.sidebar-section-label,.sidebar .sidebar-bottom{flex-shrink:0}}
+/* Analytics custom chart canvas stays inside main content rather than overflowing beside sidebar. */
+body:has(.mlgrid) .dashboard-content,body:has(.mlgrid) .page{min-width:0;max-width:100%}
+.mlgrid{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))!important;gap:16px!important;max-width:100%;min-width:0}.mlgrid>*{min-width:0;max-width:100%;overflow:hidden} .mlworkspace,.mlcanvas,.analytics-workspace{min-width:0;max-width:100%;overflow-wrap:anywhere}
+@media(max-width:640px){.mlgrid{grid-template-columns:minmax(0,1fr)!important}}
+/* Profile: polished but unchanged inputs, IDs and logic. */
+body.profile-screen .profile-card{position:relative;border:1px solid var(--border,rgba(145,164,195,.18));border-radius:22px;box-shadow:0 20px 55px rgba(0,0,0,.12);background:var(--card,rgba(19,29,48,.85));gap:clamp(18px,3vw,36px)}
+body.profile-screen .profile-avatar{border-radius:22px;box-shadow:0 12px 32px rgba(95,111,255,.18)}
+body.profile-screen .profile-form input{min-width:0;transition:border-color .15s,box-shadow .15s}
+body.profile-screen .profile-form input:focus-visible{outline:2px solid var(--accent,#7389ff);outline-offset:2px}
+body.profile-screen .profile-form input:disabled{opacity:.78;cursor:default}
+body.profile-screen .profile-card::before{content:'';position:absolute;left:20px;right:20px;top:0;height:2px;background:linear-gradient(90deg,#7185ff,#38c9ad,transparent);border-radius:3px}

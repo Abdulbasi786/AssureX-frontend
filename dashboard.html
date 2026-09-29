@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="AssureX — AI-powered warranty claim intelligence and decision support." name="description" />
+    <meta content="#060912" name="theme-color" />
+    <title>AssureX — Dashboard</title>
+    <link href="asset/fav.png" rel="shortcut icon" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Manrope:wght@500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/fixes.css">
+  <script src="js/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/animate.js" defer></script>
+<link rel="stylesheet" href="css/role-ui.css">
+<link rel="stylesheet" href="css/ai-intelligence.css">
+<link rel="stylesheet" href="css/experience-features.css">
+  <link rel="stylesheet" href="css/assurex-chatbot.css">
+<link rel="stylesheet" href="css/assurex-premium-all-pages.css">
+<link rel="stylesheet" href="css/assurex-viewport-controls.css">
+</head>
+
+<body>
+    <div class="background-grid"></div>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="ambient ambient-three"></div>
+    <div class="app" id="appView">
+        <!-- SIDEBAR -->
+        <aside class="sidebar glass" id="sidebar">
+            <div class="sidebar-header">
+                <a class="dashboard-brand" href="#">
+                    <img alt="AssureX" src="asset/assurex-logo-dark.png" />
+                    </a>
+                <button aria-label="Close menu" class="icon-button mobile-only" id="closeSidebar">
+                    ×
+                </button>
+            </div>
+            <div class="sidebar-section-label">
+                WORKSPACE
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html"><button class="nav-item active" data-page="dashboard">
+                        <span>⌂</span>
+                        Dashboard
+                    </button></a>
+                <a href="products.html"><button class="nav-item" data-page="products">
+                        <span>▣</span>
+                        Products
+                    </button></a>
+                <a href="warranties.html"><button class="nav-item" data-page="warranties">
+                        <span>◇</span>
+                        Warranties
+                    </button></a>
+                <a href="documents.html"><button class="nav-item" data-page="documents">
+                        <span>▤</span>
+                        Documents
+                    </button></a>
+                <a href="claims.html"><button class="nav-item" data-page="claims">
+                        <span>◉</span>
+                        Claims
+                    </button></a>
+                <a href="validation.html"><button class="nav-item" data-page="validation">
+                        <span>✓</span>
+                        Validation
+                    </button></a>
+                <a href="evaluation.html"><button class="nav-item" data-page="evaluation">
+                        <span>AI</span>
+                        AI Evaluation
+                    </button></a>
+                <a href="decision.html"><button class="nav-item" data-page="decision">
+                        <span>◆</span>
+                        Decision &amp; Review
+                    </button></a>
+                <a href="analytics.html"><button class="nav-item" data-page="analytics">
+                        <span>▥</span>
+                        Analytics
+                    </button></a>
+                <a href="readiness.html"><button class="nav-item" data-page="readiness">
+                        <span>◎</span>
+                        Readiness
+                    </button></a>
+                <a href="profile.html"><button class="nav-item" data-page="profile">
+                        <span>◯</span>
+                        Profile
+                    </button></a>
+            </nav>
+            <div class="sidebar-bottom">
+                <div class="sidebar-user">
+                    <div class="avatar" id="userAvatar">
+                        U
+                    </div>
+                    <div>
+                        <strong id="profileName">User</strong>
+                        <small id="profileRole">Reviewer</small>
+                    </div>
+                </div>
+                <button class="logout-button" id="logout">
+                    <span aria-hidden="true">↪</span> Sign out
+                </button>
+            </div>
+        </aside>
+        <!-- MAIN APPLICATION -->
+        <div class="app-main">
+            <!-- TOPBAR -->
+            <header class="topbar glass">
+                <button class="icon-button mobile-only" id="sidebarToggle">
+                    ☰
+                </button>
+                <div class="global-search">
+                    <span>⌕</span>
+                    <input id="globalSearch" placeholder="Search claims, products, documents..." type="search" />
+                    
+                </div>
+                <div class="topbar-actions">
+                    <button class="icon-button" id="themeButton" title="Themes">
+                        ◐
+                    </button>
+                    
+                    
+                    <button class="icon-button notification-button" id="notifyButton" title="Notifications">
+                        ♢
+                        <i></i>
+                    </button>
+                </div>
+            </header>
+            <!-- THEME MENU -->
+            <div class="theme-menu glass hidden" id="themeMenu">
+                <div class="theme-menu-header">
+                    <strong>Appearance</strong>
+                    <button class="icon-button" id="closeTheme">
+                        ×
+                    </button>
+                </div>
+                <small id="currentTheme">
+                    Electric Blue &amp; Teal
+                </small>
+                <button class="theme-choice" data-theme="light">
+                    Light Mode
+                </button>
+                <button class="theme-choice" data-theme="dark">
+                    Dark Mode
+                </button>
+            </div>
+            <!-- =====================================================
+           PAGES
+      ====================================================== -->
+            <main class="dashboard-content">
+                <!-- DASHBOARD -->
+                <section class="page" data-page="dashboard">
+                    <div class="page-heading">
+                        <div>
+                            <div class="eyebrow">OVERVIEW</div>
+                            <h1>
+                                Warranty intelligence
+                                <span>at a glance.</span>
+                            </h1>
+                            <p>
+                                Monitor claims, validation activity and model evaluation.
+                            </p>
+                        </div>
+                        <button class="btn btn-gradient" data-go="claims">
+                            + New Claim
+                        </button>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card glass">
+                            <span>Total Claims</span>
+                            <strong id="totalClaims">—</strong>
+                            <small id="claimsPeriodNote">Loading claims…</small>
+                        </div>
+                        <div class="stat-card glass">
+                            <span>Pending Review</span>
+                            <strong id="pendingClaims">—</strong>
+                            <small class="warning">Requires attention</small>
+                        </div>
+                        <div class="stat-card glass">
+                            <span>Validated</span>
+                            <strong id="validatedClaims">—</strong>
+                            <small class="positive" id="validatedNote">Loading validation…</small>
+                        </div>
+                        <div class="stat-card glass">
+                            <span>Model Agreement</span>
+                            <strong id="analysisCoverage">—</strong>
+                            <small id="analysisNote">Claims with evidence analysis</small>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="card glass" style="margin-bottom:18px;">
+<div class="card-header"><div><span class="eyebrow">ALERTS</span><h2>Notifications &amp; Alerts</h2></div><span id="notificationCount" style="font-size:12px;opacity:.7">—</span></div>
+<div id="notificationFeed" style="display:grid;gap:8px"><div style="opacity:.65">Loading alerts…</div></div>
+</div>
+<div class="card glass">
+                            <div class="card-header">
+                                <div>
+                                    <span class="eyebrow">RECENT ACTIVITY</span>
+                                    <h2>Recent Claims</h2>
+                                </div>
+                                <button class="text-button" data-go="analytics">
+                                    View all →
+                                </button>
+                            </div>
+                            <div class="table">
+                                <div class="tr th">
+                                    <span>Claim</span>
+                                    <span>Product</span>
+                                    <span>Status</span>
+                                    <span>Risk</span>
+                                </div>
+<div id="recentClaimsRows"><div class="tr"><span>Loading claims…</span><span></span><span></span><span></span></div></div>
+                            </div>
+                        </div>
+                        <div class="card glass">
+                            <div class="card-header">
+                                <div>
+                                    <span class="eyebrow">PENDING WORK</span>
+                                    <h2>Review Queue</h2>
+                                </div>
+                            </div>
+                            <div class="queue-list">
+                                <div class="queue-item">
+                                    <div class="queue-icon danger">!</div>
+                                    <div>
+                                        <strong id="modelConflictLabel">Loading…</strong>
+                                        <small>Claims needing manual review</small>
+                                    </div>
+                                    <span id="modelConflictCount">—</span>
+                                </div>
+                                <div class="queue-item">
+                                    <div class="queue-icon warning">!</div>
+                                    <div>
+                                        <strong id="warrantyCheckLabel">Loading…</strong>
+                                        <small>Warranties expiring within 30 days</small>
+                                    </div>
+                                    <span id="warrantyCheckCount">—</span>
+                                </div>
+                                <div class="queue-item">
+                                    <div class="queue-icon blue">◉</div>
+                                    <div>
+                                        <strong id="reviewQueueLabel">Loading…</strong>
+                                        <small>Awaiting reviewer action</small>
+                                    </div>
+                                    <span id="reviewQueueCount">—</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- PRODUCTS -->
+                <!-- WARRANTIES -->
+                <!-- DOCUMENTS -->
+                <!-- CLAIMS -->
+                <!-- VALIDATION -->
+                <!-- EVALUATION -->
+                <!-- DECISION -->
+                <!-- ANALYTICS -->
+                <!-- READINESS -->
+                <!-- PROFILE -->
+            </main>
+        </div>
+    </div>
+    <div class="modal-overlay hidden" id="commandPalette">
+        <div class="command-palette glass">
+            <div class="command-header">
+                <input id="commandInput" placeholder="Search commands..." />
+                <button class="icon-button" id="closeCommand">
+                    ×
+                </button>
+            </div>
+            <div id="commandResults"></div>
+        </div>
+    </div>
+    <div class="toast" id="toast">
+        Ready
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+    <script src="js/firebase-config.js"></script><script src="js/firebase-auth.js"></script><script src="js/role-guard.js"></script>
+    <script src="js/firebase-firestore.js"></script>
+    <script src="js/app.js"></script>
+<script src="js/claim-operations.js"></script>
+
+<script>
+(function(){
+  "use strict";
+  const esc=v=>String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+  const text=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+  const dateValue=v=>{
+    if(!v)return null;
+    if(typeof v==="string")return v.slice(0,10);
+    if(v.toDate)return v.toDate().toISOString().slice(0,10);
+    if(v.seconds!=null)return new Date(Number(v.seconds)*1000).toISOString().slice(0,10);
+    return null;
+  };
+  const statusInfo=status=>{
+    const s=String(status||"").toLowerCase().replace(/[_-]+/g," ");
+    if(["approved","validated","accepted"].includes(s))return ["Approved","good"];
+    if(["rejected","declined"].includes(s))return ["Rejected","danger"];
+    if(["manual review","review","pending review","pending","under evaluation","in review"].includes(s))return [status||"Pending","warn"];
+    return [status||"Pending","warn"];
+  };
+  function renderClaims(claims){
+    const rows=document.getElementById("recentClaimsRows");
+    if(!rows)return;
+    if(!claims.length){
+      rows.innerHTML='<div class="tr"><span>No claims yet</span><span>—</span><span>—</span><span>—</span></div>';
+      return;
+    }
+    rows.innerHTML=claims.slice(0,5).map(c=>{
+      const [label,cls]=statusInfo(c.status);
+      const id=c.id||c.claimId||"—";
+      const product=(c.product&& (c.product.name||c.product.modelNumber)) || c.productName || c.productId || "—";
+      const risk=(c.risk||c.riskLevel||c.evaluation&&c.evaluation.risk||"—");
+      return '<div class="tr"><b>'+esc(id)+'</b><span>'+esc(product)+'</span><em class="pill '+cls+'">'+esc(label)+'</em><span>'+esc(risk)+'</span></div>';
+    }).join("");
+  }
+  function warrantyExpiry(p){
+    const d=dateValue(p.purchase_date); const months=Number(p.warranty_months||0)+Number(p.extended_warranty_months||0);
+    if(!d||!months)return null;
+    const x=new Date(d+"T00:00:00"); x.setMonth(x.getMonth()+months); return x;
+  }
+  async function loadDashboard(user){
+    const totalEl=document.getElementById("totalClaims");
+    try{
+      const role=window.AssureXRole||"user";
+      try{const setting=await window.fbDb.collection("system_settings").doc("warranty_alert").get();if(setting.exists&&setting.data().daysBeforeExpiry!=null)localStorage.setItem("assurexWarrantyAlertDays",String(setting.data().daysBeforeExpiry));}catch(_){}
+      const claimsQuery=role==="user"?window.fbDb.collection("claims").where("userId","==",user.uid):role==="reviewer"?window.fbDb.collection("claims").where("predictedDecision","==","Manual Review"):window.fbDb.collection("claims");
+      const productsQuery=role==="user"?window.fbDb.collection("products").where("user_id","==",user.uid):window.fbDb.collection("products");
+      const [claimSnap,productSnap]=await Promise.all([claimsQuery.get(),productsQuery.get()]);
+      const claims=claimSnap.docs.map(d=>({id:d.id,...d.data()}));
+      const products=productSnap.docs.map(d=>({id:d.id,...d.data()}));
+      const pending=claims.filter(c=>["pending","pending review","manual review","under evaluation","in review","review"].includes(String(c.status||"").toLowerCase().replace(/[_-]+/g," ")));
+      const validated=claims.filter(c=>["approved","validated","accepted"].includes(String(c.status||"").toLowerCase()));
+      const analyzed=claims.filter(c=>{
+        const e=c.evidence||{};
+        return !!(e.photoAnalysis || e.documents || e.analysis || c.analysis);
+      });
+      const coverage=claims.length?Math.round(analyzed.length/claims.length*100):0;
+      text("totalClaims",claims.length);
+      text("pendingClaims",pending.length);
+      text("validatedClaims",validated.length);
+      text("validatedNote",claims.length?Math.round(validated.length/claims.length*100)+"% of claims":"No claims yet");
+      text("analysisCoverage",claims.length?coverage+"%":"—");
+      text("analysisNote",claims.length?(analyzed.length+" of "+claims.length+" claims analyzed"):"No claims yet");
+      text("claimsPeriodNote",claims.length?"Live Firestore data":"No claims recorded");
+      const alerts=window.AssureXOperations.notifications(claims,products);
+      text("notificationCount",alerts.length+" alert"+(alerts.length===1?"":"s"));
+      const feed=document.getElementById("notificationFeed"); if(feed)feed.innerHTML=alerts.slice(0,6).map(a=>'<div style="padding:10px 12px;border:1px solid rgba(255,255,255,.07);border-radius:10px"><strong>'+esc(a.title)+'</strong><div style="font-size:11px;opacity:.7;margin-top:3px">'+esc(a.message)+'</div></div>').join("")||'<div style="opacity:.65">No active alerts.</div>';
+      const recent=claims.slice().sort((a,b)=>{
+        const ad=a.createdAt&&a.createdAt.toMillis?a.createdAt.toMillis():a.createdAt&&a.createdAt.seconds?Number(a.createdAt.seconds)*1000:0;
+        const bd=b.createdAt&&b.createdAt.toMillis?b.createdAt.toMillis():b.createdAt&&b.createdAt.seconds?Number(b.createdAt.seconds)*1000:0;
+        return bd-ad;
+      });
+      renderClaims(recent);
+      const conflicts=claims.filter(c=>["manual review","review"].includes(String(c.status||"").toLowerCase().replace(/[_-]+/g," "))).length;
+      const now=new Date(), soon=new Date(now); const alertDays=Math.max(0,Math.min(365,Number(localStorage.getItem("assurexWarrantyAlertDays")||30))); soon.setDate(now.getDate()+alertDays);
+      const warrantyChecks=products.filter(p=>{const x=warrantyExpiry(p);return x&&x>=now&&x<=soon;}).length;
+      text("modelConflictCount",conflicts);
+      text("modelConflictLabel",conflicts+" manual review"+(conflicts===1?"":"s"));
+      text("warrantyCheckCount",warrantyChecks);
+      text("warrantyCheckLabel",warrantyChecks+" warranty check"+(warrantyChecks===1?"":"s"));
+      text("reviewQueueCount",pending.length);
+      text("reviewQueueLabel",pending.length+" claim"+(pending.length===1?"":"s"));
+      const name=(user.displayName||user.email||"User").trim();
+      text("profileName",name);
+      text("profileRole",String(role||"user").charAt(0).toUpperCase()+String(role||"user").slice(1));
+      const av=document.getElementById("userAvatar"); if(av)av.textContent=name.charAt(0).toUpperCase();
+    }catch(e){
+      console.error("[AssureX] Dashboard load failed",e);
+      text("totalClaims","—"); text("pendingClaims","—"); text("validatedClaims","—"); text("analysisCoverage","—");
+      text("claimsPeriodNote","Could not load claims"); text("validatedNote","Firestore unavailable"); text("analysisNote","Firestore unavailable");
+      const rows=document.getElementById("recentClaimsRows"); if(rows)rows.innerHTML='<div class="tr"><span>Unable to load claims</span><span>—</span><span>—</span><span>—</span></div>';
+    }
+  }
+  function init(){
+    if(!window.fbAuth||!window.fbDb){console.error("[AssureX] Firebase is not available");return;}
+    window.fbAuth.onAuthStateChanged(user=>{
+      if(user)loadDashboard(user);
+      else {
+        text("profileName","Guest"); text("profileRole","Sign in required");
+        const rows=document.getElementById("recentClaimsRows"); if(rows)rows.innerHTML='<div class="tr"><span>Sign in to view your dashboard</span><span></span><span></span><span></span></div>';
+      }
+    });
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();
+</script>
+
+<script src="js/nav-fix.js"></script>
+<script src="js/profile-shortcut.js"></script>
+<link rel="stylesheet" href="css/topbar-upgrade.css"><script src="js/topbar-upgrade.js"></script><script src="js/assurex-api.js" defer></script>
+<script src="js/ai-intelligence.js" defer></script>
+<script src="js/experience-features.js" defer></script>
+  <script src="js/assurex-chatbot.js" defer></script>
+<script src="js/sidebar-memory.js" defer></script><script src="js/backend-health.js" defer></script></body>
+
+</html>
